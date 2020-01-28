@@ -12,13 +12,13 @@ Feature: #Board's list
       | newBoardPOSTToList |
     When Sends board POST request
     Then Should return board status code "200" OK
-    And Saves board responses as "boardObject"
-    And Sets POST request to
-      | name        | idBoard          |
-      | newListName | {boardObject.id} |
-    And Sends POST request
+    And Saves response as "boardObject"
+    And Sets value to POST request
+      | name        |
+      | newListName |
+    And Sends list POST request
     And Should return board status code "200" OK
-    And Saves list response as "listObject"
+    And Saves response as "listObject"
     And Sends board DELETE request
     And Should return board status code "200" OK
     And Sends board GET request
