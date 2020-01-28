@@ -6,24 +6,10 @@ Feature: Board's Test
     Given Sends a POST request to "/boards/"
       | key  | value    |
       | name | newBoard |
-
-    And Sends request
-    And Should return status code "200"
-      """
-        {
-          "name": "newBoard",
-          "desc": "",
-          "descData": null,
-          "closed": false,
-          "idOrganization": null,
-          "idEnterprise": null,
-          "pinned": false,
-        }
-      """
+    When Sends request
     Then Should return status code 200
     And validate response body
     And validate schema
-    # Post condition
     And Sets a Deleted request to /boards/"(idBoard)"
     And Sends request
     And Should return status code 200
