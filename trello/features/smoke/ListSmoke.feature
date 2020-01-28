@@ -1,25 +1,34 @@
 # Created by Juan Martinez at 1/27/2020
-Feature: #Board's list
-  # Manages lists of the board
+Feature: #Manages board's list
+  # As a [regular user], It wants [manage lists], so that It [manage lists on board]
   Background:
-    Given Sets board URL "https://api.trello.com/1/boards/"
-    And Sets board KEY "keyValue"
-    And Sets board TOKEN "tokenValue"
+    Given Sets base URI "https://api.trello.com/1"
+    And Sets KEY "keyValue"
+    And Sets TOKEN "tokenValue"
 
   Scenario: # Create a new list on a board
-    Given Sets value to POST request
-      | name               |
-      | newBoardPOSTToList |
-    When Sends board POST request
-    Then Should return board status code "200" OK
+    Given Sets a POST request to "/boards/"
+#      | name               |
+#      | newBoardPOSTToList |
+      | key  | value              |
+      | name | newBoardPOSTToList |
+    And Sends request
+    And Should return status code "200"
     And Saves response as "boardObject"
-    And Sets value to POST request
-      | name        |
-      | newListName |
-    And Sends list POST request
-    And Should return board status code "200" OK
-    And Saves response as "listObject"
-    And Sends board DELETE request
-    And Should return board status code "200" OK
-    And Sends board GET request
-    And Should return board "The requested resource was not found."
+    When Sets a POST request to "/list"
+#      | name         | idBoard          |
+#      | newListName  | (boardObject.id) |
+      | key          | value            |
+      | name         | newListName      |
+      | idBoard      | (boardObject.id) |
+#      And set the query parameters
+#      | name        | idBoard          |
+#      | newListName | (boardObject.id) |
+    And Sends request
+    Then Should returns status code "200"
+    And Validates response body
+    And Validates schema
+    # Post condition
+    And Set a DELETE request to "/board/(boardObject.id)"
+    And Sends request
+    And Should return status code "200"
