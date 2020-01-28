@@ -4,7 +4,7 @@ from core.ui.utils.SchemaValidator import SchemaValidator
 
 @given('Sets a POST request to "{endpoint}"')
 def step_impl(context, endpoint):
-    context.api_value = endpoint
+    context.endpoint_value = endpoint
     for row_name in context.table:
         print(row_name['key'])
     context.name_value = row_name
@@ -13,7 +13,7 @@ def step_impl(context, endpoint):
 
 @step("Sends request")
 def step_impl(context):
-    context.json_response = context.list.post_board(context.url_value + context.api_value, context.name_value,
+    context.json_response = context.list.post_board(context.url_value + context.endpoint_value, context.name_value,
                                                     context.key_value, context.token_value)
     context.id_value = context.json_response.json()['id']
 
@@ -57,6 +57,6 @@ def step_impl(context):
 
 @step('Sets a DELETE request to "{endpoint}"')
 def step_impl(context, endpoint):
-    context.api_value = endpoint
-    context.board.delete_board(context.url_value + context.api_value, context.id_value, context.key_value,
+    context.endpoint_value = endpoint
+    context.board.delete_board(context.url_value + context.endpoint_value, context.id_value, context.key_value,
                                context.token_value)
