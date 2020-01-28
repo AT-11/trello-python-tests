@@ -1,6 +1,6 @@
 # Created by Alan Escalera at 1/27/2020
 Feature: Board
-    As a current user, it wants to manage a Board.
+    As a regular user, it wants to manage a Board.
 
   Scenario: Updates members in a Board
     Given Sets a POST request to "/boards/"
