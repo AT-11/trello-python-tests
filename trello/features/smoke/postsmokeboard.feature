@@ -7,22 +7,7 @@ Feature: Board's Test
       | name | newBoard |
 
     And Sends request
-    And Should return 200 status code as response
-    Then Should return body response
-        """
-            {
-              "id": "5e292253023dc979cb1130f8",
-              "name": "[name]",
-              "desc": "",
-              "descData": null,
-              "closed": false,
-              "idOrganization": null,
-              "idEnterprise": null,
-              "pinned": false,
-              "url": "https://trello.com/b/mihCXj3X/newboard",
-              "shortUrl": "https://trello.com/b/mihCXj3X",
-            }
-        """
-
+    And Should return "200" status code as response
+    Then Should return a body response "jsonfiles/response_body_board.json"
     And Sets a Deleted request to /boards/"idBoard"
-    Then Should return status 200
+    Then Should return status "200"
