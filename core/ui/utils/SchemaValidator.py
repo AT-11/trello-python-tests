@@ -17,7 +17,6 @@ class SchemaValidator(object):
             }
             my_json = json.loads(input_value)
             validate(instance=my_json, schema=json_schema)
-            print(my_json)
-            return True
         except:
             return False
+        return True
