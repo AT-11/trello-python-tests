@@ -1,5 +1,5 @@
 from behave import given, when, then, step
-from core.ui.utils.SchemaValidator import SchemaValidator
+from core.utils.SchemaValidator import SchemaValidator
 
 
 @given('Sets a POST request to "{endpoint}"')

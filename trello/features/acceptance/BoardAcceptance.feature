@@ -9,7 +9,7 @@ Feature: Board
       | key  | value        |
       | name | GherkinBoard |
     And Sends request
-    And Should return status code "200"
+    And Should return status code 200
     And Saves response as "BoardObject"
     And Sets a PUT request to /boards/"(BoardObject.id)"
     And Sets the following Path Params
@@ -17,12 +17,12 @@ Feature: Board
       | name    | UpdateBoardName  |
       | idBoard | (BoardObject.id) |
     When Sends request
-    Then Should return status code "200"
+    Then Should return status code 200
     And Validates response body
     And Validates schema
     And Sets a DELETE request to /boards/"(BoardObject.id)"
     And Sends request
-    And Should return status code "200"
+    And Should return status code 200
 
 
 
