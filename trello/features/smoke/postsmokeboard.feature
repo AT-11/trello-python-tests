@@ -8,7 +8,7 @@ Feature: Board's Test
       | name | newBoard |
 
     And Sends request
-    And hould return status code "200"
+    And Should return status code "200"
       """
         {
           "name": "newBoard",
