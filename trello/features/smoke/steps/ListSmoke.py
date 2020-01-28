@@ -1,4 +1,5 @@
 from behave import given, when, then, step
+from core.ui.utils.SchemaValidator import SchemaValidator
 
 
 @given('Sets base URI "{url}"')
@@ -22,25 +23,24 @@ def step_impl(context, api):
     for row_name in context.table:
         print(row_name['key'])
     context.name_value = row_name
+    context.validator = SchemaValidator()
 
 
 @step("Sends request")
 def step_impl(context):
     context.json_response = context.list.post_board(context.url_value + context.api_value, context.name_value,
                                                     context.key_value, context.token_value)
-    context.id_value = json_response.json()['id']
+    context.id_value = context.json_response.json()['id']
 
 
 @step('Should return status code "{status_code}"')
 def step_impl(context, status_code):
-    assert json_response.status_code is int(status_code)
-    expected = context.validate.validate_schema(json_response.text)
-    assert True is expected
+    assert context.json_response.status_code is int(status_code)
 
 
 @step('Saves response as "{response_object}"')
 def step_impl(context, name_object):
-    context.name_object = json_response
+    context.name_object = context.json_response
 
 
 @when('Sets a POST request to "{api}"')
@@ -51,14 +51,27 @@ def step_impl(context, api):
     context.name_value = row
 
 
-@step("Sends list POST request")
-def step_impl(context):
-    global json_response  # update
-    global id_value
-    json_response = context.CrudBoard.post_board(url_value, name_value, key_value, token_value)
-    id_value = json_response.json()['id']
+@then('Should return status code "{status_code}"')
+def step_impl(context, status_code):
+    assert context.json_response.status_code is int(status_code)
 
 
-@step("Sends board DELETE request")
+@step("Validates response body")
 def step_impl(context):
-    context.CrudBoard.delete_board(url_value, id_value, key_value, token_value)
+    """
+    :param context:
+    :return:
+    """
+
+
+@step("Validates schema")
+def step_impl(context):
+    expected = context.validator.validate_schema(context.json_response.text)
+    assert True is expected
+
+
+@step('Sets a DELETE request to "{api}"')
+def step_impl(context, api):
+    context.api = api
+    context.board.delete_board(context.url_value + context.api, context.id_value, context.key_value,
+                               context.token_value)
