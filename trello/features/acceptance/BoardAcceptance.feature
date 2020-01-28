@@ -5,14 +5,12 @@ Feature: Board
 
   Scenario: Changes the name of the board
     Given Sets a POST request to "/boards/"
-    And Sets the following Path Params:
       | key  | value        |
       | name | GherkinBoard |
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
     And Sets a PUT request to /boards/"(BoardObject.id)"
-    And Sets the following Path Params
       | key     | value            |
       | name    | UpdateBoardName  |
       | idBoard | (BoardObject.id) |
