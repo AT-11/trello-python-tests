@@ -17,8 +17,12 @@ class RequestApi(object):
         for row in table_object:
             key_value = row['key']
             value_value = row['value']
-            if re.search("[(|)|.]", value_value):
-                value_value = response_param
+            if re.search("[.]", value_value):
+                split_value = key_value[:2]
+                response_id = response_param[split_value]
+                value_value = response_id
+            if re.search("[(|)]", value_value):
+                value_value = self.config.get_config_file()[key_value]
             values[key_value] = value_value
 
         values["key"] = self.config.get_config_file()['key']

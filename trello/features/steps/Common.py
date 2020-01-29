@@ -35,7 +35,7 @@ def step_impl(context, method, endpoint):
     context.endpoint_value = endpoint
     context.table_object = context.table
     context.http_value = method
-    context.response_param = context.name_object['id']
+    context.response_param = context.name_object
 
 
 @step("Validates schema")
