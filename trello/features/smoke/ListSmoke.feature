@@ -10,9 +10,9 @@ Feature: Manages board's list
     And Should return status code 200
     And Saves response as "boardObject"
     When Sets a POST request to "/list"
-      | key          | value            |
-      | name         | newListName      |
-      | idBoard      | (boardObject.id) |
+      | key     | value            |
+      | name    | newListName      |
+      | idBoard | (boardObject.id) |
     And Sends request
     Then Should return status code 200
     And Validates response body
