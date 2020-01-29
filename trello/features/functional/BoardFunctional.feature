@@ -1,14 +1,20 @@
 # Created by Enrique Carrizales at 1/29/2020
-Feature: Board's Functional Test
+Feature: Board Functional Test
   As a regular user, Manages the board, and user creates a new label of board.
 
-  # Created by Oscar Lopez at 1/29/2020
-  Scenario: Creates new label at board with a color
-    Given Sets a POST request to '/boards/"idBoard"'
+  Scenario: Creates new color label at board
+    Given Sets a POST request to "/boards/"
+      | key  | value    |
+      | name | newBoard |
+    And Sends request
+    And Should return status code 200
+    Then Sets a POST request to '/boards/"idBoard"/labels'
       | key  | value    |
       | color | newLabelColor |
     When Sends request
-    Then Should return status code 200
+    And Should return status code 200
     And Validates response body
     And Validates schema
-    
+    And Sets a DELETE request to "/boards/(idBoard)"
+    And Sends request
+    And Should return status code 200
