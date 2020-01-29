@@ -8,25 +8,20 @@ class RequestApi(object):
     def __init__(self):
         self.response = ""
 
-    def post_request(self, input_url, map_object):
+    def do_request(self, input_endpoint, map_object):
         values = {}
         for row in map_object:
-            values.update({row['key']: row['value']})
-        values.update({"key": ""})
-        values.update({"token": ""})
+            key_value = row['key']
+            value_value = row['value']
+            values[key_value] = value_value
+
+        values["key"] = ""
+        values["token"] = ""
+
         querystring = json.dumps(values)
-        url = "https://api.trello.com/1" + input_url
-
+        url = "https://api.trello.com/1" + input_endpoint
+        HEADERS = {'content-type': 'application/json'}
         method_type = "POST"
-        self.response = requests.request(method_type, url, params=querystring)
+        self.response = requests.request(method_type, url, data=querystring, headers=HEADERS)
         return self.response
 
-    def delete_request(self, input_url, input_id):
-        url = input_url + input_id
-
-        querystring = {"key": "",
-                       "token": ""}
-
-        method_type = "DELETE"
-        self.response = self.send_request.method_request(method_type, url, querystring)
-        return self.response
