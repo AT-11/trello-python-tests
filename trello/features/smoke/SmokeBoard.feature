@@ -13,3 +13,18 @@ Feature: Board's Test
     And Sets a DELETE request to "/boards/(idBoard)"
     And Sends request
     And Should return status code 200
+
+    # Create by Limbert Vargas at 1/28/2020
+  Scenario: Deletes a board by Id
+    When Sets a DELETE request to /boards/(id) endpoint
+      | key     | value            |
+      | idBoard | (boardObject.id) |
+
+    And Sends request
+    Then Should returns 200 status code
+    And Should return a body
+    """
+    {
+    "_value": null
+    }
+    """
