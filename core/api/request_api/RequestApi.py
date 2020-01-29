@@ -1,4 +1,5 @@
 import json
+import re
 
 import requests
 
@@ -15,10 +16,9 @@ class RequestApi(object):
         values = {}
         for row in table_object:
             key_value = row['key']
-            if key_value == "idBoard":
+            value_value = row['value']
+            if re.search("[(|)|.]", value_value):
                 value_value = id_value
-            else:
-                value_value = row['value']
             values[key_value] = value_value
 
         values["key"] = self.config.get_config_file()['key']

@@ -9,7 +9,7 @@ def step_impl(context, http_type, endpoint):
     context.endpoint_value = endpoint
     context.table_object = context.table
     context.http_value = http_type
-    context.id_value = "."
+    context.id_value = ""
     context.request_api = RequestApi()
 
 
