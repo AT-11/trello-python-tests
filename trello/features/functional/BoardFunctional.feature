@@ -1,5 +1,6 @@
 # Created by Enrique Carrizales at 1/29/2020
 Feature: Board
+  <<<<<<< HEAD
   As a regular user, it wants to manage a board.
 
   Scenario: Create a board with all parameters
@@ -49,5 +50,23 @@ Feature: Board
     And Sends request
     And Should return status code 200
     And Sets a "DELETE" request to "/board/(board_test.id)"
+    And Sends request
+    And Should return status code 200
+
+
+  Scenario: Creates a label in board
+    Given Sets a "POST" request to "/boards/"
+      | key  | value    |
+      | name | newBoard |
+    And Sends request
+    And Should return status code 200
+    And Sets a "POST" request to "/boards/idBoard/labels"
+      | key   | value         |
+      | color | newLabelColor |
+    When Sends request
+    Then Should return status code 200
+    And Validates response body
+    And Validates schema
+    And Sets a "DELETE" request to "/boards/(idBoard)"
     And Sends request
     And Should return status code 200
