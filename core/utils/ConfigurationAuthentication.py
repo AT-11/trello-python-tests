@@ -2,12 +2,11 @@ import json
 
 
 class ConfigurationAuthentication(object):
-    config = ""
-    READ = 'r'
 
     def __init__(self):
-        with open('config.json', self.READ) as file:
-            self.config = json.load(file)
+        with open('core/utils/config.json', 'r') as file:
+            data = file.read()
+            self.config = json.loads(file)
 
     def get_config_file(self):
         return self.config

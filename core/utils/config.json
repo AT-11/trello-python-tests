@@ -1,5 +1,5 @@
 {
   "url_trello": "https://api.trello.com/1",
-  "key": "",
-  "token": ""
+  "key": "none",
+  "token": "none"
 }
