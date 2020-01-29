@@ -16,15 +16,17 @@ Feature: Board's Test
 
     # Create by Limbert Vargas at 1/28/2020
   Scenario: Deletes a board by Id
-    When Sets a DELETE request to /boards/(id) endpoint
+    Given Sets a POST request to "/boards/"
+      | key  | value    |
+      | name | newBoard |
+    And Sends request
+    And Should return status code 200
+
+    When Sets a DELETE request to "/boards/(id)"
       | key     | value            |
       | idBoard | (boardObject.id) |
 
     And Sends request
-    Then Should returns 200 status code
-    And Should return a body
-    """
-    {
-    "_value": null
-    }
-    """
+    Then Should returns status code 200
+    And Validates response body
+    And Validates schema
