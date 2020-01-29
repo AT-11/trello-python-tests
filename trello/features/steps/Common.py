@@ -37,19 +37,6 @@ def step_impl(context, endpoint):
     """
 
 
-@then('Should return status code {number:d}')
-def step_impl(context, number):
-    assert context.json_response.status_code is number
-
-
-@step("Validates response body")
-def step_impl(context):
-    """
-    :param context:
-    :return:
-    """
-
-
 @step("Validates schema")
 def step_impl(context):
     """
