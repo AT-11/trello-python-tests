@@ -5,7 +5,9 @@ from core.utils.SchemaValidator import SchemaValidator
 
 @given('Sets a POST request to "{endpoint}"')
 def step_impl(context, endpoint):
-    context.endpoint_value = endpoint
+    print("hola")
+    #context.endpoint_value = endpoint
+
     for row_name in context.table:
         print(row_name['key'])
     context.name_value = row_name
