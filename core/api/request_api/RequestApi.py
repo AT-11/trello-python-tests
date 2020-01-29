@@ -12,13 +12,13 @@ class RequestApi(object):
         self.response = ""
         self.config = ConfigurationAuthentication()
 
-    def do_request(self, http_type, input_endpoint, table_object, id_value):
+    def do_request(self, http_type, input_endpoint, table_object, response_param):
         values = {}
         for row in table_object:
             key_value = row['key']
             value_value = row['value']
             if re.search("[(|)|.]", value_value):
-                value_value = id_value
+                value_value = response_param
             values[key_value] = value_value
 
         values["key"] = self.config.get_config_file()['key']

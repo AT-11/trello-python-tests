@@ -9,19 +9,19 @@ def step_impl(context, http_type, endpoint):
     context.endpoint_value = endpoint
     context.table_object = context.table
     context.http_value = http_type
-    context.id_value = ""
+    context.response_param = ""
     context.request_api = RequestApi()
 
 
 @step("Sends request")
 def step_impl(context):
     context.json_response = context.request_api.do_request(context.http_value, context.endpoint_value,
-                                                           context.table_object, context.id_value)
+                                                           context.table_object, context.response_param)
 
 
 @step('Should return status code {number:d}')
 def step_impl(context, number):
-    context.validator = SchemaValidator()
+    context.validator_schema = SchemaValidator()
     assert context.json_response.status_code is number
 
 
@@ -35,7 +35,7 @@ def step_impl(context, method, endpoint):
     context.endpoint_value = endpoint
     context.table_object = context.table
     context.http_value = method
-    context.id_value = context.name_object['id']
+    context.response_param = context.name_object['id']
 
 
 @step("Validates schema")
