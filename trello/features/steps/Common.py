@@ -9,6 +9,9 @@ def step_impl(context, endpoint):
     context.endpoint_value = endpoint
     context.map_object = context.table
     context.request_api = RequestApi()
+    for row_name in context.table:
+        print(row_name['key'])
+    context.name_value = row_name
 
 
 @step("Sends request")
@@ -40,7 +43,7 @@ def step_impl(context, endpoint):
 @step("Validates schema")
 def step_impl(context):
     """
-    expected = context.validator.validate_schema(context.json_response.text)
+    expected = context.validator_schema.validate_schema(context.json_response.text)
     assert True is expected
     """
 
