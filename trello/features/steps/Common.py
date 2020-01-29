@@ -4,19 +4,19 @@ from core.api.request_api.RequestApi import RequestApi
 from core.utils.SchemaValidator import SchemaValidator
 
 
-@given('Sets a "{method}" request to "{endpoint}"')
-def step_impl(context, method, endpoint):
+@given('Sets a "{http_type}" request to "{endpoint}"')
+def step_impl(context, http_type, endpoint):
     context.endpoint_value = endpoint
-    context.map_object = context.table
-    context.method_value = method
+    context.table_object = context.table
+    context.http_value = http_type
     context.id_value = "."
     context.request_api = RequestApi()
 
 
 @step("Sends request")
 def step_impl(context):
-    context.json_response = context.request_api.do_request(context.endpoint_value, context.map_object,
-                                                           context.method_value, context.id_value)
+    context.json_response = context.request_api.do_request(context.http_value, context.endpoint_value,
+                                                           context.table_object, context.id_value)
 
 
 @step('Should return status code {number:d}')
@@ -33,8 +33,8 @@ def step_impl(context, name_object):
 @when('Sets a "{method}" request to "{endpoint}"')
 def step_impl(context, method, endpoint):
     context.endpoint_value = endpoint
-    context.map_object = context.table
-    context.method_value = method
+    context.table_object = context.table
+    context.http_value = method
     context.id_value = context.name_object['id']
 
 
@@ -46,8 +46,8 @@ def step_impl(context):
     """
 
 
-@step('Sets a DELETE request to "{endpoint}"')
-def step_impl(context, endpoint):
+@step('Sets a "{http_type}" request to "{endpoint}"')
+def step_impl(context, http_type, endpoint):
     """
     context.endpoint_value = endpoint
     context.board.delete_board(context.url_value + context.endpoint_value, context.id_value, context.key_value,
