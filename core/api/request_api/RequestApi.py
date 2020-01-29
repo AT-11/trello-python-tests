@@ -11,7 +11,7 @@ class RequestApi(object):
         self.response = ""
         self.config = ConfigurationAuthentication()
 
-    def do_request(self, method_type, input_endpoint, map_object):
+    def do_request(self, request_type, input_endpoint, map_object):
         values = {}
         for row in map_object:
             key_value = row['key']
@@ -25,5 +25,5 @@ class RequestApi(object):
         url = self.config.get_config_file()['url_trello'] + input_endpoint
         HEADERS = {'content-type': 'application/json'}
 
-        self.response = requests.request(method_type, url, data=querystring, headers=HEADERS)
+        self.response = requests.request(request_type, url, data=querystring, headers=HEADERS)
         return self.response
