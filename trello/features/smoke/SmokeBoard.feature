@@ -13,3 +13,20 @@ Feature: Board's Test
     And Sets a DELETE request to "/boards/(idBoard)"
     And Sends request
     And Should return status code 200
+
+    # Create by Limbert Vargas at 1/28/2020
+  Scenario: Deletes a board by Id
+    Given Sets a POST request to "/boards/"
+      | key  | value    |
+      | name | newBoard |
+    And Sends request
+    And Should return status code 200
+
+    When Sets a DELETE request to "/boards/(id)"
+      | key     | value            |
+      | idBoard | (boardObject.id) |
+
+    And Sends request
+    Then Should returns status code 200
+    And Validates response body
+    And Validates schema
