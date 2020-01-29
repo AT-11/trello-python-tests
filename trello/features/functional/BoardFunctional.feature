@@ -1,5 +1,5 @@
 # Created by Enrique Carrizales at 1/29/2020
-Feature: Board Functional Test
+Feature: Board
   As a regular user, Manages the board, and user creates a new label of board.
 
   Scenario: Creates new color label in board
