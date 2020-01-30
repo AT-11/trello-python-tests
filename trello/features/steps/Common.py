@@ -27,7 +27,7 @@ def step_impl(context, number):
 
 @step('Saves response as "{name_object}"')
 def step_impl(context, name_object):
-    context.name_object = context.json_response.json()
+    context.response_param = context.json_response.json()
 
 
 @when('Sets a "{method}" request to "{endpoint}"')
@@ -35,7 +35,6 @@ def step_impl(context, method, endpoint):
     context.endpoint_value = endpoint
     context.table_object = context.table
     context.http_value = method
-    context.response_param = context.name_object
 
 
 @step("Validates schema")
