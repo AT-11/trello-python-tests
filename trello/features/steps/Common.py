@@ -7,34 +7,34 @@ from core.utils.SchemaValidator import SchemaValidator
 @given('Sets a "{http_type}" request to "{endpoint}"')
 def step_impl(context, http_type, endpoint):
     context.endpoint_value = endpoint
-    context.map_object = context.table
+    context.table_object = context.table
+    context.http_value = http_type
+    context.response_param = ""
     context.request_api = RequestApi()
 
 
 @step("Sends request")
 def step_impl(context):
-    context.json_response = context.request_api.do_request(context.endpoint_value, context.map_object)
-    context.id_value = context.json_response.json()['id']
+    context.json_response = context.request_api.do_request(context.http_value, context.endpoint_value,
+                                                           context.table_object, context.response_param)
 
 
 @step('Should return status code {number:d}')
 def step_impl(context, number):
-    context.validator = SchemaValidator()
+    context.validator_schema = SchemaValidator()
     assert context.json_response.status_code is number
 
 
-@step('Saves response as "{response_object}"')
+@step('Saves response as "{name_object}"')
 def step_impl(context, name_object):
-    """
-    to do
-    """
+    context.response_param = context.json_response.json()
 
 
-@when('Sets a "{http_type}" request to "{endpoint}"')
-def step_impl(context, http_type, endpoint):
-    """
-    to do
-    """
+@when('Sets a "{method}" request to "{endpoint}"')
+def step_impl(context, method, endpoint):
+    context.endpoint_value = endpoint
+    context.table_object = context.table
+    context.http_value = method
 
 
 @step("Validates schema")
@@ -59,4 +59,3 @@ def step_impl(context):
     """
     :type context: behave.runner.Context
     """
-    raise NotImplementedError(u'STEP: And Validates response body')
