@@ -12,15 +12,18 @@ class RequestApi(object):
         self.response = ""
         self.config = EnvironmentConfiguration()
 
+    def check_id(self, value, response_param):
+        key = value[1:value.index(".")]
+        return response_param.get(key, None)
+
     def do_request(self, http_type, input_endpoint, table_object, response_param):
         values = {}
         for row in table_object:
             key_value = row['key']
             value_value = row['value']
             if re.search("[.]", value_value):
-                split_value = key_value[:2]
-                response_id = response_param[split_value]
-                value_value = response_id
+                response_value = self.check_id(value_value, response_param)
+                value_value = response_value
             if re.search("[(|)]", value_value):
                 value_value = self.config.get_config_file()[key_value]
             values[key_value] = value_value
