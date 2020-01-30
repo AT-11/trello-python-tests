@@ -1,14 +1,17 @@
 import json
 from jsonschema import validate
 
+from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
 from core.utils.JsonFileReader import JsonFileReader
 
 
 class SchemaValidator(object):
 
-    # Validates json schema
-    def validate(self, body_response, json_schema):
-        json_path = 'trello/jsonfiles/' + json_schema
+    @staticmethod
+    def validate(body_response, json_schema):
+        environment_conf = EnvironmentConfiguration()
+        folder_json_path = environment_conf.get_config_file()['folder_json_path']
+        json_path = folder_json_path + json_schema
         try:
             json_schema = JsonFileReader.read(json_path)
             body_json = json.loads(body_response)
