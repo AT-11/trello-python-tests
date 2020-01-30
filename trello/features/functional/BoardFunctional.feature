@@ -50,7 +50,7 @@ Feature: Board
       | id  | organization_test.id |
     And Sends request
     And Should return status code 200
-    And Sets a "DELETE" request to "/board/"
+    And Sets a "DELETE" request to "/boards/"
       | key | value         |
       | id  | board_test.id |
     And Sends request
@@ -71,8 +71,26 @@ Feature: Board
     Then Should return status code 200
     And Validates response body
     And Validates schema
-    And Sets a "DELETE" request to "/boards/"
-      | key | value         |
-      | id  | board_test.id |
+    And Sets a "DELETE" request to "/boards/(id)"
+    And Sends request
+    And Should return status code 200
+
+
+  # Created by Limbert Vargas at 1/29/2020
+  Scenario: Creates a list in board
+    Given Sets a "POST" request to "/boards/"
+      | key  | value    |
+      | name | newBoard |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "board_test"
+    And Sets a "POST" request to "/boards/(id)/lists"
+      | key     | value            |
+      | idBoard | (board_test.id) |
+    When Sends request
+    Then Should return status code 200
+    And Validates response body
+    And Validates schema
+    And Sets a "DELETE" request to "/boards/(id)"
     And Sends request
     And Should return status code 200
