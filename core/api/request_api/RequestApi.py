@@ -12,16 +12,20 @@ class RequestApi(object):
         self.response = ""
         self.config = EnvironmentConfiguration()
 
+    def verify_value(self, row_key, row_value, response_param):
+        if re.search("[.]", row_value):
+            key = row_value[1:row_value.index(".")]
+            row_value = response_param.get(key, None)
+        if re.search("[(|)]", row_value):
+            row_value = self.config.get_config_file()[row_key]
+        return row_value
+
     def generate_data(self, data_table, response_param):
         data_dictionary = {}
         for row in data_table:
             row_key = row['key']
             row_value = row['value']
-            if re.search("[.]", row_value):
-                key = row_value[1:row_value.index(".")]
-                row_value = response_param.get(key, None)
-            if re.search("[(|)]", row_value):
-                row_value = self.config.get_config_file()[row_key]
+            row_value = self.verify_value(row_key, row_value, response_param)
             data_dictionary[row_key] = row_value
         data_dictionary["key"] = self.config.get_config_file()['key']
         data_dictionary["token"] = self.config.get_config_file()['token']
