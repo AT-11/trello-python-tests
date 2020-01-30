@@ -17,6 +17,8 @@ Feature: Manages board's list
     Then Should return status code 200
     And Validates response body
     And Validates schema
-    And Sets a DELETE request to "/board/(boardObject.id)"
+    And Sets a "DELETE" request to "/board/"
+      | key | value            |
+      | id  | (boardObject.id) |
     And Sends request
     And Should return status code 200
