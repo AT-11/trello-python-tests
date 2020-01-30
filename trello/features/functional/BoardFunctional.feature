@@ -1,6 +1,6 @@
 # Created by Enrique Carrizales at 1/29/2020
 Feature: Board
-  <<<<<<< HEAD
+
   As a regular user, it wants to manage a board.
 
   Scenario: Create a board with all parameters
@@ -46,10 +46,14 @@ Feature: Board
     And Validates response body
     And Validates schema
      # Post condition
-    And Sets a "DELETE" request to "/organizations/organization_test.id"
+    And Sets a "DELETE" request to "/organizations/"
+      | key | value                |
+      | id  | organization_test.id |
     And Sends request
     And Should return status code 200
-    And Sets a "DELETE" request to "/board/(board_test.id)"
+    And Sets a "DELETE" request to "/board/"
+      | key | value         |
+      | id  | board_test.id |
     And Sends request
     And Should return status code 200
 
@@ -60,6 +64,7 @@ Feature: Board
       | name | newBoard |
     And Sends request
     And Should return status code 200
+    And Saves response as "board_test"
     And Sets a "POST" request to "/boards/idBoard/labels"
       | key   | value         |
       | color | newLabelColor |
@@ -67,6 +72,8 @@ Feature: Board
     Then Should return status code 200
     And Validates response body
     And Validates schema
-    And Sets a "DELETE" request to "/boards/(idBoard)"
+    And Sets a "DELETE" request to "/boards/"
+      | key | value         |
+      | id  | board_test.id |
     And Sends request
     And Should return status code 200
