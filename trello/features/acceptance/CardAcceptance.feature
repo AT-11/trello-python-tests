@@ -9,14 +9,14 @@ Feature: Card
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
-    And Sets a "POST" request to "/lists/"
+    When Sets a "POST" request to "/lists/"
       | key     | value            |
       | idBoard | (BoardObject.id) |
       | name    | GherkinList      |
     And Sends request
     And Should return status code 200
     And Saves response as "ListObject"
-    When Sets a "POST" request to "/cards/"
+    And Sets a "POST" request to "/cards/"
       | key    | value           |
       | idList | (ListObject.id) |
       | name   | GherkinCard     |
