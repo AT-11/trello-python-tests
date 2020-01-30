@@ -3,14 +3,14 @@ import re
 
 import requests
 
-from core.utils.ConfigurationAuthentication import ConfigurationAuthentication
+from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
 
 
 class RequestApi(object):
 
     def __init__(self):
         self.response = ""
-        self.config = ConfigurationAuthentication()
+        self.config = EnvironmentConfiguration()
 
     def do_request(self, http_type, input_endpoint, table_object, response_param):
         values = {}
