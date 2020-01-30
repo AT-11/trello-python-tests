@@ -47,17 +47,14 @@ Feature: Board
 
 
 
-  Scenario: Create a list from board endpoint
+  Scenario: Marked as a viewer the board
     Given Sets a "POST" request to "/boards/"
       | key  | value        |
       | name | GherkinBoard |
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
-    When Sets a "Post" request to "boards/(id)/lists"
-      | key  | value            |
-      | name | NewLIST          |
-      | id   | (BoardObject.id) |
+    When Sets a "Post" request to "boards/(id)/markedAsViewed"
     And Sends request
     Then Should return status code 200
     And Validates response body
