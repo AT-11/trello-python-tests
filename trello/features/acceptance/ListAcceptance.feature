@@ -1,6 +1,6 @@
 # Created by Juan Martinez at 1/27/2020
-Feature: # Board's list
-  # Manages lists of the board
+Feature: Board's list
+  Manages lists of the board
   Scenario: # Updates the properties of a list by id
     Given Sets a "POST" request to "/boards/"
       | key  | value    |
@@ -28,3 +28,4 @@ Feature: # Board's list
       | name | (boardObject.id) |
     And Sends request
     And Should return status code 200
+    
