@@ -17,7 +17,7 @@ Feature: List
     And Sends request
     And Should return status code 200
     And Validates response body
-    And Validates schema
+    And Validates schema with "list_schema.json"
     And Sets a "DELETE" request to "/board/(boardObject.id)"
     And Sends request
     And Should return status code 200
