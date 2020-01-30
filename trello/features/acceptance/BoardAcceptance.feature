@@ -19,11 +19,10 @@ Feature: Board
     And Validates response body
     And Validates schema with "board_schema.json"
     # Post condition
-    And Sets a "DELETE" request to "/boards/"
-      | key | value            |
-      | id  | (BoardObject.id) |
+    And Sets a "DELETE" request to "/boards/(BoardObject.id)"
     And Sends request
     And Should return status code 200
+
 
 
   Scenario: Updates members in a Board
@@ -42,8 +41,28 @@ Feature: Board
     And Validates response body
     And Validates schema with "board_schema.json"
     # Post condition
-    And Sets a "DELETE" request to "/boards/"
-      | key | value            |
-      | id  | (BoardObject.id) |
+    And Sets a "DELETE" request to "/boards/(BoardObject.id)"
+    And Sends request
+    And Should return status code 200
+
+
+
+  Scenario: Create a list from board endpoint
+    Given Sets a "POST" request to "/boards/"
+      | key  | value        |
+      | name | GherkinBoard |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    When Sets a "Post" request to "boards/(id)/lists"
+      | key  | value            |
+      | name | NewLIST          |
+      | id   | (BoardObject.id) |
+    And Sends request
+    Then Should return status code 200
+    And Validates response body
+    And Validates schema with "board_schema.json"
+    # Post condition
+    And Sets a "DELETE" request to "/boards/(BoardObject.id)"
     And Sends request
     And Should return status code 200
