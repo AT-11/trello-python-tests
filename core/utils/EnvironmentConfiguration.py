@@ -1,10 +1,10 @@
 import json
 
 
-class ConfigurationAuthentication(object):
+class EnvironmentConfiguration(object):
 
     def __init__(self):
-        with open('core/utils/config.json', 'r') as file:
+        with open('config.json', 'r') as file:
             data = file.read()
             self.config = json.loads(data)
 
