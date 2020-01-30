@@ -51,13 +51,10 @@ def step_impl(context):
     """
 
 
-@step('Sets a "{http_type}" request to "{endpoint}"')
-def step_impl(context, http_type, endpoint):
-    """
+@step('Sets a "{method}" request to "{endpoint}"')
+def step_impl(context, method, endpoint):
     context.endpoint_value = endpoint
-    context.board.delete_board(context.url_value + context.endpoint_value, context.id_value, context.key_value,
-                               context.token_value)
-    """
+    context.method = method
 
 
 @step("Validates response body")
