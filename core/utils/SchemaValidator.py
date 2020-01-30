@@ -1,22 +1,21 @@
 import json
 from jsonschema import validate
 
+from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
+from core.utils.JsonFileReader import JsonFileReader
+
 
 class SchemaValidator(object):
 
-    # Validates json schema
-    def validate_schema(self, input_value):
+    @staticmethod
+    def validate(body_response, json_schema):
+        environment_conf = EnvironmentConfiguration()
+        folder_json_path = environment_conf.get_config_file()['folder_json_path']
+        json_path = folder_json_path + json_schema
         try:
-            json_schema = {
-                "type": "object",
-                "properties": {
-                    "id": {"type": "string", "pattern": "^[A-Za-z0-9]+$"},
-                    "name": {"type": "string", "pattern": "^[A-Za-z0-9]+$"},
-                    "desc": {"type": "string", "pattern": "^$|^[A-Za-z0-9]+$"},
-                }
-            }
-            my_json = json.loads(input_value)
-            validate(instance=my_json, schema=json_schema)
+            json_schema = JsonFileReader.read(json_path)
+            body_json = json.loads(body_response)
+            validate(instance=body_json, schema=json_schema)
         except:
             return False
         return True
