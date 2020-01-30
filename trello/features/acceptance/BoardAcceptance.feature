@@ -9,7 +9,6 @@ Feature: Board
       | name | GherkinBoard |
     And Sends request
     And Should return status code 200
-    And Validates schema with "board_schema.json"
     And Saves response as "BoardObject"
     When Sets a "PUT" request to "/boards/"
       | key     | value            |
