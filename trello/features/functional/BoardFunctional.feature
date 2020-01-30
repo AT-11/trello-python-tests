@@ -7,7 +7,6 @@ Feature: Board
     Given Sets a "POST" request to "/organizations"
       | key         | value             |
       | displayName | organization_test |
-      | displayName | boardTest         |
     And Sends request
     And Should return status code 200
     And Saves response as "organization_test"
@@ -23,7 +22,7 @@ Feature: Board
       | idBoard | (board_test.id) |
     And Sends request
     And Should return status code 200
-    And Sets a "POST" request to "/boards/"
+    When Sets a "POST" request to "/boards/"
       | key                   | value                  |
       | name                  | testBoard              |
       | defaultLabels         | false                  |
@@ -41,7 +40,7 @@ Feature: Board
       | prefs_cardCovers      | false                  |
       | prefs_background      | pink                   |
       | prefs_cardAging       | pirate                 |
-    When Sends request
+    And Sends request
     Then Should return status code 200
     And Validates response body
     And Validates schema

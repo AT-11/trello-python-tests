@@ -1,12 +1,10 @@
-import json
+from core.utils.JsonFileReader import JsonFileReader
 
 
 class EnvironmentConfiguration(object):
 
     def __init__(self):
-        with open('config.json', 'r') as file:
-            data = file.read()
-            self.config = json.loads(data)
+        self.config = JsonFileReader.read('config.json')
 
     def get_config_file(self):
         return self.config
