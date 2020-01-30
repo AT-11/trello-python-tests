@@ -3,7 +3,8 @@ import json
 
 class JsonFileReader(object):
 
-    def read(self, file_path):
+    @staticmethod
+    def read(file_path):
         with open(file_path, 'r') as file:
             data = file.read()
         return json.loads(data)
