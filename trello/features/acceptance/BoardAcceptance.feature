@@ -47,3 +47,23 @@ Feature: Board
       | id  | (BoardObject.id) |
     And Sends request
     And Should return status code 200
+
+
+  Scenario: Marked as a viewer the board
+    Given Sets a "POST" request to "/boards/"
+      | key  | value        |
+      | name | GherkinBoard |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    When Sets a "Post" request to "boards/(id)/markedAsViewed"
+    And Sends request
+    Then Should return status code 200
+    And Validates response body
+    And Validates schema with "board_schema.json"
+    # Post condition
+    And Sets a "DELETE" request to "/boards/"
+      | key | value            |
+      | id  | (BoardObject.id) |
+    And Sends request
+    And Should return status code 200
