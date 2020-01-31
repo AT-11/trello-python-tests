@@ -15,7 +15,7 @@ Feature: List
       | idBoard | (boardObject.id) |
       | pos     | top              |
     And Sends request
-    And Should return status code 200
+    Then Should return status code 200
     And Validates response body
     And Validates schema with "list_schema.json"
     And Sets a "DELETE" request to "/board/(boardObject.id)"
