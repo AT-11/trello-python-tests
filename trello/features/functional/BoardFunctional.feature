@@ -70,15 +70,16 @@ Feature: Board
     When Sends request
     Then Should return status code 200
     And Validates response body
-    And Validates schema
+    And Validates schema with "board_schema.json"
     And Sets a "DELETE" request to "/boards/(boardObject.id)"
     And Sends request
     And Should return status code 200
 
 
   # Created by Limbert Vargas at 1/29/2020
-  # This scenario allows to create a list on an existing board
   Scenario: Creates a list in board
+  This scenario allows to create a list on an existing board
+
     Given Sets a "POST" request to "/boards/"
       | key  | value    |
       | name | newBoard |
