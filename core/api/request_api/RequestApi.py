@@ -48,7 +48,7 @@ class RequestApi(object):
             self.response = requests.request(http_type, url, params=values)
         return self.response
 
-    def generate_data_delete(self, response_param):
+    def generate_data_delete(self, data_table, response_param):
         row_value = self.verify_value_delete(response_param)
         return row_value
 
