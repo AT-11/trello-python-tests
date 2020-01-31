@@ -1,6 +1,7 @@
 # Created by Juan Martinez at 1/31/2020
 Feature: Card
-  As a regular user, it wants manage lists, so it manages cards on list
+  As a regular user, it wants manage a card, so it manages cards
+  on list
 
   Scenario: Create a new card
     Given Sets a "POST" request to "/boards/"
@@ -17,12 +18,14 @@ Feature: Card
     And Should return status code 200
     And Saves response as "ListObject"
     And Sets a "POST" request to "/cards/"
-      | key    | value           |
-      | name   | functionalCard  |
-      | desc    | value           |
-      | due    | 01/31/2020           |
-      | idList | (ListObject.id) |
-
+      | key         | value                     |
+      | name        | functionalCard            |
+      | desc        | this is a description     |
+      | pos         | top                       |
+      | due         | 01/31/2020                |
+      | dueComplete | false                     |
+      | idList      | (ListObject.id)           |
+      | urlSource   | http://fundacion-jala_org |
     And Sends request
     Then Should return status code 200
     And Saves response as "CardObject"
