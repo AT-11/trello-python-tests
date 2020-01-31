@@ -19,10 +19,11 @@ Feature: Board
     And Validates response body
     And Validates schema with "board_schema.json"
     # Post condition
-    And Sets a "DELETE" request to "/boards/(BoardObject.id)"
+    And Sets a "DELETE" request to "/boards/"
+      | key | value            |
+      | id  | (BoardObject.id) |
     And Sends request
     And Should return status code 200
-
 
 
   Scenario: Updates members in a Board
@@ -41,10 +42,11 @@ Feature: Board
     And Validates response body
     And Validates schema with "board_schema.json"
     # Post condition
-    And Sets a "DELETE" request to "/boards/(BoardObject.id)"
+    And Sets a "DELETE" request to "/boards/"
+      | key | value            |
+      | id  | (BoardObject.id) |
     And Sends request
     And Should return status code 200
-
 
 
   Scenario: Marked as a viewer the board
@@ -60,6 +62,8 @@ Feature: Board
     And Validates response body
     And Validates schema with "board_schema.json"
     # Post condition
-    And Sets a "DELETE" request to "/boards/(BoardObject.id)"
+    And Sets a "DELETE" request to "/boards/"
+      | key | value            |
+      | id  | (BoardObject.id) |
     And Sends request
     And Should return status code 200
