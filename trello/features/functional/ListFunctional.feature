@@ -1,18 +1,19 @@
-# Created by Juan Martinez at 1/27/2020
-Feature: Manages board's list
-  As a regular user, wants manage lists, so that manages lists on board
+# Created by Juan Martinez at 1/30/2020
+Feature: List
+  Manages list of the board
 
-  Scenario: Create a new list on a board
+  Scenario: Create a list with all its specifications
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
-      | name | newBoardPOSTToList |
+      | name | newBoardFunctional |
     And Sends request
     And Should return status code 200
     And Saves response as "boardObject"
     When Sets a "POST" request to "/list"
       | key     | value            |
-      | name    | newListName      |
+      | name    | functionalList   |
       | idBoard | (boardObject.id) |
+      | pos     | top              |
     And Sends request
     Then Should return status code 200
     And Validates response body
