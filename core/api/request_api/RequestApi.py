@@ -34,10 +34,27 @@ class RequestApi(object):
         return data_dictionary
 
     def do_request(self, http_type, input_endpoint, data_table, response_param):
+        values = {}
+
         data = self.generate_data(data_table, response_param)
 
         body_content = json.dumps(data)
         url = self.config.get_config_file()['url_trello'] + input_endpoint
         HEADERS = {'content-type': 'application/json'}
-        self.response = requests.request(http_type, url, data=body_content, headers=HEADERS)
+        if http_type == "POST":
+            self.response = requests.request(http_type, url, data=body_content, headers=HEADERS)
+        else:
+            values["key"] = self.config.get_config_file()['key']
+            values["token"] = self.config.get_config_file()['token']
+            url += self.generate_data_delete(data_table, response_param)
+            self.response = requests.request(http_type, url, params=values)
         return self.response
+
+    def generate_data_delete(self, data_table, response_param):
+        row_value = self.verify_value_delete(response_param)
+        return row_value
+
+    def verify_value_delete(self, response_param):
+        key = 'BoardObject'
+        row_value = response_param.get(key, None)
+        return row_value
