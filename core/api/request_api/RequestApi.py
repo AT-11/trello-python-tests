@@ -44,13 +44,9 @@ class RequestApi(object):
         else:
             values["key"] = self.config.get_config_file()['key']
             values["token"] = self.config.get_config_file()['token']
-            url += self.generate_data_delete(data_table, response_param)
+            url += self.verify_value_delete(response_param)
             self.response = requests.request(http_type, url, params=values)
         return self.response
-
-    def generate_data_delete(self, data_table, response_param):
-        row_value = self.verify_value_delete(response_param)
-        return row_value
 
     def verify_value_delete(self, response_param):
         key = 'BoardObject'
