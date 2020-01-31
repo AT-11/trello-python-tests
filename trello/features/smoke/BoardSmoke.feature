@@ -18,19 +18,16 @@ Feature: Board's Test
     And Should return status code 200
     #And Validates schema with "delete_schema.json"
 
-#    # Create by Limbert Vargas at 1/28/2020
-#  Scenario: Deletes a board by Id
-#    Given Sets a "POST" request to "/boards/"
-#      | key  | value    |
-#      | name | newBoard |
-#    And Sends request
-#    And Should return status code 200
-#    And Saves response as "BoardObject"
-#    When Sets a "DELETE" request to "/boards/"
-#      | key     | value            |
-#      | idBoard | (BoardObject.id) |
-#
-#    And Sends request
-#    Then Should returns status code 200
-#    And Validates response body
-#    And Validates schema
+    # Create by Limbert Vargas at 1/28/2020
+  Scenario: Deletes a board by Id
+    Given Sets a "POST" request to "/boards/"
+      | key  | value    |
+      | name | newBoard |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    When Sets a "DELETE" request to "/boards/"
+      | key     | value            |
+      | idBoard | (BoardObject.idBoard) |
+    Then Sends request
+    And Should return status code 200
