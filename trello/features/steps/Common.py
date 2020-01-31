@@ -41,12 +41,6 @@ def step_impl(context, method, endpoint):
     context.method = method
 
 
-@then('Should return status code {number:d}')
-def step_impl(context, number):
-    context.validator_schema = SchemaValidator()
-    assert context.json_response.status_code is number
-
-
 @step('Validates schema with "{schema}"')
 def step_impl(context, schema):
     expected = SchemaValidator.validate(context.json_response.text, schema)
