@@ -13,12 +13,14 @@ class RequestApi(object):
         self.config = EnvironmentConfiguration()
 
     def verify_value(self, row_key, row_value, response_param):
+        result_value = ""
         if re.search("[.]", row_value):
             key = row_value[1:row_value.index(".")]
             row_value = response_param.get(key, None)
-        if re.search("[(|)]", row_value):
+        elif re.search("[(|)]", row_value):
             row_value = self.config.get_config_file()[row_key]
-        return row_value
+        result_value = row_value
+        return result_value
 
     def generate_data(self, data_table, response_param):
         data_dictionary = {}
