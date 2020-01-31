@@ -43,7 +43,6 @@ def step_impl(context, method, endpoint):
 
 @step('Validates schema with "{schema}"')
 def step_impl(context, schema):
-    context.validator_schema = SchemaValidator()
     expected = SchemaValidator.validate(context.json_response.text, schema)
     assert True is expected
 
