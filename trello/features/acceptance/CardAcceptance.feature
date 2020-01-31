@@ -26,6 +26,8 @@ Feature: Card
     And Validates response body
     And Validates schema with "card_schema.json"
     # Post condition
-    And Sets a "DELETE" request to "/boards/(BoardObject.id)"
+    And Sets a "DELETE" request to "/boards/"
+      | key | value            |
+      | id  | (BoardObject.id) |
     And Sends request
     And Should return status code 200
