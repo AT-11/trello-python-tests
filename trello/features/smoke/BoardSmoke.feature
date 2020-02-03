@@ -11,14 +11,10 @@ Feature: Board's Test
     And Saves response as "BoardObject"
     And Validates response body
     And Validates schema with "board_schema.json"
-    And Sets a "DELETE" request to "/boards/"
-      | key | value                 |
-      | id  | (BoardObject.idBoard) |
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
-    #And Validates schema with "delete_schema.json"
 
-    # Create by Limbert Vargas at 1/28/2020
   Scenario: Deletes a board by Id
     Given Sets a "POST" request to "/boards/"
       | key  | value    |
@@ -26,8 +22,6 @@ Feature: Board's Test
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
-    When Sets a "DELETE" request to "/boards/"
-      | key     | value            |
-      | idBoard | (BoardObject.idBoard) |
+    When Sets a "DELETE" request to "/boards/BoardObject.id"
     Then Sends request
     And Should return status code 200
