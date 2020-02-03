@@ -12,7 +12,7 @@ class RequestApi(object):
         self.response = ""
         self.config = EnvironmentConfiguration()
 
-    def verify_value(self, row_key, row_value, id_dictionary):
+    def get_id_value(self, row_key, row_value, id_dictionary):
         result_value = ""
         if re.search("[.]", row_value):
             key = row_value[1:row_value.index(".")]
@@ -28,7 +28,7 @@ class RequestApi(object):
             for row in data_table:
                 row_key = row['key']
                 row_value = row['value']
-                row_value = self.verify_value(row_key, row_value, id_dictionary)
+                row_value = self.get_id_value(row_key, row_value, id_dictionary)
                 data_dictionary[row_key] = row_value
 
         data_dictionary["key"] = self.config.get_config_file()['key']
