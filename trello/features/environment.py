@@ -7,4 +7,6 @@ def before_scenario(context, scenario):
 
 
 def after_scenario(context, scenario):
+    """
     print('Finished running a scenario')
+    """
