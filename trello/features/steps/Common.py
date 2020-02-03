@@ -1,6 +1,7 @@
 from behave import given, when, then, step
 
 from core.api.request_api.RequestApi import RequestApi
+from core.utils.BodyValidator import BodyValidator
 from core.utils.SchemaValidator import SchemaValidator
 
 
@@ -53,8 +54,7 @@ def step_impl(context, method, endpoint):
     context.method = method
 
 
-@step("Validates response body")
-def step_impl(context):
-    """
-    :type context: behave.runner.Context
-    """
+@step('Validates response body with "{expected_body}"')
+def step_impl(context, expected_body, ):
+    body_validator = BodyValidator()
+    body_validator.validate(context.json_response, expected_body, context.data_table)
