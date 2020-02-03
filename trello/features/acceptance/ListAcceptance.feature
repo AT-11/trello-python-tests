@@ -23,6 +23,6 @@ Feature: Board's list
     And Should return status code 200
     And Validates response body
     And Validates schema with "list_schema.json"
-    And Sets a "DELETE" request to "/board/boardObject.id"
+    And Sets a "DELETE" request to "/boards/boardObject.id"
     And Sends request
     And Should return status code 200
