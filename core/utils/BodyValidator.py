@@ -12,7 +12,8 @@ class BodyValidator(object):
         folder_json_path = environment_conf.get_config_file()['folder_json_path']
         expected_body_path = folder_json_path + expected_body_path
         expected_body = JsonFileReader.read(expected_body_path)
-        expected_body = BodyValidator.update_expected_body(data_table, expected_body.text)
+
+        expected_body = BodyValidator.update_expected_body(data_table, expected_body)
         # body_response = json.loads(body_response)
         for row in expected_body:
             if row['value'] in body_response:
@@ -22,9 +23,10 @@ class BodyValidator(object):
 
     @staticmethod
     def update_expected_body(data_table, expected_body):
-        expected_body_dictionary = json.loads(expected_body)
+        expected_body_dictionary = expected_body
         for row in expected_body_dictionary:
-            expected_body[row['key']] = BodyValidator.replacer(row['value'], data_table)
+            value = BodyValidator.replacer(row['value'], data_table)
+            expected_body[row['key']] = value
         return expected_body_dictionary
 
     @staticmethod
