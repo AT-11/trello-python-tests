@@ -15,7 +15,6 @@ Feature: Board's Test
     And Sends request
     And Should return status code 200
 
-    # Create by Limbert Vargas at 1/28/2020
   Scenario: Deletes a board by Id
     Given Sets a "POST" request to "/boards/"
       | key  | value    |
