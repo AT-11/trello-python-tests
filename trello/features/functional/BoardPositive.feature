@@ -1,6 +1,6 @@
 # Created by Oscar Lopez at 2/3/2020
 Feature: Create a new Board with name and description
-  As a regular user, it wants to manage a board, and user Creates a board with description.
+  As a regular user, it wants to manage a board, and creates a board with description.
 
   Scenario : Creates a new Board with description
     Given Sets a "POST" request to "/boards/"
