@@ -6,13 +6,6 @@ import requests
 from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
 
 
-def replace_variables(input_endpoint, response_param):
-    for key in response_param:
-        if input_endpoint.find(key) > -1:
-            input_endpoint = input_endpoint.replace(key, response_param[key]).replace(".id", "")
-    return input_endpoint
-
-
 class RequestApi(object):
 
     def __init__(self):
@@ -49,22 +42,15 @@ class RequestApi(object):
         data = self.generate_data(data_table, response_param)
 
         body_content = json.dumps(data)
-        url = self.config.get_config_file()['url_trello'] + replace_variables(input_endpoint, response_param)
+        url = self.config.get_config_file()['url_trello'] + self.replace_variables(input_endpoint, response_param)
         HEADERS = {'content-type': 'application/json'}
-        # if http_type == "POST":
-        if data_table is not None:
-            self.response = requests.request(http_type, url, data=body_content, headers=HEADERS)
-        else:
-            self.response = requests.request(http_type, url, params=body_content, headers=HEADERS)
 
-        # else:
-        #     values["key"] = self.config.get_config_file()['key']
-        #     values["token"] = self.config.get_config_file()['token']
-        #     url += self.verify_value_delete(response_param)
-        #     self.response = requests.request(http_type, url, params=values)
+        self.response = requests.request(http_type, url, data=body_content, headers=HEADERS)
+
         return self.response
 
-    def verify_value_delete(self, response_param):
-        key = 'BoardObject'
-        row_value = response_param.get(key, None)
-        return row_value
+    def replace_variables(self, input_endpoint, response_param):
+        for key in response_param:
+            if input_endpoint.find(key) > -1:
+                input_endpoint = input_endpoint.replace(key, response_param[key]).replace(".id", "")
+        return input_endpoint
