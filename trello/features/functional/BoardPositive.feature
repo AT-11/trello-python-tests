@@ -13,6 +13,6 @@ Feature: Create a new Board with name and description
     And Validates response body
     And Validates schema with "board_schema.json"
     #Post Condition
-    And Sets a "DELETE" request to "/boards/boardObject.id"
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
