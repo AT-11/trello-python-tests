@@ -1,6 +1,5 @@
 import json
 import re
-
 import requests
 
 from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
@@ -39,7 +38,7 @@ class RequestApi(object):
         data = self.generate_data(data_table, id_dictionary)
 
         body_content = json.dumps(data)
-        url = self.config.get_config_file()['url_trello'] + self.replace_variables(input_endpoint, id_dictionary)
+        url = self.config.get_config_file()['base_uri'] + self.replace_variables(input_endpoint, id_dictionary)
         HEADERS = {'content-type': 'application/json'}
 
         self.response = requests.request(http_type, url, data=body_content, headers=HEADERS)
