@@ -11,6 +11,7 @@ Feature: Board's Test
     And Saves response as "BoardObject"
     And Validates response body
     And Validates schema with "board_schema.json"
+    #Post Condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
@@ -22,6 +23,7 @@ Feature: Board's Test
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    #Post Condition
     When Sets a "DELETE" request to "/boards/BoardObject.id"
     Then Sends request
     And Should return status code 200
