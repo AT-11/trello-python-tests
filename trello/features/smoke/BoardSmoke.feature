@@ -14,7 +14,6 @@ Feature: Board's Test
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
-    #And Validates schema with "delete_schema.json"
 
     # Create by Limbert Vargas at 1/28/2020
   Scenario: Deletes a board by Id
