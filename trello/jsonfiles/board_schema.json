@@ -36,19 +36,38 @@
       "type": "object",
       "properties": {
         "permissionLevel": {
-          "type": "string"
+          "type": "string",
+          "enum": ["org", "private", "public"]
         },
         "hideVotes": {
           "type": "boolean"
         },
         "voting": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "disabled",
+            "members",
+            "observers",
+            "org",
+            "public"
+          ]
         },
         "comments": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "disabled",
+            "members",
+            "observers",
+            "org",
+            "public"
+          ]
         },
         "invitations": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "admins",
+            "members"
+          ]
         },
         "selfJoin": {
           "type": "boolean"
@@ -60,13 +79,28 @@
           "type": "boolean"
         },
         "cardAging": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "pirate",
+            "regular"
+          ]
         },
         "calendarFeedEnabled": {
           "type": "boolean"
         },
         "background": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "blue",
+            "orange",
+            "green",
+            "red",
+            "purple",
+            "pink",
+            "lime",
+            "sky",
+            "grey"
+          ]
         },
         "backgroundImage": {
           "type": "null"
@@ -194,7 +228,6 @@
     "url",
     "shortUrl",
     "prefs",
-    "labelNames",
-    "limits"
+    "labelNames"
   ]
 }
