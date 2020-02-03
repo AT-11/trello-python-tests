@@ -217,6 +217,7 @@
     }
   },
   "required": [
+    "id",
     "name",
     "desc",
     "descData",
