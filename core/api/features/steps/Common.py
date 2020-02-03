@@ -1,5 +1,4 @@
 from behave import given, when, then, step
-
 from core.api.request_api.RequestApi import RequestApi
 from core.utils.SchemaValidator import SchemaValidator
 
