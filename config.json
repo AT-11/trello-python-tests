@@ -2,5 +2,6 @@
   "url_trello": "https://api.trello.com/1",
   "folder_json_path": "trello/jsonfiles/",
   "key": "",
-  "token": ""
+  "token": "",
+  "email" : "amet.net@gmail.com"
 }
