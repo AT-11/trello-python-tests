@@ -77,9 +77,7 @@ Feature: Board
     And Validates response body
     And Validates schema with "board_schema.json"
     # Post condition
-    And Sets a "DELETE" request to "/boards/"
-      | key | value            |
-      | id  | (BoardObject.id) |
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
 
@@ -100,9 +98,7 @@ Feature: Board
     And Validates response body
     And Validates schema with "board_schema.json"
     # Post condition
-    And Sets a "DELETE" request to "/boards/"
-      | key | value            |
-      | id  | (BoardObject.id) |
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
 
@@ -132,9 +128,7 @@ Feature: Board
     And Validates response body
     And Validates schema with "board_schema.json"
     # Post condition
-    And Sets a "DELETE" request to "/boards/"
-      | key | value            |
-      | id  | (BoardObject.id) |
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
     And Sets a "DELETE" request to "/organizations/OrganizationObject.id"
@@ -157,8 +151,6 @@ Feature: Board
     And Validates response body
     And Validates schema with "board_schema.json"
     # Post condition
-    And Sets a "DELETE" request to "/boards/"
-      | key | value            |
-      | id  | (BoardObject.id) |
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
