@@ -14,8 +14,6 @@ class SchemaValidator(object):
         json_path = folder_json_path + json_schema
         try:
             json_schema = JsonFileReader.read(json_path)
-            body_json = json.loads(body_response)
-            validate(instance=body_json, schema=json_schema)
-        except:
-            return False
-        return True
+            return validate(instance=body_response, schema=json_schema) is None
+        except ValueError as error:
+            raise RuntimeError('Body response is wrong') from error
