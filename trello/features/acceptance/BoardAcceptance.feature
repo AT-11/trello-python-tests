@@ -10,18 +10,15 @@ Feature: Board
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
-    When Sets a "PUT" request to "/boards/"
-      | key     | value            |
-      | name    | UpdateBoardName  |
-      | idBoard | (BoardObject.id) |
+    When Sets a "PUT" request to "/boards/BoardObject.id"
+      | key  | value           |
+      | name | UpdateBoardName |
     And Sends request
     Then Should return status code 200
     And Validates response body
     And Validates schema with "board_schema.json"
     # Post condition
-    And Sets a "DELETE" request to "/boards/"
-      | key | value            |
-      | id  | (BoardObject.id) |
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
 
@@ -33,18 +30,15 @@ Feature: Board
     And Sends request
     And Should return status code 200
     And Saves response as "board_test"
-    When Sets a "PUT" request to "/boards/id/members"
-      | key     | value           |
-      | idBoard | (board_test.id) |
-      | email   | (email)         |
+    When Sets a "PUT" request to "/boards/board_test.id/members"
+      | key   | value   |
+      | email | (email) |
     And Sends request
     Then Should return status code 200
     And Validates response body
     And Validates schema with "board_schema.json"
     # Post condition
-    And Sets a "DELETE" request to "/boards/"
-      | key | value            |
-      | id  | (BoardObject.id) |
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
 
@@ -56,14 +50,12 @@ Feature: Board
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
-    When Sets a "Post" request to "boards/(id)/markedAsViewed"
+    When Sets a "POST" request to "/boards/BoardObject.id/markedAsViewed"
     And Sends request
     Then Should return status code 200
     And Validates response body
     And Validates schema with "board_schema.json"
     # Post condition
-    And Sets a "DELETE" request to "/boards/"
-      | key | value            |
-      | id  | (BoardObject.id) |
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
