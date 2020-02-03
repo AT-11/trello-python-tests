@@ -33,12 +33,9 @@ class RequestApi(object):
 
         data_dictionary["key"] = self.config.get_config_file()['key']
         data_dictionary["token"] = self.config.get_config_file()['token']
-
         return data_dictionary
 
     def do_request(self, http_type, input_endpoint, data_table, response_param):
-        values = {}
-
         data = self.generate_data(data_table, response_param)
 
         body_content = json.dumps(data)
@@ -46,11 +43,11 @@ class RequestApi(object):
         HEADERS = {'content-type': 'application/json'}
 
         self.response = requests.request(http_type, url, data=body_content, headers=HEADERS)
-
         return self.response
 
     def replace_variables(self, input_endpoint, response_param):
+        NO_FOUND = -1
         for key in response_param:
-            if input_endpoint.find(key) > -1:
+            if input_endpoint.find(key) > NO_FOUND:
                 input_endpoint = input_endpoint.replace(key, response_param[key]).replace(".id", "")
         return input_endpoint
