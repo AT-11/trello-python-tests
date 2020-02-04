@@ -3,6 +3,7 @@
   "folder_json_path": "trello/jsonfiles/",
   "key": "",
   "token": "",
-  "email": "",
+  "email": "alansur@hotmail.com",
+  "website": "http://fundacion-jala.org",
   "log_path": "logs/logFile.log"
 }
