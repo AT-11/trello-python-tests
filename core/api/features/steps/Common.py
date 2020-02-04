@@ -18,7 +18,7 @@ def step_impl(context):
 
 @step('Should return status code {number:d}')
 def step_impl(context, number):
-    assert context.json_response.status_code is number
+    assert context.json_response.status_code == number
 
 
 @step('Saves response as "{name_object}"')
