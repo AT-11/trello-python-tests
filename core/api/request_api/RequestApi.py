@@ -1,6 +1,9 @@
 import json
+import logging
 import re
 import requests
+
+from http.client import HTTPConnection
 
 from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
 
@@ -40,6 +43,15 @@ class RequestApi(object):
         body_content = json.dumps(data)
         url = self.config.get_config_file()['base_uri'] + self.replace_variables(input_endpoint, id_dictionary)
         HEADERS = {'content-type': 'application/json'}
+        DEBUG_VALUE = 1
+        HTTPConnection.debuglevel = DEBUG_VALUE
+        logger = logging.getLogger()
+        logger.setLevel(logging.DEBUG)
+        file_handler = logging.FileHandler(self.config.get_config_file()['log_path'])
+        file_handler.setLevel(logging.DEBUG)
+        formatter = logging.Formatter("%(asctime)s - %(process)d - %(name)s - %(levelname)s - %(message)s")
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
 
         self.response = requests.request(http_type, url, data=body_content, headers=HEADERS)
         return self.response
