@@ -1,5 +1,5 @@
 {
-  "url_trello": "https://api.trello.com/1",
+  "base_uri": "https://api.trello.com/1",
   "folder_json_path": "trello/jsonfiles/",
   "key": "",
   "token": "",
