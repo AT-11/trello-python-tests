@@ -1,4 +1,5 @@
 from core.api.request_api.RequestApi import RequestApi
+from core.api.features.steps.Common import *
 
 
 def before_scenario(context, scenario):
