@@ -1,6 +1,9 @@
 import json
+import logging
 import re
 import requests
+
+from http.client import HTTPConnection
 
 from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
 
@@ -29,19 +32,32 @@ class RequestApi(object):
                 row_value = row['value']
                 row_value = self.get_id_value(row_key, row_value, id_dictionary)
                 data_dictionary[row_key] = row_value
-
-        data_dictionary["key"] = self.config.get_config_file()['key']
-        data_dictionary["token"] = self.config.get_config_file()['token']
         return data_dictionary
 
     def do_request(self, http_type, input_endpoint, data_table, id_dictionary):
         data = self.generate_data(data_table, id_dictionary)
+        params_credentials = {"key": self.config.get_config_file()['key'], "token": self.config
+            .get_config_file()['token']}
 
         body_content = json.dumps(data)
         url = self.config.get_config_file()['base_uri'] + self.replace_variables(input_endpoint, id_dictionary)
         HEADERS = {'content-type': 'application/json'}
 
-        self.response = requests.request(http_type, url, data=body_content, headers=HEADERS)
+        DEBUG_VALUE = 1
+        HTTPConnection.debuglevel = DEBUG_VALUE
+        logger = logging.getLogger()
+        logger.setLevel(logging.DEBUG)
+        file_handler = logging.FileHandler(self.config.get_config_file()['log_path'])
+        file_handler.setLevel(logging.DEBUG)
+        formatter = logging.Formatter("%(asctime)s - %(process)d - %(name)s - %(levelname)s - %(message)s")
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+
+        if http_type == 'GET' or http_type == 'DELETE':
+            self.response = requests.request(http_type, url, params=params_credentials)
+        else:
+            self.response = requests.request(http_type, url, data=body_content, headers=HEADERS,
+                                             params=params_credentials)
         return self.response
 
     def replace_variables(self, input_endpoint, id_dictionary):
