@@ -53,7 +53,7 @@ class RequestApi(object):
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
 
-        if http_type == 'GET' and http_type == 'DELETE':
+        if http_type == 'GET' or http_type == 'DELETE':
             self.response = requests.request(http_type, url, params=params_credentials)
         else:
             self.response = requests.request(http_type, url, data=body_content, headers=HEADERS,
