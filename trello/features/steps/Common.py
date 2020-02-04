@@ -44,8 +44,8 @@ def step_impl(context, method, endpoint):
 
 @step('Validates schema with "{schema}"')
 def step_impl(context, schema):
-    expected = SchemaValidator.validate(context.json_response.json(), schema)
-    assert True is expected
+    result = SchemaValidator.validate(context.json_response.json(), schema)
+    assert True is result
 
 
 @step('Sets a "{method}" request to "{endpoint}"')
@@ -55,6 +55,7 @@ def step_impl(context, method, endpoint):
 
 
 @step('Validates response body with "{expected_body}"')
-def step_impl(context, expected_body, ):
+def step_impl(context, expected_body):
     body_validator = BodyValidator()
-    body_validator.validate(context.json_response, expected_body, context.data_table)
+    result = body_validator.validate(context.json_response, expected_body, context.data_table)
+    assert True is result
