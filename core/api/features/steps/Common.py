@@ -30,11 +30,10 @@ def step_impl(context, name_object):
 @step('Validates schema with "{schema}"')
 def step_impl(context, schema):
     result = SchemaValidator.validate(context.json_response.json(), schema)
-    assert True is result
+    assert None is result
 
 
 @step('Validates response body with "{expected_body}"')
 def step_impl(context, expected_body):
-    body_validator = BodyValidator()
-    result = body_validator.validate(context.json_response, expected_body, context.data_table)
+    result = BodyValidator.validate(context.json_response, expected_body, context.data_table)
     assert True is result

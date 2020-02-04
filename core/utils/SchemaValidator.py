@@ -1,4 +1,3 @@
-import json
 from jsonschema import validate
 
 from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
@@ -12,8 +11,8 @@ class SchemaValidator(object):
         environment_conf = EnvironmentConfiguration()
         folder_json_path = environment_conf.get_config_file()['folder_json_path']
         json_path = folder_json_path + json_schema
+        json_schema = JsonFileReader.read(json_path)
         try:
-            json_schema = JsonFileReader.read(json_path)
-            return validate(instance=body_response, schema=json_schema) is None
+            return validate(instance=body_response, schema=json_schema)
         except ValueError as error:
             raise RuntimeError('Body response is wrong') from error
