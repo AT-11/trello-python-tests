@@ -1,5 +1,6 @@
 from behave import step
 
+from core.utils.BodyValidator import BodyValidator
 from core.utils.SchemaValidator import SchemaValidator
 
 
@@ -28,12 +29,11 @@ def step_impl(context, name_object):
 
 @step('Validates schema with "{schema}"')
 def step_impl(context, schema):
-    expected = SchemaValidator.validate(context.json_response.json(), schema)
-    assert True is expected
+    result = SchemaValidator.validate(context.json_response.json(), schema)
+    assert None is result
 
 
-@step("Validates response body")
-def step_impl(context):
-    """
-    :type context: behave.runner.Context
-    """
+@step('Validates response body with "{expected_body}"')
+def step_impl(context, expected_body):
+    result = BodyValidator.validate(context.json_response, expected_body, context.data_table)
+    assert True is result
