@@ -13,11 +13,24 @@ To start setting up the environment with BDD (Behavior Driven Development).
 * Install [Git version 2.21.0.windows.1](https://git-scm.com/download/win)
 
 ## Configuration
-List of required libraries in Project interpreter
-* Install [behave](https://www.jetbrains.com/help/pycharm/creating-feature-files.html) interpreter in PyCharm.
-* Install [requests](https://pypi.org/project/requests/)
-* Install [jsonschema](https://pypi.org/project/jsonschema/)
-* Install [Pytest](https://docs.pytest.org/en/latest/getting-started.html) to write unit tests
+This project was intended to work with python 3.8.1 A list of required libraries can be found on "requirements.txt" 
+file.
+* behave interpreter in PyCharm.
+* requests
+* jsonschema
+* Pytest to write unit tests.
 
+To finish this configuration we need add Pytest in Python Integrated Tool follow the next steps:
+
+Go File -> Settings -> Tools -> Python Integrated Tools and in Testing field in Default test runner select pytest option.  
+
+This means all required libraries can be installed from the project path using:
+```bash 
+pip install -r requirements.txt
+```
+## About the Project
+On the 'core' folder we intend to put generic steps and functions that can be used on any API testing. 
+We also included a generic API request class, this class can be inherited to customize request options.
 ## Execution
-To execute this project we are focus on the features, to run any scenario we proceed to select the feature directory and select any feature, right click in the feature file and click in Run.
+To execute this project we are focus on the features, to run any scenario we proceed to select the feature directory 
+and select any feature, right click in the feature file and click in Run.
