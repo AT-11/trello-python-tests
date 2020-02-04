@@ -47,7 +47,7 @@ class RequestApi(object):
         HTTPConnection.debuglevel = 1
         logger = logging.getLogger()
         logger.setLevel(logging.DEBUG)
-        fh = logging.FileHandler("core/myapp.log")
+        fh = logging.FileHandler("logs/myapp.log")
         fh.setLevel(logging.DEBUG)
         formatter = logging.Formatter("%(asctime)s - %(process)d - %(name)s - %(levelname)s - %(message)s")
         fh.setFormatter(formatter)
