@@ -8,15 +8,19 @@ Feature: Manages board's list
       | name | newBoardPOSTToList |
     And Sends request
     And Should return status code 200
-    And Saves response as "boardObject"
+    And Saves response as "BoardObject"
     When Sets a "POST" request to "/list"
       | key     | value            |
       | name    | newListName      |
-      | idBoard | (boardObject.id) |
+      | idBoard | (BoardObject.id) |
     And Sends request
     Then Should return status code 200
-    And Validates response body
-    And Validates schema with "list_schema.json"
-    And Sets a "DELETE" request to "/board/(boardObject.id)"
+    And Saves response as "ListObject"
+#    And Validates response body with "expected_board_body.json"
+#    And Validates schema with "list_schema.json"
+    And Sets a "GET" request to "/lists/ListObject.id"
+    And Sends request
+    And Should return status code 200
+    And Sets a "DELETE" request to "/board/BoardObject.id"
     And Sends request
     And Should return status code 200
