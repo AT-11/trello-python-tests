@@ -1,4 +1,5 @@
 from behave import step
+
 from core.utils.SchemaValidator import SchemaValidator
 
 
@@ -36,4 +37,3 @@ def step_impl(context):
     """
     :type context: behave.runner.Context
     """
-    
