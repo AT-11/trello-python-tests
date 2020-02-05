@@ -5,9 +5,8 @@ from core.api.features.steps.Common import *
 def before_scenario(context, scenario):
     context.id_dictionary = {}
     context.request_api = RequestApi()
+    print("START: %s", scenario)
 
 
 def after_scenario(context, scenario):
-    """
-    To do
-    """
+    print("END: %s", scenario)
