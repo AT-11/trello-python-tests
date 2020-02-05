@@ -65,12 +65,17 @@ Feature: Board
     And Saves response as "BoardObject"
     When Sets a "POST" request to "/labels"
       | key     | value            |
+      | name    | newLabel         |
       | color   | green            |
       | idBoard | (BoardObject.id) |
     And Sends request
     Then Should return status code 200
-    # And Validates response body
-    And Validates schema with "board_schema.json"
+    And Saves response as "LabelObject"
+    And Validates response body
+    And Validates schema with "label_schema.json"
+    And Sets a "GET" request to "/labels/LabelObject.id"
+    And Sends request
+    And Should return status code 200
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
@@ -85,11 +90,18 @@ Feature: Board
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
-    And Sets a "POST" request to "/boards/BoardObject.id/lists"
+    And Sets a "POST" request to "/lists"
+      | key     | value            |
+      | name    | newList          |
+      | idBoard | (BoardObject.id) |
     When Sends request
     Then Should return status code 200
-    #And Validates response body
-    And Validates schema with "board_schema.json"
+     And Saves response as "ListObject"
+    And Validates schema with "list_schema.json"
+    And Sets a "GET" request to "/lists/ListObject.id"
+    And Sends request
+    And Should return status code 200
+    And Validates response body
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200

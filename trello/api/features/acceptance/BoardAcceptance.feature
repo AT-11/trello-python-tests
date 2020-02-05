@@ -17,6 +17,9 @@ Feature: Board
     Then Should return status code 200
     And Validates response body
     And Validates schema with "board_schema.json"
+    And Sets a "GET" request to "/boards/BoardObject.id"
+    And Sends request
+    And Should return status code 200
     # Post condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
@@ -29,12 +32,15 @@ Feature: Board
       | name | boardTest |
     And Sends request
     And Should return status code 200
-    And Saves response as "board_test"
-    When Sets a "PUT" request to "/boards/board_test.id/members"
+    And Saves response as "BoardObject"
+    When Sets a "PUT" request to "/boards/BoardObject.id/members"
       | key   | value   |
       | email | (email) |
     And Sends request
     Then Should return status code 200
+    And Sets a "GET" request to "/boards/BoardObject.id/members"
+    And Sends request
+    And Should return status code 200
     And Validates response body
     And Validates schema with "board_schema.json"
     # Post condition
@@ -42,7 +48,7 @@ Feature: Board
     And Sends request
     And Should return status code 200
 
-
+  # Known bug
   Scenario: Marked as a viewer the board
     Given Sets a "POST" request to "/boards/"
       | key  | value        |
@@ -74,6 +80,10 @@ Feature: Board
       | color | yellow      |
     And Sends request
     Then Should return status code 200
+    And Saves response as "LabelObject"
+    And Sets a "GET" request to "/labels/LabelObject.id"
+    And Sends request
+    And Should return status code 200
     And Validates response body
     And Validates schema with "board_schema.json"
     # Post condition
@@ -81,7 +91,7 @@ Feature: Board
     And Sends request
     And Should return status code 200
 
-
+# known bug "This is an experimental resource and may change at any time without notice."
   Scenario: Add tag to existent board
     Given Sets a "POST" request to "/boards/"
       | key  | value        |
@@ -98,10 +108,9 @@ Feature: Board
     And Sends request
     And Should return status code 200
     And Saves response as "OrganizationObject"
-    When Sets a "POST" request to "/boards/OrganizationObject.id/idTags"
-      | key   | value                   |
-      | id    | (BoardObject.id)        |
-      | value | (OrganizationObject.id) |
+    When Sets a "POST" request to "/boards/BoardObject.id/idTags"
+      | key     | value                   |
+      | value   | (OrganizationObject.id) |
     And Sends request
     Then Should return status code 200
     And Validates response body
