@@ -27,7 +27,6 @@ class RequestApi(object):
         elif re.search("[(|)]", row_value):
             row_value = self.config.get_config_file()[row_key]
         result_value = row_value
-        self.logger.debug(result_value)
         return result_value
 
     def generate_data(self, data_table, id_dictionary):
@@ -38,24 +37,23 @@ class RequestApi(object):
                 row_value = row['value']
                 row_value = self.get_id_value(row_key, row_value, id_dictionary)
                 data_dictionary[row_key] = row_value
-        self.logger.debug(data_dictionary)
         return data_dictionary
 
     def do_request(self, http_type, input_endpoint, data_table, id_dictionary):
-        self.logger.debug("METHOD: " + http_type)
-        self.logger.debug("ENDPOINT: " + input_endpoint)
-        self.logger.debug("DATATABLE: %s", data_table)
-        self.logger.debug("DICTIONARY: %s", id_dictionary)
+        self.logger.info("METHOD: " + http_type)
+        self.logger.info("ENDPOINT: " + input_endpoint)
+        self.logger.info("DATATABLE: %s", data_table)
+        self.logger.info("DICTIONARY: %s", id_dictionary)
         data = self.generate_data(data_table, id_dictionary)
         params_credentials = {"key": self.config.get_config_file()['key'], "token": self.config
             .get_config_file()['token']}
 
         body_content = json.dumps(data)
-        self.logger.info("BODY: %s", body_content)
+        self.logger.debug("BODY: %s", body_content)
         url = self.config.get_config_file()['base_uri'] + self.replace_variables(input_endpoint, id_dictionary)
         HEADERS = {'content-type': 'application/json'}
 
-        self.logger.info("HEADERS: %s", HEADERS)
+        self.logger.debug("HEADERS: %s", HEADERS)
 
         if http_type == 'GET' or http_type == 'DELETE':
             self.response = requests.request(http_type, url, params=params_credentials)
@@ -63,11 +61,11 @@ class RequestApi(object):
             self.response = requests.request(http_type, url, data=body_content, headers=HEADERS,
                                              params=params_credentials)
         if self.response.status_code < 400:
-            self.logger.info("RESPONSE: %s %s", self.response.status_code, self.response.reason)
+            self.logger.info("RESPONSE: %s", self.response.reason)
+            self.logger.debug("RESPONSE: %s", self.response.status_code)
         elif 400 <= self.response.status_code < 500:
-            self.logger.error("RESPONSE: %s %s", self.response.status_code, self.response.reason)
-        elif 500 <= self.response.status_code < 600:
-            self.logger.critical("RESPONSE: %s %s", self.response.status_code, self.response.reason)
+            self.logger.error("RESPONSE: %s", self.response.reason)
+            self.logger.debug("RESPONSE: %s", self.response.status_code)
 
         return self.response
 
