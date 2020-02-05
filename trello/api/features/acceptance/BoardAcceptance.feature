@@ -3,24 +3,24 @@ Feature: Board
   As a regular user, it wants to manage a Board.
 
 
-#  Scenario: Changes the name of the board
-#    Given Sets a "POST" request to "/boards/"
-#      | key  | value        |
-#      | name | GherkinBoard |
-#    And Sends request
-#    And Should return status code 200
-#    And Saves response as "BoardObject"
-#    When Sets a "PUT" request to "/boards/BoardObject.id"
-#      | key  | value           |
-#      | name | UpdateBoardName |
-#    And Sends request
-#    Then Should return status code 200
-#    #And Validates response body with "expected_board_body.json"
-#    And Validates schema with "board_schema.json"
-#    # Post condition
-#    And Sets a "DELETE" request to "/boards/BoardObject.id"
-#    And Sends request
-#    And Should return status code 200
+  Scenario: Changes the name of the board
+    Given Sets a "POST" request to "/boards/"
+      | key  | value        |
+      | name | GherkinBoard |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    When Sets a "PUT" request to "/boards/BoardObject.id"
+      | key  | value           |
+      | name | UpdateBoardName |
+    And Sends request
+    Then Should return status code 200
+    And Validates response body with "expected_board_body.json"
+    And Validates schema with "board_schema.json"
+    # Post condition
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
+    And Sends request
+    And Should return status code 200
 
 
   Scenario: Updates members in a Board
@@ -35,51 +35,51 @@ Feature: Board
       | email | (email) |
     And Sends request
     Then Should return status code 200
-    #And Validates response body with "expected_board_body.json"
+    And Validates response body with "expected_board_body.json"
     And Validates schema with "board_schema.json"
     # Post condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
 
-   #with this scenario we found a bug
-#  Scenario: Marked as a viewer the board
-#    Given Sets a "POST" request to "/boards/"
-#      | key  | value        |
-#      | name | GherkinBoard |
-#    And Sends request
-#    And Should return status code 200
-#    And Saves response as "BoardObject"
-#    When Sets a "POST" request to "/boards/BoardObject.id/markedAsViewed"
-#    And Sends request
-#    Then Should return status code 200
-#   # And Validates response body with "expected_board_body.json"
-#    And Validates schema with "board_schema.json"
-#    # Post condition
-#    And Sets a "DELETE" request to "/boards/BoardObject.id"
-#    And Sends request
-#    And Should return status code 200
+  # With this scenario we found a bug
+  Scenario: Marked as a viewer the board
+    Given Sets a "POST" request to "/boards/"
+      | key  | value        |
+      | name | GherkinBoard |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    When Sets a "POST" request to "/boards/BoardObject.id/markedAsViewed"
+    And Sends request
+    Then Should return status code 200
+    And Validates response body with "expected_board_body.json"
+    And Validates schema with "board_schema.json"
+    # Post condition
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
+    And Sends request
+    And Should return status code 200
 
 
-#  Scenario: Add label to existent Board
-#    Given Sets a "POST" request to "/boards/"
-#      | key  | value      |
-#      | name | BoardLabel |
-#    And Sends request
-#    And Should return status code 200
-#    And Saves response as "BoardObject"
-#    When Sets a "POST" request to "/boards/BoardObject.id/labels"
-#      | key   | value       |
-#      | name  | nameOfLabel |
-#      | color | yellow      |
-#    And Sends request
-#    Then Should return status code 200
-#   # And Validates response body with "expected_board_body.json"
-#    And Validates schema with "label_schema.json"
-#    # Post condition
-#    And Sets a "DELETE" request to "/boards/BoardObject.id"
-#    And Sends request
-#    And Should return status code 200
+  Scenario: Add label to existent Board
+    Given Sets a "POST" request to "/boards/"
+      | key  | value      |
+      | name | BoardLabel |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    When Sets a "POST" request to "/boards/BoardObject.id/labels"
+      | key   | value       |
+      | name  | nameOfLabel |
+      | color | yellow      |
+    And Sends request
+    Then Should return status code 200
+    And Validates response body with "expected_board_body.json"
+    And Validates schema with "label_schema.json"
+    # Post condition
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
+    And Sends request
+    And Should return status code 200
 
 
   Scenario: Add tag to existent board
@@ -103,7 +103,7 @@ Feature: Board
       | value | (OrganizationObject.id) |
     And Sends request
     Then Should return status code 200
-    #And Validates response body with "expected_board_body.json"
+    And Validates response body with "expected_board_body.json"
     And Validates schema with "board_schema.json"
     # Post condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"
@@ -126,7 +126,7 @@ Feature: Board
       | value | calendar |
     And Sends request
     Then Should return status code 410
-   # And Validates response body with "expected_board_body.json"
+    And Validates response body with "expected_board_body.json"
     And Validates schema with "board_schema.json"
     # Post condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"
