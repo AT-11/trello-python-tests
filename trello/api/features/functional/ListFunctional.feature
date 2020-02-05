@@ -17,8 +17,8 @@ Feature: List
     And Sends request
     Then Should return status code 200
     And Saves response as "ListObject"
-    #And Validates response body
-    #And Validates schema with "list_schema.json"
+    And Validates response body
+    And Validates schema with "list_schema.json"
     And Sets a "GET" request to "/lists/ListObject.id"
     And Sends request
     And Should return status code 200

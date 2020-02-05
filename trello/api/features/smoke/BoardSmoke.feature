@@ -26,10 +26,10 @@ Feature: Board's Test
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
-    And Sets a "GET" request to "/boards/BoardObject.id"
-    And Sends request
-    And Should return status code 200
     #Post Condition
     When Sets a "DELETE" request to "/boards/BoardObject.id"
     Then Sends request
     And Should return status code 200
+    And Sets a "GET" request to "/boards/BoardObject.id"
+    And Sends request
+    And Should return status code 404
