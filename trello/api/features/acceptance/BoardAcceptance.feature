@@ -38,11 +38,11 @@ Feature: Board
       | email | (email) |
     And Sends request
     Then Should return status code 200
+    And Validates response body
+    And Validates schema with "board_schema.json"
     And Sets a "GET" request to "/boards/BoardObject.id/members"
     And Sends request
     And Should return status code 200
-    And Validates response body
-    And Validates schema with "board_schema.json"
     # Post condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
@@ -81,11 +81,11 @@ Feature: Board
     And Sends request
     Then Should return status code 200
     And Saves response as "LabelObject"
+    And Validates response body
+    And Validates schema with "board_schema.json"
     And Sets a "GET" request to "/labels/LabelObject.id"
     And Sends request
     And Should return status code 200
-    And Validates response body
-    And Validates schema with "board_schema.json"
     # Post condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
@@ -100,11 +100,11 @@ Feature: Board
     And Should return status code 200
     And Saves response as "BoardObject"
     And Sets a "POST" request to "/organizations"
-      | key         | value                     |
-      | displayName | postOrganization          |
-      | desc        | This a description        |
-      | name        | thisIsName                |
-      | website     | http://fundacion-jala.org |
+      | key         | value              |
+      | displayName | postOrganization   |
+      | desc        | This a description |
+      | name        | thisIsName         |
+      | website     | (website)          |
     And Sends request
     And Should return status code 200
     And Saves response as "OrganizationObject"
