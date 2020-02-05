@@ -7,14 +7,13 @@ from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
 
 
 class RequestApi(object):
+    logger = logging.getLogger(__name__)
 
     def __init__(self):
         self.response = ""
         self.config = EnvironmentConfiguration()
-        self.logger = logging.getLogger()
 
     def get_id_value(self, row_key, row_value, id_dictionary):
-        self.logger.info("Enter id value")
         result_value = ""
         if re.search("[.]", row_value):
             key = row_value[1:row_value.index(".")]
@@ -26,7 +25,6 @@ class RequestApi(object):
         return result_value
 
     def generate_data(self, data_table, id_dictionary):
-        self.logger.debug("generate data")
         data_dictionary = {}
         if data_table is not None:
             for row in data_table:
@@ -40,14 +38,18 @@ class RequestApi(object):
         return data_dictionary
 
     def do_request(self, http_type, input_endpoint, data_table, id_dictionary):
-        self.logger.debug(http_type + " " + input_endpoint + " " + data_table + " " + id_dictionary)
+        self.logger.info("METHOD: " + http_type)
+        self.logger.info("ENDPOINT: " + input_endpoint)
+        self.logger.info("DATATABLE: %s", data_table)
+        self.logger.info("DICTIONARY: %s", id_dictionary)
         data = self.generate_data(data_table, id_dictionary)
 
         body_content = json.dumps(data)
+        self.logger.info("BODY: %s", body_content)
         url = self.config.get_config_file()['base_uri'] + self.replace_variables(input_endpoint, id_dictionary)
         HEADERS = {'content-type': 'application/json'}
-
-        # logger = logging.getLogger()
+        self.logger.info(HEADERS)
+        self.logger.info("HEADERS: %s", HEADERS)
         self.logger.setLevel(logging.DEBUG)
         file_handler = logging.FileHandler(self.config.get_config_file()['log_path'])
         formatter = logging.Formatter("%(asctime)s - %(process)d - %(name)s - %(levelname)s - %(message)s")
@@ -55,6 +57,13 @@ class RequestApi(object):
         self.logger.addHandler(file_handler)
 
         self.response = requests.request(http_type, url, data=body_content, headers=HEADERS)
+        if self.response.status_code < 400:
+            self.logger.info("RESPONSE: %s %s", self.response.status_code, self.response.reason)
+        elif self.response.status_code < 500:
+            self.logger.info("RESPONSE: %s %s", self.response.status_code, self.response.reason)
+        elif self.response.status_code < 600:
+            self.logger.info("RESPONSE: %s %s", self.response.status_code, self.response.reason)
+
         return self.response
 
     def replace_variables(self, input_endpoint, id_dictionary):
