@@ -4,6 +4,7 @@ import requests
 
 from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
 from logs.Logger import logger
+from logs.Logger import verify_logger
 
 
 class RequestApi(object):
@@ -50,20 +51,11 @@ class RequestApi(object):
 
         if http_type == 'GET' or http_type == 'DELETE':
             self.response = requests.request(http_type, url, params=params_credentials)
+            verify_logger(self.response)
         else:
             self.response = requests.request(http_type, url, data=body_content, headers=HEADERS,
                                              params=params_credentials)
-        if self.response.status_code < 400:
-            logger.setLevel(level=10)
-            logger.debug("RESPONSE: %s", self.response.status_code)
-            logger.info("RESPONSE: %s", self.response.reason)
-        elif 400 >= self.response.status_code < 500:
-            logger.setLevel(level=30)
-            logger.warning("RESPONSE: %s", self.response.text)
-        elif self.response.status_code >= 500:
-            logger.setLevel(level=40)
-            logger.error("RESPONSE: " + self.response.text, exc_info=True)
-
+            verify_logger(self.response)
         return self.response
 
     def replace_variables(self, input_endpoint, id_dictionary):
