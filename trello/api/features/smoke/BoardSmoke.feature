@@ -13,6 +13,7 @@ Feature: Board's Test
       | key                   | value    |
       | name                  | newBoard |
       | desc                  |          |
+      | closed                | False    |
       | prefs.permissionLevel | private  |
     And Validates schema with "board_schema.json"
     And Sets a "GET" request to "/boards/BoardObject.id"
