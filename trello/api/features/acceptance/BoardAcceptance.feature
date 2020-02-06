@@ -38,8 +38,12 @@ Feature: Board
       | email | (email) |
     And Sends request
     Then Should return status code 200
-    And Validates response body with "expected_board_body.json"
-    And Validates schema with "board_schema.json"
+    And Validates response body with
+      | key                     | value |
+      | members.activityBlocked | None  |
+      | memberships.memberType  | None  |
+      | memberships.nonPublic   | None  |
+    And Validates schema with "put_boards_members.json"
     And Sets a "GET" request to "/boards/BoardObject.id/members"
     And Sends request
     And Should return status code 200
