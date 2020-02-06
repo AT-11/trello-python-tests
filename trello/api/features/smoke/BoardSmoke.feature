@@ -1,6 +1,6 @@
 # Created by Oscar Lopez at 1/27/2020
 Feature: Board's Test
-  As a regular user, Manages the board, and user creates a new board.
+  As a regular user, It manages the board, and user creates a new board.
 
   Scenario: Creates new board with a name
     Given Sets a "POST" request to "/boards/"
@@ -10,8 +10,11 @@ Feature: Board's Test
     Then Should return status code 200
     And Saves response as "BoardObject"
     And Validates response body with
-      | key  | value    |
-      | name | newBoard |
+      | key                   | value    |
+      | name                  | newBoard |
+      | desc                  |          |
+      | closed                | False    |
+      | prefs.permissionLevel | private  |
     And Validates schema with "board_schema.json"
     And Sets a "GET" request to "/boards/BoardObject.id"
     And Sends request
