@@ -8,6 +8,17 @@ Feature: Negative test of Board
     Then Should return status code 400
     And Validates response message with message "invalid id"
 
+
+  Scenario: Create a new board with spaces as name
+    Given Sets a "POST" request to "/boards/"
+      | key  | value               |
+      | name |                     |
+      | desc | This is description |
+    And Sends request
+    And Should return status code 400
+    And Validates response message with message "invalid value for name"
+
+
   Scenario: Creates a new board with a name empty
     Given Sets a "POST" request to "/boards/"
       | key  | value |
