@@ -1,6 +1,6 @@
 # Created by Juan Martinez at 1/27/2020
 Feature: Manages board's list
-  As a regular user, wants manage lists, so that manages lists on board
+  As a regular user, It manages a lists, so that manages lists on board
 
   Scenario: Create a new list on a board
     Given Sets a "POST" request to "/boards/"
