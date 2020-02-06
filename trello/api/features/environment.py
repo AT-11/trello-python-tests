@@ -11,12 +11,10 @@ def before_scenario(context, scenario):
     context.id_dictionary = {}
     context.request_api = RequestApi()
     logger.info("START: %s", scenario)
-    print("START: %s", scenario)
 
 
 def after_scenario(context, scenario):
     logger.info("END: %s", scenario)
-    print("after: %s", scenario)
 
 
 def after_feature(context, feature):
