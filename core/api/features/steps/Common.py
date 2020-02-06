@@ -39,3 +39,8 @@ def step_impl(context):
     INDEX_TWO = 2
     result = BodyValidator.validate(context.json_response, context.table)
     assert True is result[INDEX_ONE], result[INDEX_TWO]
+
+
+@step('Validates response message with message "{msg}"')
+def step_impl(context, msg):
+    assert context.json_response.text == msg
