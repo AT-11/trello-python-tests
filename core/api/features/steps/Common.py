@@ -35,5 +35,7 @@ def step_impl(context, schema):
 
 @step("Validates response body with")
 def step_impl(context):
+    INDEX_ONE = 1
+    INDEX_TWO = 2
     result = BodyValidator.validate(context.json_response, context.table)
-    assert True is result[0], result[1]
+    assert True is result[INDEX_ONE], result[INDEX_TWO]
