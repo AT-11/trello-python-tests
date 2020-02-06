@@ -9,7 +9,9 @@ Feature: Board's Test
     When Sends request
     Then Should return status code 200
     And Saves response as "BoardObject"
-    And Validates response body with "expected_board_body.json"
+    And Validates response body with
+      | key  | value    |
+      | name | newBoard |
     And Validates schema with "board_schema.json"
     #Post Condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"
