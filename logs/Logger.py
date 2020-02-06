@@ -17,11 +17,12 @@ def verify_logger(input_response):
         logger.setLevel(level=10)
         logger.debug("RESPONSE: %s", input_response.status_code)
         logger.info("RESPONSE: %s", input_response.reason)
-    elif 400 >= input_response.status_code < 500:
+        return
+    if 400 >= input_response.status_code < 500:
         logger.setLevel(level=30)
         logger.warning("RESPONSE: %s", input_response.text)
-    elif input_response.status_code >= 500:
+        return
+    if input_response.status_code >= 500:
         logger.setLevel(level=40)
-        logger.error("RESPONSE: " + input_response.text, exc_info=True)
-    else:
         logger.error("Something was wrong: ", exc_info=True)
+        return
