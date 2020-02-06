@@ -16,7 +16,11 @@ Feature: Manages board's list
     And Sends request
     Then Should return status code 200
     And Saves response as "ListObject"
-    And Validates response body with "expected_board_body.json"
+    And Validates response body with
+      | key    | value       |
+      | name   | newListName |
+      | closed | False       |
+      | limits | {}          |
     And Validates schema with "list_schema.json"
     And Sets a "GET" request to "/lists/ListObject.id"
     And Sends request
