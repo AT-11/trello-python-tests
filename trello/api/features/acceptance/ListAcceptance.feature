@@ -8,21 +8,24 @@ Feature: Board's list
       | name | newBoard |
     And Sends request
     And Should return status code 200
-    And Saves response as "boardObject"
+    And Saves response as "BoardObject"
     When Sets a "POST" request to "/list"
       | key     | value            |
       | name    | newListName      |
-      | idBoard | (boardObject.id) |
+      | idBoard | (BoardObject.id) |
     And Sends request
     Then Should return status code 200
-    And Saves response as "listObject"
-    And Sets a "PUT" request to "/list/listObject.id"
+    And Saves response as "ListObject"
+    And Sets a "PUT" request to "/lists/ListObject.id"
       | key  | value       |
       | name | newListName |
     And Sends request
     And Should return status code 200
     And Validates response body
     And Validates schema with "list_schema.json"
-    And Sets a "DELETE" request to "/boards/boardObject.id"
+    And Sets a "GET" request to "/lists/ListObject.id"
+    And Sends request
+    And Should return status code 200
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200

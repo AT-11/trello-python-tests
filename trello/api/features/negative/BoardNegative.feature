@@ -5,5 +5,5 @@ Feature: Negative test of Board
   Scenario: Gets a board by invalid Id
     When  Sets a "GET" request to "/boards/idBoardNotValid"
     And Sends request
-    Then Should return status code 404
+    Then Should return status code 400
 

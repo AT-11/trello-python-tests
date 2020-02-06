@@ -13,6 +13,9 @@ Feature: Board's Test
       | key  | value    |
       | name | newBoard |
     And Validates schema with "board_schema.json"
+    And Sets a "GET" request to "/boards/BoardObject.id"
+    And Sends request
+    And Should return status code 200
     #Post Condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
@@ -25,7 +28,11 @@ Feature: Board's Test
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
-    #Post Condition
     When Sets a "DELETE" request to "/boards/BoardObject.id"
-    Then Sends request
-    And Should return status code 200
+    And Sends request
+    Then Should return status code 200
+    And Validates response body with
+    And Validates schema with "delete_board_schema.json"
+    And Sets a "GET" request to "/boards/BoardObject.id"
+    And Sends request
+    And Should return status code 404

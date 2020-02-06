@@ -31,7 +31,10 @@ Feature: Card
     And Saves response as "CardObject"
     And Validates response body
     And Validates schema with "card_schema.json"
+    And Sets a "GET" request to "/cards/CardObject.id"
+    And Sends request
+    And Should return status code 200
     # Post condition
-    And Sets a "DELETE" request to "/boards/(BoardObject.id)"
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
