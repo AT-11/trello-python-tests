@@ -2,7 +2,7 @@
 Feature: Card
   As a regular user, it wants manage a card, so it manages cards on list
 
-  Scenario: Create a new card
+  Scenario: Creates a new card with parameters
     Given Sets a "POST" request to "/boards/"
       | key  | value               |
       | name | boardFunctionalCard |
