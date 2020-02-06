@@ -32,6 +32,8 @@ Feature: Board's Test
     And Sends request
     Then Should return status code 200
     And Validates response body with
+      | key    | value |
+      | _value | None  |
     And Validates schema with "delete_board_schema.json"
     And Sets a "GET" request to "/boards/BoardObject.id"
     And Sends request
