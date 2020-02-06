@@ -62,15 +62,14 @@ class RequestApi(object):
                                              params=params_credentials)
         if self.response.status_code < 400:
             self.logger.setLevel(level=10)
-            self.logger.info("RESPONSE: %s", self.response.reason)
             self.logger.debug("RESPONSE: %s", self.response.status_code)
+            self.logger.info("RESPONSE: %s", self.response.reason)
         elif 400 >= self.response.status_code < 500:
             self.logger.setLevel(level=30)
             self.logger.warning("RESPONSE: %s", self.response.text)
         elif self.response.status_code >= 500:
             self.logger.setLevel(level=40)
-            self.logger.error("RESPONSE: " + self.response.reason, exc_info=True)
-            self.logger.debug("RESPONSE: %s", self.response.status_code)
+            self.logger.error("RESPONSE: " + self.response.text, exc_info=True)
 
         return self.response
 
