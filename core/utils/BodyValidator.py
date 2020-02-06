@@ -11,8 +11,9 @@ class BodyValidator(object):
             value_body_response = dictor(body_response, value)
             result = str(value_body_response) == dict_expected[value]
             if not result:
-                return False
-        return True
+                return False, " {} should be: {} but was {}".format(value, str(dict_expected[value]), str(
+                    value_body_response))
+        return True, "success"
 
     @staticmethod
     def load_expected_dict(data_table):
