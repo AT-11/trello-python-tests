@@ -6,4 +6,4 @@ Feature: Negative test of Board
     When  Sets a "GET" request to "/boards/idBoardNotValid"
     And Sends request
     Then Should return status code 400
-    And Validates response message "invalid id"
+    And Validates response message with message "invalid id"

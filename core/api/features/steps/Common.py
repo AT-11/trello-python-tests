@@ -39,6 +39,6 @@ def step_impl(context):
     assert True is result
 
 
-@step('Validates response message "{msg}"')
+@step('Validates response message with message "{msg}"')
 def step_impl(context, msg):
     assert context.json_response.text == msg
