@@ -23,7 +23,11 @@ Feature: Card
     And Sends request
     Then Should return status code 200
     And Saves response as "CardObject"
-    And Validates response body
+    And Validates response body with
+      | key                                   | value |
+      | badges.attachmentsByType.trello.board | 0     |
+      | badges.attachmentsByType.trello.card  | 0     |
+      | badges.location                       | False |
     And Validates schema with "card_schema.json"
     # Post condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"

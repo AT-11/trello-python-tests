@@ -33,7 +33,7 @@ def step_impl(context, schema):
     assert None is result
 
 
-@step('Validates response body with "{expected_body}"')
-def step_impl(context, expected_body):
-    result = BodyValidator.validate(context.json_response, expected_body, context.data_table)
+@step("Validates response body with")
+def step_impl(context):
+    result = BodyValidator.validate(context.json_response, context.table)
     assert True is result

@@ -64,6 +64,9 @@ class RequestApi(object):
             self.logger.info("RESPONSE: %s", self.response.reason)
             self.logger.debug("RESPONSE: %s", self.response.status_code)
         elif 400 >= self.response.status_code < 500:
+            self.logger.warning("RESPONSE: %s", self.response.reason)
+            self.logger.debug("RESPONSE: %s", self.response.status_code)
+        elif self.response.status_code >= 500:
             self.logger.error("RESPONSE: %s", self.response.reason)
             self.logger.debug("RESPONSE: %s", self.response.status_code)
 
