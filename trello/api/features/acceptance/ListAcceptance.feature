@@ -2,7 +2,7 @@
 Feature: Board's list
   Manages lists of the board
 
-  Scenario: # Updates the properties of a list by id
+  Scenario: Updates the properties of a list by id
     Given Sets a "POST" request to "/boards/"
       | key  | value    |
       | name | newBoard |
@@ -21,8 +21,10 @@ Feature: Board's list
       | name | newListName |
     And Sends request
     And Should return status code 200
-    And Validates response body
-    And Validates schema with "list_schema.json"
+    And Validates response body with
+      | key  | value       |
+      | name | newListName |
+    And Validates schema with "put_list_schema.json"
     And Sets a "GET" request to "/lists/ListObject.id"
     And Sends request
     And Should return status code 200
