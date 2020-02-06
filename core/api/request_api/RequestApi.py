@@ -1,12 +1,9 @@
 import json
-import logging
 import re
 import requests
 
 from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
-from logs.Logger import get_logger
-
-logger = get_logger()
+from logs.Logger import logger
 
 
 class RequestApi(object):
