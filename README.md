@@ -36,18 +36,9 @@ To configure the project to run the features is necessary access to config.json 
 in this file in the following fields:
 ```
 key:
-``` 
-This field is fill with the key provided in Trello API documentation
-
-```
 token:
 ```
-This field is fill with the key provided in Trello API documentation
-
-```
-email:
-``` 
-This field is fill with a valid email used to loggin in Trello application
+This fields is fill with the key and token provided in Trello API documentation.
 
 ## Execution
 To execute this project we are focus on the features, to run any scenario we proceed to select the feature directory 
