@@ -81,7 +81,10 @@ Feature: Board
     And Sends request
     Then Should return status code 200
     And Saves response as "LabelObject"
-    And Validates response body with "expected_board_body.json"
+    And Validates response body with
+      | key     | value            |
+      | name    | nameOfLabel      |
+      | color   | yellow           |
     And Validates schema with "label_schema.json"
     And Sets a "GET" request to "/labels/LabelObject.id"
     And Sends request
@@ -90,39 +93,6 @@ Feature: Board
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
-
-# known bug "This is an experimental resource and may change at any time without notice."
-  Scenario: Add tag to existent board
-    Given Sets a "POST" request to "/boards/"
-      | key  | value        |
-      | name | postBoardTag |
-    And Sends request
-    And Should return status code 200
-    And Saves response as "BoardObject"
-    And Sets a "POST" request to "/organizations"
-      | key         | value              |
-      | displayName | postOrganization   |
-      | desc        | This a description |
-      | name        | thisIsName         |
-      | website     | (website)          |
-    And Sends request
-    And Should return status code 200
-    And Saves response as "OrganizationObject"
-    When Sets a "POST" request to "/boards/BoardObject.id/idTags"
-      | key   | value                   |
-      | value | (OrganizationObject.id) |
-    And Sends request
-    Then Should return status code 200
-    And Validates response body with "expected_board_body.json"
-    And Validates schema with "board_schema.json"
-    # Post condition
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
-    And Sends request
-    And Should return status code 200
-    And Sets a "DELETE" request to "/organizations/OrganizationObject.id"
-    And Sends request
-    And Should return status code 200
-
 
   Scenario: Add powerUps to existent Board
     Given Sets a "POST" request to "/boards/"
