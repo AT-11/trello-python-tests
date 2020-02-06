@@ -82,9 +82,9 @@ Feature: Board
     Then Should return status code 200
     And Saves response as "LabelObject"
     And Validates response body with
-      | key     | value            |
-      | name    | nameOfLabel      |
-      | color   | yellow           |
+      | key     | value       |
+      | name    | nameOfLabel |
+      | color   | yellow      |
     And Validates schema with "label_schema.json"
     And Sets a "GET" request to "/labels/LabelObject.id"
     And Sends request
@@ -106,8 +106,10 @@ Feature: Board
       | value | calendar |
     And Sends request
     Then Should return status code 410
-    And Validates response body with "expected_board_body.json"
-    And Validates schema with "board_schema.json"
+    And Validates response body with
+      | key     | value |
+      | message | Gone  |
+    And Validates schema with "powerups_schema.json"
     # Post condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
