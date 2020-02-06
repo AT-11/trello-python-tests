@@ -4,5 +4,6 @@
   "key": "",
   "token": "",
   "email": "",
+  "website": "http://fundacion-jala.org",
   "log_path": "logs/logFile.log"
 }

@@ -1,11 +1,10 @@
 import json
-import logging
 import re
 import requests
 
-from http.client import HTTPConnection
-
 from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
+from logs.Logger import logger
+from logs.Logger import verify_logger
 
 
 class RequestApi(object):
@@ -35,29 +34,28 @@ class RequestApi(object):
         return data_dictionary
 
     def do_request(self, http_type, input_endpoint, data_table, id_dictionary):
+        logger.info("METHOD: " + http_type)
+        logger.info("ENDPOINT: " + input_endpoint)
+        logger.info("DATATABLE: %s", data_table)
+        logger.info("DICTIONARY: %s", id_dictionary)
         data = self.generate_data(data_table, id_dictionary)
         params_credentials = {"key": self.config.get_config_file()['key'], "token": self.config
             .get_config_file()['token']}
 
         body_content = json.dumps(data)
+        logger.debug("BODY: %s", body_content)
         url = self.config.get_config_file()['base_uri'] + self.replace_variables(input_endpoint, id_dictionary)
         HEADERS = {'content-type': 'application/json'}
 
-        DEBUG_VALUE = 1
-        HTTPConnection.debuglevel = DEBUG_VALUE
-        logger = logging.getLogger()
-        logger.setLevel(logging.DEBUG)
-        file_handler = logging.FileHandler(self.config.get_config_file()['log_path'])
-        file_handler.setLevel(logging.DEBUG)
-        formatter = logging.Formatter("%(asctime)s - %(process)d - %(name)s - %(levelname)s - %(message)s")
-        file_handler.setFormatter(formatter)
-        logger.addHandler(file_handler)
+        logger.debug("HEADERS: %s", HEADERS)
 
         if http_type == 'GET' or http_type == 'DELETE':
             self.response = requests.request(http_type, url, params=params_credentials)
+            verify_logger(self.response)
         else:
             self.response = requests.request(http_type, url, data=body_content, headers=HEADERS,
                                              params=params_credentials)
+            verify_logger(self.response)
         return self.response
 
     def replace_variables(self, input_endpoint, id_dictionary):
