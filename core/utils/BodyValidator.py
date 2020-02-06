@@ -1,36 +1,23 @@
-import json
-
-from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
-from core.utils.JsonFileReader import JsonFileReader
+from dictor import dictor
 
 
 class BodyValidator(object):
 
     @staticmethod
-    def validate(body_response, expected_body_path, data_table):
-        result = False
-        environment_conf = EnvironmentConfiguration()
-        folder_json_path = environment_conf.get_config_file()['folder_json_path']
-        expected_body_path = folder_json_path + expected_body_path
-        expected_body = JsonFileReader.read(expected_body_path)
-
-        expected_body = BodyValidator.update_expected_body(data_table, expected_body)
+    def validate(body_response, data_table):
+        dict_expected = BodyValidator.load_expected_dict(data_table)
         body_response = body_response.json()
-        for row in expected_body:
-            result = expected_body[row] == body_response[row]
+        for value in dict_expected:
+            value_body_response = dictor(body_response, value)
+            result = str(value_body_response) == dict_expected[value]
             if not result:
                 return False
-        return result
+        return True
 
     @staticmethod
-    def update_expected_body(data_table, expected_body):
+    def load_expected_dict(data_table):
+        dict_expected = {}
         for row_data_table in data_table:
             key = row_data_table['key']
-            expected_body[key] = BodyValidator.replacer(expected_body, row_data_table)
-        return expected_body
-
-    @staticmethod
-    def replacer(expected_body, row_data_table):
-        row_key = row_data_table['key']
-        if row_key in expected_body:
-            return row_data_table['value']
+            dict_expected[key] = row_data_table['value']
+        return dict_expected

@@ -15,7 +15,7 @@ Feature: Board
       | name | UpdateBoardName |
     And Sends request
     Then Should return status code 200
-    And Validates response body
+    And Validates response body with "expected_board_body.json"
     And Validates schema with "board_schema.json"
     And Sets a "GET" request to "/boards/BoardObject.id"
     And Sends request
@@ -38,7 +38,7 @@ Feature: Board
       | email | (email) |
     And Sends request
     Then Should return status code 200
-    And Validates response body
+    And Validates response body with "expected_board_body.json"
     And Validates schema with "board_schema.json"
     And Sets a "GET" request to "/boards/BoardObject.id/members"
     And Sends request
@@ -48,7 +48,7 @@ Feature: Board
     And Sends request
     And Should return status code 200
 
-  # Known bug
+  # With this scenario we found a bug
   Scenario: Marked as a viewer the board
     Given Sets a "POST" request to "/boards/"
       | key  | value        |
@@ -59,7 +59,7 @@ Feature: Board
     When Sets a "POST" request to "/boards/BoardObject.id/markedAsViewed"
     And Sends request
     Then Should return status code 200
-    And Validates response body
+    And Validates response body with "expected_board_body.json"
     And Validates schema with "board_schema.json"
     # Post condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"
@@ -81,8 +81,8 @@ Feature: Board
     And Sends request
     Then Should return status code 200
     And Saves response as "LabelObject"
-    And Validates response body
-    And Validates schema with "board_schema.json"
+    And Validates response body with "expected_board_body.json"
+    And Validates schema with "label_schema.json"
     And Sets a "GET" request to "/labels/LabelObject.id"
     And Sends request
     And Should return status code 200
@@ -109,11 +109,11 @@ Feature: Board
     And Should return status code 200
     And Saves response as "OrganizationObject"
     When Sets a "POST" request to "/boards/BoardObject.id/idTags"
-      | key     | value                   |
-      | value   | (OrganizationObject.id) |
+      | key   | value                   |
+      | value | (OrganizationObject.id) |
     And Sends request
     Then Should return status code 200
-    And Validates response body
+    And Validates response body with "expected_board_body.json"
     And Validates schema with "board_schema.json"
     # Post condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"
@@ -136,7 +136,7 @@ Feature: Board
       | value | calendar |
     And Sends request
     Then Should return status code 410
-    And Validates response body
+    And Validates response body with "expected_board_body.json"
     And Validates schema with "board_schema.json"
     # Post condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"

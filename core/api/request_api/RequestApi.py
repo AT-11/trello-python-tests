@@ -3,16 +3,21 @@ import logging
 import re
 import requests
 
-from http.client import HTTPConnection
-
 from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
 
 
 class RequestApi(object):
+    logger = logging.getLogger(__name__)
 
     def __init__(self):
         self.response = ""
         self.config = EnvironmentConfiguration()
+
+        self.logger.setLevel(logging.DEBUG)
+        file_handler = logging.FileHandler(self.config.get_config_file()['log_path'])
+        formatter = logging.Formatter("%(asctime)s - %(process)d - %(name)s - %(levelname)s - %(message)s")
+        file_handler.setFormatter(formatter)
+        self.logger.addHandler(file_handler)
 
     def get_id_value(self, row_key, row_value, id_dictionary):
         result_value = ""
@@ -35,29 +40,36 @@ class RequestApi(object):
         return data_dictionary
 
     def do_request(self, http_type, input_endpoint, data_table, id_dictionary):
+        self.logger.info("METHOD: " + http_type)
+        self.logger.info("ENDPOINT: " + input_endpoint)
+        self.logger.info("DATATABLE: %s", data_table)
+        self.logger.info("DICTIONARY: %s", id_dictionary)
         data = self.generate_data(data_table, id_dictionary)
         params_credentials = {"key": self.config.get_config_file()['key'], "token": self.config
             .get_config_file()['token']}
 
         body_content = json.dumps(data)
+        self.logger.debug("BODY: %s", body_content)
         url = self.config.get_config_file()['base_uri'] + self.replace_variables(input_endpoint, id_dictionary)
         HEADERS = {'content-type': 'application/json'}
 
-        DEBUG_VALUE = 1
-        HTTPConnection.debuglevel = DEBUG_VALUE
-        logger = logging.getLogger()
-        logger.setLevel(logging.DEBUG)
-        file_handler = logging.FileHandler(self.config.get_config_file()['log_path'])
-        file_handler.setLevel(logging.DEBUG)
-        formatter = logging.Formatter("%(asctime)s - %(process)d - %(name)s - %(levelname)s - %(message)s")
-        file_handler.setFormatter(formatter)
-        logger.addHandler(file_handler)
+        self.logger.debug("HEADERS: %s", HEADERS)
 
         if http_type == 'GET' or http_type == 'DELETE':
             self.response = requests.request(http_type, url, params=params_credentials)
         else:
             self.response = requests.request(http_type, url, data=body_content, headers=HEADERS,
                                              params=params_credentials)
+        if self.response.status_code < 400:
+            self.logger.info("RESPONSE: %s", self.response.reason)
+            self.logger.debug("RESPONSE: %s", self.response.status_code)
+        elif 400 >= self.response.status_code < 500:
+            self.logger.warning("RESPONSE: %s", self.response.reason)
+            self.logger.debug("RESPONSE: %s", self.response.status_code)
+        elif self.response.status_code >= 500:
+            self.logger.error("RESPONSE: %s", self.response.reason)
+            self.logger.debug("RESPONSE: %s", self.response.status_code)
+
         return self.response
 
     def replace_variables(self, input_endpoint, id_dictionary):
