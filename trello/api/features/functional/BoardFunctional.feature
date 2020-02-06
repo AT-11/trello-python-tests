@@ -42,7 +42,7 @@ Feature: Board
       | prefs_cardAging       | pirate                 |
     And Sends request
     Then Should return status code 200
-    #And Validates response body
+    And Validates response body
     And Validates schema with "board_schema.json"
     And Sets a "GET" request to "/boards/BoardObject.id"
     And Sends request
