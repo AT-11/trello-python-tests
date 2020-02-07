@@ -79,3 +79,45 @@ Feature: Card
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
+
+
+  Scenario: Modify the name of a card
+    Given Sets a "POST" request to "/boards/"
+      | key  | value               |
+      | name | boardFunctionalCard |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    And Sets a "POST" request to "/lists/"
+      | key     | value               |
+      | idBoard | (BoardObject.id)    |
+      | name    | boardFunctionalList |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "ListObject"
+    And Sets a "POST" request to "/cards/"
+      | key    | value           |
+      | name   | functionalCard  |
+      | idList | (ListObject.id) |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "CardObject"
+    When Sets a "PUT" request to "/cards/CardObject.id"
+      | key  | value                |
+      | name | new name of the card |
+    And Sends request
+    And Should return status code 200
+    And Validates response body with
+      | key                                   | value                |
+      | badges.attachmentsByType.trello.board | 0                    |
+      | badges.attachmentsByType.trello.card  | 0                    |
+      | closed                                | False                |
+      | name                                  | new name of the card |
+    And Validates schema with "put_card_schema.json"
+    And Sets a "GET" request to "/cards/CardObject.id"
+    And Sends request
+    And Should return status code 200
+    # Post condition
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
+    And Sends request
+    And Should return status code 200
