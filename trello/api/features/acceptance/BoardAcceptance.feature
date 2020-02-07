@@ -54,7 +54,8 @@ Feature: Board
     And Sends request
     And Should return status code 200
 
-  # With this scenario we found a bug
+    
+  @defect
   Scenario: Marked as a viewer the board
     Given Sets a "POST" request to "/boards/"
       | key  | value        |
@@ -99,6 +100,7 @@ Feature: Board
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
+
 
   Scenario: Add powerUps to existent Board
     Given Sets a "POST" request to "/boards/"
