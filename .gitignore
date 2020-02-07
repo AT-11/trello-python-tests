@@ -130,5 +130,4 @@ dmypy.json
 .pyre/
 
 config.json
-input_variables.json
 logFile.log
