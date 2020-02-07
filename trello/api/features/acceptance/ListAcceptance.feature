@@ -2,7 +2,7 @@
 Feature: Board's list
   Manages lists of the board
 
-  Scenario: Updates the properties of a list by id
+  Scenario: Update the name of a list using id
     Given Sets a "POST" request to "/boards/"
       | key  | value    |
       | name | newBoard |
