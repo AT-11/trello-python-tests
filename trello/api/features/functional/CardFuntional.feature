@@ -41,3 +41,39 @@ Feature: Card
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
+
+
+  Scenario: Add a new comment to a card
+    Given Sets a "POST" request to "/boards/"
+      | key  | value               |
+      | name | boardForCardComment |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    When Sets a "POST" request to "/lists/"
+      | key     | value            |
+      | idBoard | (BoardObject.id) |
+      | name    | cardList         |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "ListObject"
+    And Sets a "POST" request to "/cards/"
+      | key    | value           |
+      | idList | (ListObject.id) |
+    And Sends request
+    Then Should return status code 200
+    And Saves response as "CardObject"
+    And Validates response body with
+      | key                                   | value |
+      | name                                  |       |
+      | badges.attachmentsByType.trello.board | 0     |
+      | badges.location                       | False |
+    And Validates schema with "card_schema.json"
+    And Sets a "POST" request to "/cards/CardObject.id/actions/comments"
+      | key  | value             |
+      | text | This is a comment |
+    And Sends request
+    And Should return status code 200
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
+    And Sends request
+    And Should return status code 200
