@@ -19,7 +19,7 @@ class RequestApi(object):
             key = row_value[1:row_value.index(".")]
             row_value = id_dictionary.get(key, None)
         elif re.search("[(|)]", row_value):
-            row_value = self.config.get_config_file()[row_key]
+            row_value = self.config.get_variables_file()[row_key]
         result_value = row_value
         return result_value
 

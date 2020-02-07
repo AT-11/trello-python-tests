@@ -8,3 +8,9 @@ class JsonFileReader(object):
         with open(file_path, 'r') as file:
             data = file.read()
         return json.loads(data)
+
+    @staticmethod
+    def read_variables(file_path):
+        with open(file_path, 'r') as file:
+            data = file.read()
+        return json.loads(data)
