@@ -56,7 +56,7 @@ Feature: Board
 
 
   @defect
-  Scenario: Board Marked as a viewed
+  Scenario: Board marked as a viewed
     Given Sets a "POST" request to "/boards/"
       | key  | value        |
       | name | GherkinBoard |
