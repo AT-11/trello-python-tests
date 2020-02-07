@@ -79,3 +79,45 @@ Feature: Card
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
+
+
+  Scenario: Add a new label to a card
+    Given Sets a "POST" request to "/boards/"
+      | key  | value                 |
+      | name | boardForCardWithLabel |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    And Sets a "POST" request to "/lists/"
+      | key     | value            |
+      | idBoard | (BoardObject.id) |
+      | name    | cardListName     |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "ListObject"
+    And Sets a "POST" request to "/cards/"
+      | key    | value           |
+      | idList | (ListObject.id) |
+      | name   | newCardLabel    |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "CardObject"
+    When Sets a "POST" request to "/cards/CardObject.id/labels"
+      | key   | value           |
+      | id    | (CardObject.id) |
+      | color | green           |
+      | name  | greenLabel      |
+    And Sends request
+    Then Should return status code 200
+    And Saves response as "CardLabelObject"
+    And Validates response body with
+      | key   | value      |
+      | color | green      |
+      | name  | greenLabel |
+    And Validates schema with "card_label_schema.json"
+    And Sets a "GET" request to "/cards/CardObject.id"
+    And Sends request
+    And Should return status code 200
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
+    And Sends request
+    And Should return status code 200
