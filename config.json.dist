@@ -3,6 +3,5 @@
   "folder_json_path": "trello/jsonfiles/",
   "key": "",
   "token": "",
-  "email": "",
   "log_path": "logs/logFile.log"
 }
