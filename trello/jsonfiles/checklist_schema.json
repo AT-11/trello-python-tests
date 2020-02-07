@@ -5,24 +5,29 @@
     "id": {
       "type": "string"
     },
-    "idBoard": {
-      "type": "string"
-    },
     "name": {
       "type": "string"
     },
-    "color": {
+    "idBoard": {
       "type": "string"
     },
-    "limits": {
-      "type": "object"
+    "idCard": {
+      "type": "string"
+    },
+    "pos": {
+      "type": "integer"
+    },
+    "checkItems": {
+      "type": "array",
+      "items": {}
     }
   },
   "required": [
     "id",
-    "idBoard",
     "name",
-    "color",
-    "limits"
+    "idBoard",
+    "idCard",
+    "pos",
+    "checkItems"
   ]
 }
