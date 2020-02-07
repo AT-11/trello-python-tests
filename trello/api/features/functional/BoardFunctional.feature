@@ -71,7 +71,7 @@ Feature: Board
     And Sends request
     Then Should return status code 200
     And Saves response as "LabelObject"
-    And Validates response body with:
+    And Validates response body with
       | key  | value    |
       | name | newLabel |
     And Validates schema with "label_schema.json"
@@ -103,7 +103,7 @@ Feature: Board
     And Sets a "GET" request to "/lists/ListObject.id"
     And Sends request
     And Should return status code 200
-    And Validates response body with:
+    And Validates response body with
       | key  | value   |
       | name | newList |
     And Sets a "DELETE" request to "/boards/BoardObject.id"
