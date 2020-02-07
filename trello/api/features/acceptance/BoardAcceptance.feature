@@ -54,7 +54,7 @@ Feature: Board
     And Sends request
     And Should return status code 200
 
-    
+
   @defect
   Scenario: Marked as a viewer the board
     Given Sets a "POST" request to "/boards/"

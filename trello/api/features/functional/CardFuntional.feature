@@ -150,7 +150,7 @@ Scenario: Modify the name of a card
       | key  | value                |
       | name | new name of the card |
     And Sends request
-    And Should return status code 200
+    Then Should return status code 200
     And Validates response body with
       | key                                   | value                |
       | badges.attachmentsByType.trello.board | 0                    |
