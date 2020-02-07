@@ -5,7 +5,7 @@ class EnvironmentConfiguration(object):
 
     def __init__(self):
         self.config = JsonFileReader.read('config.json.dist')
-        self.variables = JsonFileReader.read_variables('input_variables.json')
+        self.variables = JsonFileReader.read('input_variables.json')
 
     def get_config_file(self):
         return self.config
