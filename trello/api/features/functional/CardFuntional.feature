@@ -49,7 +49,7 @@ Feature: Card
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
-    When Sets a "POST" request to "/lists/"
+    And Sets a "POST" request to "/lists/"
       | key     | value                      |
       | idBoard | (BoardObject.id)           |
       | name    | boardFunctionalListSticker |
@@ -61,9 +61,9 @@ Feature: Card
       | name   | functionalCardSticker |
       | idList | (ListObject.id)       |
     And Sends request
-    Then Should return status code 200
+    And Should return status code 200
     And Saves response as "CardObject"
-    And Sets a "POST" request to "/cards/CardObject.id/stickers"
+    When Sets a "POST" request to "/cards/CardObject.id/stickers"
       | key    | value |
       | image  | heart |
       | top    | 0     |
