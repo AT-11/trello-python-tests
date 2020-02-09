@@ -37,3 +37,38 @@ Feature: Card
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
+
+
+  Scenario: Delete a Card
+    Given Sets a "POST" request to "/boards/"
+      | key  | value                |
+      | name | board to delete card |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    And Sets a "POST" request to "/lists/"
+      | key     | value            |
+      | idBoard | (BoardObject.id) |
+      | name    | list of card     |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "ListObject"
+    And Sets a "POST" request to "/cards/"
+      | key    | value           |
+      | idList | (ListObject.id) |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "CardObject"
+    When Sets a "DELETE" request to "/cards/CardObject.id"
+    And Sends request
+    And Should return status code 200
+    And Validates response body with
+      | key    | value |
+      | Limits | None  |
+    And Validates schema with "delete_card_label_schema.json"
+    And Sets a "GET" request to "/cards/CardObject.id"
+    And Sends request
+    And Should return status code 404
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
+    And Sends request
+    And Should return status code 200
