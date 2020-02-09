@@ -66,3 +66,36 @@ Feature: List
     And Sets a "DELETE" request to "/board/BoardObject.id"
     And Sends request
     And Should return status code 200
+
+
+  Scenario: Modify the list position to "bottom"
+    Given Sets a "POST" request to "/boards/"
+      | key  | value              |
+      | name | newBoardFunctional |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    And Sets a "POST" request to "/lists/"
+      | key     | value            |
+      | name    | functionalList   |
+      | idBoard | (BoardObject.id) |
+      | pos     | top              |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "ListObject"
+    When Sets a "PUT" request to "/lists/ListObject.id/pos"
+      | key   | value  |
+      | value | bottom |
+    And Sends request
+    Then Should return status code 200
+    And Validates response body with
+      | key    | value          |
+      | name   | functionalList |
+      | closed | False          |
+    And Validates schema with "put_list_schema.json"
+    And Sets a "GET" request to "/lists/ListObject.id"
+    And Sends request
+    And Should return status code 200
+    And Sets a "DELETE" request to "/board/BoardObject.id"
+    And Sends request
+    And Should return status code 200
