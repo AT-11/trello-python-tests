@@ -14,5 +14,5 @@ Feature: Organization
       | key         | value                    |
       | displayName | new Name of Organization |
     And Sends request
-    And Should return status code 200
+    Then Should return status code 200
     And Saves response as "organizationNameObject"
