@@ -61,7 +61,7 @@ Feature: Card
     And Saves response as "CardObject"
     When Sets a "DELETE" request to "/cards/CardObject.id"
     And Sends request
-    And Should return status code 200
+    Then Should return status code 200
     And Validates response body with
       | key    | value |
       | Limits | None  |

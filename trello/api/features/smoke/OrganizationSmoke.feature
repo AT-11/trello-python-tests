@@ -14,7 +14,7 @@ Feature: Organization
       | displayName | new Organization |
       | desc        |                  |
       | website     | None             |
-    And Validates schema with "Create_organization.json"
+    And Validates schema with "organization_schema.json"
     And Sets a "GET" request to "/organizations/organizationObject.id"
     And Sends request
     And Should return status code 200
@@ -22,7 +22,3 @@ Feature: Organization
     And Sets a "DELETE" request to "/organizations/organizationObject.id"
     And Sends request
     And Should return status code 200
-
-
-
-
