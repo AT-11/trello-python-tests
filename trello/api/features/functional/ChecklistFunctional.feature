@@ -2,7 +2,7 @@
 Feature: Checklist
   As a regular user, it wants to manage a checklist on a card.
 
-  Scenario: Add checkitem to checklist
+  Scenario: Adds checkitem to checklist
     Given Sets a "POST" request to "/boards/"
       | key  | value            |
       | name | BoardToCheckItem |
