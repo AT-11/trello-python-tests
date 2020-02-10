@@ -1,4 +1,3 @@
-# Created by Enrique Carrizales at 2/10/2020
 Feature: List
   As a regular user, It manages a List.
 

@@ -17,7 +17,7 @@ Feature: List
     And Sends request
     Then Should return status code 200
     And Saves response as "ListObject"
-        And Validates response body with
+    And Validates response body with
       | key    | value          |
       | name   | functionalList |
       | closed | False          |
@@ -68,7 +68,7 @@ Feature: List
     And Should return status code 200
 
 
-  Scenario: Create a list from another list
+  Scenario: Creates a list from another list
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |
@@ -105,7 +105,7 @@ Feature: List
     And Should return status code 200
 
 
-  Scenario: Modify the list position to bottom
+  Scenario: Modifies the list position to bottom
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |
