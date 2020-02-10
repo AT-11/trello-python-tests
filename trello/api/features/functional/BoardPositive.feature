@@ -10,7 +10,10 @@ Feature: Create a new Board with name and description
     When Sends request
     Then Should return status code 200
     And Saves response as "BoardObject"
-    And Validates response body
+    And Validates response body with
+      | key  | value          |
+      | name | newBoard       |
+      | desc | newDescription |
     And Validates schema with "board_schema.json"
     And Sets a "GET" request to "/boards/BoardObject.id"
     And Sends request
@@ -18,4 +21,4 @@ Feature: Create a new Board with name and description
     #Post Condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
-    And Should return status code 200
+    And Should return status code 200 
