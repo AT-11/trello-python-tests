@@ -1,4 +1,3 @@
-# Created by Alan Escalera at 02/08/2020
 Feature: Organization
   As a regular user, It manages a Organization
 
