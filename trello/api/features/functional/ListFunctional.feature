@@ -27,7 +27,7 @@ Feature: List
     And Should return status code 200
 
 
-  Scenario: Move all cards from list to another list
+  Scenario: Moves all cards from list to another list
     Given Sets a "POST" request to "/boards/"
       | key  | value        |
       | name | newBoardList |
