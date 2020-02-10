@@ -1,6 +1,7 @@
 Feature: Organization
   As a regular user, It manages a Organization
 
+  @defect
   Scenario: Add a member to an Organization
     Given Sets a "POST" request to "/organizations/"
       | key         | value            |
