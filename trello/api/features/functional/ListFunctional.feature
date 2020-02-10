@@ -68,7 +68,7 @@ Feature: List
     And Should return status code 200
 
 
-  Scenario: Modify the list position to "bottom"
+  Scenario: Modify the list position to bottom
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |

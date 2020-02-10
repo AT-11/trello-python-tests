@@ -2,7 +2,7 @@
 Feature: List
   As a regular user, It manages a List.
 
-  Scenario: A list without name could not be crated
+  Scenario: A list without name could not be created
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardPOSTToList |
