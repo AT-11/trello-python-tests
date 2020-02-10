@@ -14,7 +14,7 @@ Feature: Organization
       | email    | (email)    |
       | fullName | Angel Owen |
     And Sends request
-    And Should return status code 200
+    Then Should return status code 200
     And Saves response as "organization_membersObject"
     And Validates response body with
       | key                      | value      |
