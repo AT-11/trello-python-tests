@@ -38,15 +38,16 @@ Feature: Checklist
       | checked | false       |
     And Sends request
     Then Should return status code 200
-    And Saves response as "CheckaItemaObject"
+    And Saves response as "CheckItemaObject"
     And Validates response body with
       | key    | value       |
       | name   | CheckItem01 |
       | state  | incomplete  |
       | limits | {}          |
     And Validates schema with "check_item_schema.json"
-    And Sets a "GET" request to "/checklists/CheckListaObject.id/checkItems/CheckaItemaObject.idCheckItem"
+    And Sets a "GET" request to "/checklists/CheckListaObject.id/checkItems"
       | key    | value |
+      | filter | all   |
       | fields | all   |
     And Sends request
     And Should return status code 200
