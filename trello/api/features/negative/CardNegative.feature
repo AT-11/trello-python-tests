@@ -2,7 +2,7 @@
 Feature: Negative test of Card
   As a regular user, It manages the card, and user Gets a Error message Error.
 
-Scenario: A list without name could not be created
+  Scenario: A list without name could not be created
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardPOSTToList |
@@ -34,13 +34,13 @@ Scenario: A list without name could not be created
     And Sends request
     And Should return status code 400
 
-    Scenario: Gets a card by incorrect idCard
+  Scenario: Gets a card by incorrect idCard
     When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/actions"
     And Sends request
     Then Should return status code 400
     And Validates response message with message "invalid id"
 
-   Scenario: Gets the member of a card that doesn't exist
+  Scenario: Gets the member of a card that doesn't exist
     When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/members"
     And Sends request
     Then Should return status code 400
