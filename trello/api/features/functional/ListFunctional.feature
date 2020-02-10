@@ -2,7 +2,7 @@
 Feature: List
   Manages list of the board
 
-   Scenario: Move a list from a board to another one
+  Scenario: Moves a list from a board to another one
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |

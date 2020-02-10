@@ -2,7 +2,6 @@
 Feature: Organization
   As a regular user, it wants to manage a organization, and creates a organization.
 
-
   Scenario: Change the name of the Organization
     Given Sets a "POST" request to "/organizations/"
       | key         | value            |

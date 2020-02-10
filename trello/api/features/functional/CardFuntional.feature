@@ -280,7 +280,7 @@ Feature: Card
       | name       | Check List Card Functional |
       | checkItems | []                         |
     And Validates schema with "put_card_add_checklist.json"
-    And Sets a "GET" request to "https://api.trello.com/1/cards/Card_AObject.id/checklists"
+    And Sets a "GET" request to "/cards/CardObject.id/checklists"
     And Sends request
     And Should return status code 200
     # Post condition
