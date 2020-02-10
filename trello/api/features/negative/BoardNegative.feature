@@ -1,4 +1,3 @@
-# Created by Oscar Lopez at 2/3/2020
 Feature: Negative test of Board
   As a regular user, It manages the board, and user Gets a board.
 
@@ -8,24 +7,19 @@ Feature: Negative test of Board
     Then Should return status code 400
     And Validates response message with message "invalid id"
 
-
-  Scenario: Create a new board with spaces as name
+  @defect
+  Scenario Outline: Create a new board with spaces as name
     Given Sets a "POST" request to "/boards/"
-      | key  | value               |
-      | name |                     |
-      | desc | This is description |
-    And Sends request
-    And Should return status code 400
-    And Validates response message with message "invalid value for name"
-
-
-  Scenario: Creates a new board with a name empty
-    Given Sets a "POST" request to "/boards/"
-      | key  | value |
-      | name |       |
+      | key  | value  |
+      | name | <name> |
+      | desc | <desc> |
     When Sends request
-    Then Should return status code 400
-    And Validates response message with message "invalid value for name"
-    And Sets a "GET" request to "/boards/BoardObject.id"
+    Then Should return status code <status_code>
+    And Saves response as "BoardObject"
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
-    And Should return status code 400
+    And Should return status code <status_code>
+    Examples:
+      | name           | desc                | status_code |
+      | (empty)        | This is description | 400         |
+      | (blank_spaces) | This is description | 200         |
