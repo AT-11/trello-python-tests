@@ -3,7 +3,7 @@ Feature: Organization
   As a regular user, It manages a Organization.
 
   @defect
-  Scenario: API can't create a Organization without name
+  Scenario: Organization could not be created without name
     When Sets a "POST" request to "/organizations/"
       | key  | value        |
       | desc | without Name |
@@ -16,7 +16,7 @@ Feature: Organization
 
 
   @defect
-  Scenario: API can't create a Organization with a wrong website
+  Scenario: Organization could not be created with a wrong website
     When Sets a "POST" request to "/organizations/"
       | key         | value          |
       | displayName | LIVE           |
