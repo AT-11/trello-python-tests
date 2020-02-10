@@ -1,15 +1,15 @@
 # Created by Oscar Lopez at 2/10/2020
 Feature: Negative test of Card
-  As a regular user, It manages the board, and user Gets a Error message Error.
+  As a regular user, It manages the card, and user Gets a Error message Error.
 
-  Scenario: Lists actions on a card with an incorrect idCard
+  Scenario: Gets a card by incorrect idCard
     When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/actions"
     And Sends request
     Then Should return status code 400
     And Validates response message with message "invalid id"
 
-  @defect # Preguntar a Carlos
-  Scenario: Adds a with a wrong image sticker to a card
+  @defect
+  Scenario: Adds a wrong image sticker to a card
     Given Sets a "POST" request to "/boards/"
       | key  | value                      |
       | name | boardFunctionalCardSticker |
