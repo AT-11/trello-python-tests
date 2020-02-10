@@ -1,8 +1,8 @@
 # Created by Juan Martinez at 09/02/2020
 Feature: Organization
-  As a regular user, it wants to manage a organization, and creates a a organization.
+  As a regular user, it wants to manage a organization, and creates a organization.
 
-  Scenario: Get organization
+  Scenario: Gets organization
     Given Sets a "POST" request to "/organizations"
       | key         | value                |
       | displayName | TeamToOrganization   |
