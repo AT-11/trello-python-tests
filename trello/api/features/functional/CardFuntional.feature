@@ -246,3 +246,44 @@ Feature: Card
     And Sends request
     And Should return status code 200
 
+
+  Scenario: Creates a new checklist in a card with a top position
+    Given Sets a "POST" request to "/boards/"
+      | key  | value                    |
+      | name | board to check list card |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    And Sets a "POST" request to "/lists/"
+      | key     | value               |
+      | idBoard | (BoardObject.id)    |
+      | name    | boardFunctionalList |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "ListObject"
+    And Sets a "POST" request to "/cards/"
+      | key    | value           |
+      | name   | functionalCard  |
+      | idList | (ListObject.id) |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "CardObject"
+    When Sets a "POST" request to "/cards/CardObject.id/checklists"
+      | key  | value                      |
+      | name | Check List Card Functional |
+      | pos  | top                        |
+    And Sends request
+    Then Should return status code 200
+    And Saves response as "Card_AObject"
+    And Validates response body with
+      | key        | value                      |
+      | name       | Check List Card Functional |
+      | checkItems | []                         |
+    And Validates schema with "put_card_add_checklist.json"
+    And Sets a "GET" request to "/cards/CardObject.id/checklists"
+    And Sends request
+    And Should return status code 200
+    # Post condition
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
+    And Sends request
+    And Should return status code 200
