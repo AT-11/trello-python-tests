@@ -247,7 +247,7 @@ Feature: Card
     And Should return status code 200
 
 
-  Scenario: Get the checklists on a card
+  Scenario: Gets the checklists on a card
     Given Sets a "POST" request to "/boards/"
       | key  | value          |
       | name | newBoardToCard |
@@ -282,12 +282,11 @@ Feature: Card
       | fields           | all   |
     And Sends request
     Then Should return status code 200
-    And Saves response as "ChecklistResponse"
     And Validates response body with
-      | key        | value         |
-      | checkItems | []            |
-      | name       | checklistName |
-    And Validates schema with "checklist_schema.json"
+      | key          | value         |
+      | 0.checkItems | []            |
+      | 0.name       | checklistName |
+    And Validates schema with "checklist_schema_array.json"
     And Sets a "GET" request to "/checklists/ChecklistObject.id"
       | key    | value |
       | fields | all   |
