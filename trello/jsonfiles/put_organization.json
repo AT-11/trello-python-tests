@@ -15,19 +15,10 @@
       "type": "string"
     },
     "descData": {
-      "type": "object",
-      "properties": {
-        "emoji": {
-          "type": "object"
-        }
-      },
-      "required": [
-        "emoji"
-      ]
+      "type": "null"
     },
     "url": {
-      "type": "string",
-      "pattern": "http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+"
+      "type": "string"
     },
     "website": {
       "type": "null"
@@ -48,9 +39,6 @@
     "powerUps": {
       "type": "array",
       "items": {}
-    },
-    "limits": {
-      "type": "object"
     }
   },
   "required": [
@@ -65,7 +53,6 @@
     "logoHash",
     "logoUrl",
     "products",
-    "powerUps",
-    "limits"
+    "powerUps"
   ]
 }
