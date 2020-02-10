@@ -287,7 +287,7 @@ Feature: Card
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
-    
+
 
   Scenario: Gets the checklists on a card
     Given Sets a "POST" request to "/boards/"

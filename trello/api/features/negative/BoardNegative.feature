@@ -6,9 +6,9 @@ Feature: Negative test of Board
     And Sends request
     Then Should return status code 400
     And Validates response message with message "invalid id"
-
+    
   @defect
-  Scenario Outline: Create a new board with spaces as name
+  Scenario Outline: Board can't be created with spaces or empty as name
     Given Sets a "POST" request to "/boards/"
       | key  | value  |
       | name | <name> |
