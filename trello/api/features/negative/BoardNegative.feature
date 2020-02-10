@@ -1,12 +1,12 @@
 Feature: Negative test of Board
   As a regular user, It manages the board, and user Gets a board.
 
-  Scenario: Gets a board by invalid Id
+  Scenario: Board can't be got by invalid Id
     When  Sets a "GET" request to "/boards/idBoardNotValid"
     And Sends request
     Then Should return status code 400
     And Validates response message with message "invalid id"
-    
+
   @defect
   Scenario Outline: Board can't be created with spaces or empty as name
     Given Sets a "POST" request to "/boards/"
