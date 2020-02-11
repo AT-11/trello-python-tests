@@ -347,6 +347,7 @@ Feature: Card
     And Should return status code 200
 
 
+  @Functional
   Scenario: Find a card by id
     Given Sets a "POST" request to "/boards/"
       | key  | value            |
