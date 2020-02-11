@@ -1,6 +1,7 @@
 Feature: List
   As a regular user, It manages a List.
 
+  @Negative
   Scenario: A list without name could not be created
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
