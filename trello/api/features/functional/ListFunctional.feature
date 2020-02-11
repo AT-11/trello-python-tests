@@ -1,4 +1,3 @@
-# Created by Juan Martinez at 1/30/2020
 Feature: List
   Manages list of the board
 
@@ -184,5 +183,38 @@ Feature: List
     And Sends request
     And Should return status code 200
     And Sets a "DELETE" request to "/boards/BoardObject.id"
+    And Sends request
+    And Should return status code 200
+
+
+  Scenario: Closes a List
+    Given Sets a "POST" request to "/boards/"
+      | key  | value              |
+      | name | newBoardFunctional |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    And Sets a "POST" request to "/lists/"
+      | key     | value            |
+      | name    | functionalList   |
+      | idBoard | (BoardObject.id) |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "ListObject"
+    When Sets a "PUT" request to "/lists/ListObject.id/closed"
+      | key   | value |
+      | value | true  |
+    And Sends request
+    Then Should return status code 200
+    And Saves response as "List_Object"
+    And Validates response body with
+      | key    | value          |
+      | name   | functionalList |
+      | closed | True           |
+    And Validates schema with "put_list_schema.json"
+    And Sets a "GET" request to "/lists/List_Object.id"
+    And Sends request
+    And Should return status code 200
+    And Sets a "DELETE" request to "/board/BoardObject.id"
     And Sends request
     And Should return status code 200
