@@ -1,4 +1,3 @@
-# Created by Juan Martinez at 1/31/2020
 Feature: Card
   As a regular user, it wants manage a card, so it manages cards on list
 
@@ -343,6 +342,43 @@ Feature: Card
       | cards  | all   |
     And Sends request
     And Should return status code 200
+    And Sets a "DELETE" request to "/boards/BoardObject.id"
+    And Sends request
+    And Should return status code 200
+
+
+  Scenario: Find a card by id
+    Given Sets a "POST" request to "/boards/"
+      | key  | value            |
+      | name | boardForFindCard |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    And Sets a "POST" request to "/lists/"
+      | key     | value            |
+      | idBoard | (BoardObject.id) |
+      | name    | findCardList     |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "ListObject"
+    And Sets a "POST" request to "/cards/"
+      | key    | value           |
+      | name   | findCard        |
+      | idList | (ListObject.id) |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "CardObject"
+    When Sets a "GET" request to "/cards/CardObject.id"
+      | key  | value    |
+      | name | findCard |
+    And Sends request
+    Then Should return status code 200
+    And Validates response body with
+      | key    | value    |
+      | closed | False    |
+      | name   | findCard |
+    And Validates schema with "get_card_schema.json"
+    # Post condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
