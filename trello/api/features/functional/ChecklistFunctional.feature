@@ -31,8 +31,8 @@ Feature: Checklist
       | pos    | top                  |
     And Sends request
     And Should return status code 200
-    And Saves response as "CheckListaObject"
-    When Sets a "POST" request to "/checklists/CheckListObject.id/checkItems"
+    And Saves response as "CheckListAObject"
+    When Sets a "POST" request to "/checklists/CheckListAObject.id/checkItems"
       | key     | value       |
       | name    | CheckItem01 |
       | pos     | top         |
@@ -46,7 +46,7 @@ Feature: Checklist
       | state  | incomplete  |
       | limits | {}          |
     And Validates schema with "check_item_schema.json"
-    And Sets a "GET" request to "/checklists/CheckListaObject.id/checkItems"
+    And Sets a "GET" request to "/checklists/CheckListAObject.id/checkItems"
       | key    | value |
       | filter | all   |
       | fields | all   |
