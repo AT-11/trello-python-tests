@@ -4,6 +4,8 @@ from logs.Logger import logger
 
 
 def before_feature(context, feature):
+
+    # os.chdir("C:/Users/Admin/Documents/Python/trello-python-tests")
     logger.info("START: %s", feature)
 
 

@@ -1,7 +1,12 @@
+import os
+import threading
+
 from behave import step
 
 from core.utils.BodyValidator import BodyValidator
 from core.utils.SchemaValidator import SchemaValidator
+
+from behave.__main__ import main as behave_main
 
 
 @step('Sets a "{method}" request to "{endpoint}"')
@@ -44,3 +49,18 @@ def step_impl(context):
 @step('Validates response message with message "{msg}"')
 def step_impl(context, msg):
     assert context.json_response.text == msg
+
+
+@step(u'run in parallel "{feature}" "{scenario}"')
+def step_impl(context, feature, scenario):
+    t = threading.Thread(
+        name='run test parallel',
+        target=parallel_executor,
+        args=[context, feature, scenario])
+    # args=[context, 'parallel_actions.feature', 'Make Cab-Cab communication'])
+    t.start()
+
+
+def parallel_executor(context, feature_name, scenario):
+    os.chdir("trello\\api\\features\\negative\\")
+    behave_main('-i "{}" -n "{}" --no-capture --no-skipped'.format(feature_name, scenario))
