@@ -9,6 +9,7 @@ Feature: Checklist
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     And Sets a "POST" request to "/lists"
       | key     | value            |
       | name    | ListToCheckItem  |
@@ -49,8 +50,5 @@ Feature: Checklist
       | key    | value |
       | filter | all   |
       | fields | all   |
-    And Sends request
-    And Should return status code 200
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
