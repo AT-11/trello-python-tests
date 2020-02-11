@@ -51,7 +51,7 @@ Feature: List
     Then Should return status code 400
     And Validates response message with message "invalid id"
 
-  Scenario: Can not Set a soft limit for number of cards in the list with invalid value
+  Scenario: Can not set a soft limit for number of cards in the list with invalid value
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardPOSTToList |

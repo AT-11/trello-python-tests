@@ -24,7 +24,7 @@ Feature: Negative test of Board
       | (empty)        | This is description | 400         |
       | (blank_spaces) | This is description | 200         |
 
-  Scenario: Can not Update members with wrong invalid Id
+  Scenario: Can not Update members with invalid Id
     When Sets a "PUT" request to "/boards/BoardObject.id/members"
       | key   | value   |
       | email | (email) |
