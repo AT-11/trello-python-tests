@@ -9,15 +9,13 @@ Feature: Card
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     When Sets a "POST" request to "/list"
       | key     | value            |
       | idBoard | (BoardObject.id) |
     And Sends request
     Then Should return status code 400
     And Validates response message with message "invalid value for name"
-    And Sets a "DELETE" request to "/board/BoardObject.id"
-    And Sends request
-    And Should return status code 200
 
 
   @defect
