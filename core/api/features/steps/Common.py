@@ -64,3 +64,9 @@ def step_impl(context, feature, scenario):
 def parallel_executor(context, feature_name, scenario):
     os.chdir("trello\\api\\features\\negative\\")
     behave_main('-i "{}" -n "{}" --no-capture --no-skipped'.format(feature_name, scenario))
+
+
+@step("Saves endpoint to delete")
+def step_impl(context):
+    value = context.endpoint_value + context.json_response.json()['id']
+    context.cleaner_list.append(value)

@@ -1,7 +1,7 @@
-# Created by Juan Martinez at 2/6/2020
 Feature: Card
   As a regular user, it wants to manage a card, and creates a card.
 
+  @Acceptance
   Scenario: Add a new card with name
     Given Sets a "POST" request to "/boards/"
       | key  | value                |
@@ -9,6 +9,7 @@ Feature: Card
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     And Sets a "POST" request to "/lists/"
       | key     | value            |
       | idBoard | (BoardObject.id) |
@@ -30,11 +31,9 @@ Feature: Card
     And Sets a "GET" request to "/cards/CardObject.id"
     And Sends request
     And Should return status code 200
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
-    And Sends request
-    And Should return status code 200
 
 
+  @Acceptance
   Scenario: Create a new checklist on a card
     Given Sets a "POST" request to "/boards/"
       | key  | value    |
@@ -42,6 +41,7 @@ Feature: Card
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     And Sets a "POST" request to "/lists/"
       | key     | value            |
       | idBoard | (BoardObject.id) |
@@ -67,8 +67,5 @@ Feature: Card
       | checkItems | []          |
     And Validates schema with "checklist_schema.json"
     And Sets a "GET" request to "/cards/CardObject.id"
-    And Sends request
-    And Should return status code 200
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200

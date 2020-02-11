@@ -1,7 +1,7 @@
-# Created by Alan Escalera at 1/27/2020
 Feature: Card
   As a regular user, it wants to manage a Card.
 
+  @Smoke
   Scenario: Creates new card
     Given Sets a "POST" request to "/boards/"
       | key  | value        |
@@ -9,14 +9,15 @@ Feature: Card
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
-    When Sets a "POST" request to "/lists/"
+    And Saves endpoint to delete
+    And Sets a "POST" request to "/lists/"
       | key     | value            |
       | idBoard | (BoardObject.id) |
       | name    | GherkinList      |
     And Sends request
     And Should return status code 200
     And Saves response as "ListObject"
-    And Sets a "POST" request to "/cards/"
+    When Sets a "POST" request to "/cards/"
       | key    | value           |
       | idList | (ListObject.id) |
     And Sends request
@@ -33,12 +34,9 @@ Feature: Card
     And Sets a "GET" request to "/cards/CardObject.id"
     And Sends request
     And Should return status code 200
-    # Post condition
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
-    And Sends request
-    And Should return status code 200
 
-
+    
+  @Smoke
   Scenario: Delete a Card
     Given Sets a "POST" request to "/boards/"
       | key  | value                |
@@ -46,6 +44,7 @@ Feature: Card
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     And Sets a "POST" request to "/lists/"
       | key     | value            |
       | idBoard | (BoardObject.id) |
@@ -69,6 +68,3 @@ Feature: Card
     And Sets a "GET" request to "/cards/CardObject.id"
     And Sends request
     And Should return status code 404
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
-    And Sends request
-    And Should return status code 200

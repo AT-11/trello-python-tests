@@ -1,6 +1,7 @@
 Feature: List
   Manages list of the board
 
+  @Functional
   Scenario: Creates a list with name and position
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
@@ -8,6 +9,7 @@ Feature: List
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     When Sets a "POST" request to "/lists/"
       | key     | value            |
       | name    | functionalList   |
@@ -25,11 +27,9 @@ Feature: List
     And Sets a "GET" request to "/lists/ListObject.id"
     And Sends request
     And Should return status code 200
-    And Sets a "DELETE" request to "/board/BoardObject.id"
-    And Sends request
-    And Should return status code 200
 
 
+  @Functional
   Scenario: Moves a list from a board to another one
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
@@ -37,18 +37,19 @@ Feature: List
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     And Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |
     And Sends request
     And Should return status code 200
     And Saves response as "Board_AObject"
-    And Sets a "POST" request to "/lists/"
+    When Sets a "POST" request to "/lists/"
       | key     | value            |
       | name    | functionalList   |
       | idBoard | (BoardObject.id) |
     And Sends request
-    And Should return status code 200
+    Then Should return status code 200
     And Saves response as "ListObject"
     And Validates response body with
       | key    | value          |
@@ -59,14 +60,9 @@ Feature: List
     And Sets a "GET" request to "/lists/ListObject.id"
     And Sends request
     And Should return status code 200
-    And Sets a "DELETE" request to "/board/BoardObject.id"
-    And Sends request
-    And Should return status code 200
-    And Sets a "DELETE" request to "/board/Board_AObject.id"
-    And Sends request
-    And Should return status code 200
 
 
+  @Functional
   Scenario: Creates a list from another list
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
@@ -74,6 +70,7 @@ Feature: List
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     And Sets a "POST" request to "/lists/"
       | key     | value            |
       | name    | functionalList   |
@@ -99,11 +96,9 @@ Feature: List
     And Sets a "GET" request to "/lists/SecondObjectList.id"
     And Sends request
     And Should return status code 200
-    And Sets a "DELETE" request to "/board/BoardObject.id"
-    And Sends request
-    And Should return status code 200
 
 
+  @Functional
   Scenario: Modifies the list position to bottom
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
@@ -111,6 +106,7 @@ Feature: List
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     And Sets a "POST" request to "/lists/"
       | key     | value            |
       | name    | functionalList   |
@@ -132,11 +128,9 @@ Feature: List
     And Sets a "GET" request to "/lists/ListObject.id"
     And Sends request
     And Should return status code 200
-    And Sets a "DELETE" request to "/board/BoardObject.id"
-    And Sends request
-    And Should return status code 200
 
 
+  @Functional
   Scenario: Moves all cards from list to another list
     Given Sets a "POST" request to "/boards/"
       | key  | value        |
@@ -144,6 +138,7 @@ Feature: List
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     And Sets a "POST" request to "/list"
       | key     | value            |
       | name    | newFistList      |
@@ -182,11 +177,9 @@ Feature: List
     And Sets a "GET" request to "/lists/SecondListObject.id"
     And Sends request
     And Should return status code 200
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
-    And Sends request
-    And Should return status code 200
 
 
+  @Functional
   Scenario: Closes a List
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
@@ -194,6 +187,7 @@ Feature: List
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     And Sets a "POST" request to "/lists/"
       | key     | value            |
       | name    | functionalList   |
@@ -213,8 +207,5 @@ Feature: List
       | closed | True           |
     And Validates schema with "put_list_schema.json"
     And Sets a "GET" request to "/lists/List_Object.id"
-    And Sends request
-    And Should return status code 200
-    And Sets a "DELETE" request to "/board/BoardObject.id"
     And Sends request
     And Should return status code 200

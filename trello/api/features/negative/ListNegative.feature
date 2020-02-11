@@ -1,6 +1,7 @@
 Feature: List
   As a regular user, It manages a List.
 
+  @Negative
   Scenario: A list without name could not be created
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
@@ -8,15 +9,13 @@ Feature: List
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     When Sets a "POST" request to "/list"
       | key     | value            |
       | idBoard | (BoardObject.id) |
     And Sends request
     Then Should return status code 400
     And Validates response message with message "invalid value for name"
-    And Sets a "DELETE" request to "/board/BoardObject.id"
-    And Sends request
-    And Should return status code 200
 
 
   @defect
@@ -37,6 +36,7 @@ Feature: List
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     And Sets a "POST" request to "/lists/"
       | key     | value            |
       | name    | functionalList   |
@@ -51,6 +51,3 @@ Feature: List
     And Sends request
     Then Should return status code 400
     And Validates response message with message "invalid value for value"
-    And Sets a "DELETE" request to "/board/BoardObject.id"
-    And Sends request
-    And Should return status code 200
