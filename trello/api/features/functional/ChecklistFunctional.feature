@@ -1,4 +1,3 @@
-# Created by Juan Martinez at 09/02/2020
 Feature: Checklist
   As a regular user, it wants to manage a checklist on a card.
 
