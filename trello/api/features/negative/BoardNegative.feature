@@ -23,3 +23,13 @@ Feature: Negative test of Board
       | name           | desc                | status_code |
       | (empty)        | This is description | 400         |
       | (blank_spaces) | This is description | 200         |
+
+  Scenario: Can not Update members with wrong invalid Id
+    When Sets a "PUT" request to "/boards/BoardObject.id/members"
+      | key   | value   |
+      | email | (email) |
+    And Sends request
+    Then Should return status code 400
+    And Validates response message with message "invalid id"
+
+
