@@ -9,6 +9,7 @@ Feature: Card
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     When Sets a "POST" request to "/lists/"
       | key     | value               |
       | idBoard | (BoardObject.id)    |
@@ -35,10 +36,6 @@ Feature: Card
       | name                                  | functionalCard |
     And Validates schema with "card_schema.json"
     And Sets a "GET" request to "/cards/CardObject.id"
-    And Sends request
-    And Should return status code 200
-    # Post condition
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
 

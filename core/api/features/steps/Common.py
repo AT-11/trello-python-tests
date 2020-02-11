@@ -44,3 +44,9 @@ def step_impl(context):
 @step('Validates response message with message "{msg}"')
 def step_impl(context, msg):
     assert context.json_response.text == msg
+
+
+@step("Saves endpoint to delete")
+def step_impl(context):
+    value = context.endpoint_value + context.json_response.json()['id']
+    context.cleaner_list.append(value)
