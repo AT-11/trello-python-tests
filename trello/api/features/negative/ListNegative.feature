@@ -29,19 +29,6 @@ Feature: List
     And Validates response message with message "invalid value for id"
 
 
-  Scenario: Card with an incorrect id can not be found
-    When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/actions"
-    And Sends request
-    Then Should return status code 400
-    And Validates response message with message "invalid id"
-
-
-  Scenario: It does not allow to find an non-existent member in card
-    When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/members"
-    And Sends request
-    Then Should return status code 400
-    And Validates response message with message "invalid id"
-
   @defect
   Scenario: List does not allow to set softlimit over the limit 5000
     Given Sets a "POST" request to "/boards/"
