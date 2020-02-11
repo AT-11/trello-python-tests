@@ -2,6 +2,7 @@
 Feature: Card
   As a regular user, it wants to manage a Card.
 
+  @Smoke
   Scenario: Creates new card
     Given Sets a "POST" request to "/boards/"
       | key  | value        |
@@ -9,14 +10,14 @@ Feature: Card
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
-    When Sets a "POST" request to "/lists/"
+    And Sets a "POST" request to "/lists/"
       | key     | value            |
       | idBoard | (BoardObject.id) |
       | name    | GherkinList      |
     And Sends request
     And Should return status code 200
     And Saves response as "ListObject"
-    And Sets a "POST" request to "/cards/"
+    When Sets a "POST" request to "/cards/"
       | key    | value           |
       | idList | (ListObject.id) |
     And Sends request
@@ -38,7 +39,7 @@ Feature: Card
     And Sends request
     And Should return status code 200
 
-
+  @Smoke
   Scenario: Delete a Card
     Given Sets a "POST" request to "/boards/"
       | key  | value                |
