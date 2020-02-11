@@ -2,6 +2,7 @@
 Feature: Board's list
   Manages lists of the board
 
+  @Acceptance
   Scenario: Update the name of a list using id
     Given Sets a "POST" request to "/boards/"
       | key  | value    |

@@ -2,6 +2,7 @@
 Feature: Card
   As a regular user, it wants to manage a card, and creates a card.
 
+  @Acceptance
   Scenario: Add a new card with name
     Given Sets a "POST" request to "/boards/"
       | key  | value                |
@@ -34,7 +35,7 @@ Feature: Card
     And Sends request
     And Should return status code 200
 
-
+  @Acceptance
   Scenario: Create a new checklist on a card
     Given Sets a "POST" request to "/boards/"
       | key  | value    |
