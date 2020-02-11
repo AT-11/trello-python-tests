@@ -26,7 +26,7 @@ Feature: Board
       | (blank_spaces) | This is description | 200         |
 
 
-  Scenario: Can not Update members with invalid Id
+  Scenario: It can not Update members with an invalid Id
     When Sets a "PUT" request to "/boards/BoardObject.id/members"
       | key   | value   |
       | email | (email) |

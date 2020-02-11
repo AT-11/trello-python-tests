@@ -43,7 +43,7 @@ Feature: List
     And Validates response message with message "invalid id"
 
   @defect
-  Scenario: Can not set a soft limit for number of cards in the list with invalid value
+  Scenario: List does not allow to set softlimit over the limit 5000
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardPOSTToList |

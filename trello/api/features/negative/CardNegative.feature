@@ -29,22 +29,15 @@ Feature: Card
     And Validates response message with message "invalid value for id"
 
 
-  Scenario: Can not get a card by incorrect idCard
+  Scenario: It can not get a card by incorrect idCard
     When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/actions"
     And Sends request
     Then Should return status code 400
     And Validates response message with message "invalid id"
 
 
-  Scenario: Can not get the member of a card that doesn't exist
+  Scenario: It can not get the member of a card that doesn't exist
     When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/members"
-    And Sends request
-    Then Should return status code 400
-    And Validates response message with message "invalid id"
-
-
-  Scenario: Can not get stickers of a card that doesn't exist
-    When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/stickers"
     And Sends request
     Then Should return status code 400
     And Validates response message with message "invalid id"
