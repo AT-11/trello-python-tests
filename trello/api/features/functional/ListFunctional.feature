@@ -218,4 +218,3 @@ Feature: List
     And Sets a "DELETE" request to "/board/BoardObject.id"
     And Sends request
     And Should return status code 200
-    
