@@ -39,6 +39,7 @@ Feature: Card
     And Sends request
     And Should return status code 200
 
+    
   @Smoke
   Scenario: Delete a Card
     Given Sets a "POST" request to "/boards/"
