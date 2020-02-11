@@ -1,7 +1,7 @@
-# Created by Enrique Carrizales at 1/29/2020
 Feature: Board
   As a regular user, it wants to manage a board.
-  
+
+  @Functional
   Scenario: Creates a label in board
     Given Sets a "POST" request to "/boards/"
       | key  | value    |
@@ -29,20 +29,20 @@ Feature: Board
     And Should return status code 200
 
 
+  @Functional
   Scenario: Creates a list in board
   This scenario allows to create a list on an existing board
-
     Given Sets a "POST" request to "/boards/"
       | key  | value    |
       | name | newBoard |
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
-    And Sets a "POST" request to "/lists"
+    When Sets a "POST" request to "/lists"
       | key     | value            |
       | name    | newList          |
       | idBoard | (BoardObject.id) |
-    When Sends request
+    And Sends request
     Then Should return status code 200
     And Saves response as "ListObject"
     And Validates schema with "list_schema.json"

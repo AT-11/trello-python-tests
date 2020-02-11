@@ -1,6 +1,7 @@
 Feature: Organization
   As a regular user, it wants to manage a organization, and creates a organization.
 
+  @Functional
   Scenario: Change the name of the Organization
     Given Sets a "POST" request to "/organizations/"
       | key         | value            |
@@ -26,6 +27,7 @@ Feature: Organization
     And Should return status code 200
 
 
+    @Functional
   Scenario: Gets organization
     Given Sets a "POST" request to "/organizations"
       | key         | value                |
