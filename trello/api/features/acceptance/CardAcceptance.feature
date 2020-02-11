@@ -35,6 +35,7 @@ Feature: Card
     And Sends request
     And Should return status code 200
 
+
   @Acceptance
   Scenario: Create a new checklist on a card
     Given Sets a "POST" request to "/boards/"

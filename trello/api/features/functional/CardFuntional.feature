@@ -2,6 +2,7 @@
 Feature: Card
   As a regular user, it wants manage a card, so it manages cards on list
 
+  @Functional
   Scenario: Creates a new card with parameters
     Given Sets a "POST" request to "/boards/"
       | key  | value               |
@@ -9,14 +10,14 @@ Feature: Card
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
-    When Sets a "POST" request to "/lists/"
+    And Sets a "POST" request to "/lists/"
       | key     | value               |
       | idBoard | (BoardObject.id)    |
       | name    | boardFunctionalList |
     And Sends request
     And Should return status code 200
     And Saves response as "ListObject"
-    And Sets a "POST" request to "/cards/"
+    When Sets a "POST" request to "/cards/"
       | key         | value                 |
       | name        | functionalCard        |
       | desc        | this is a description |
@@ -43,6 +44,7 @@ Feature: Card
     And Should return status code 200
 
 
+  @Functional
   Scenario: Adds a sticker to a card
     Given Sets a "POST" request to "/boards/"
       | key  | value                      |
@@ -87,6 +89,7 @@ Feature: Card
     And Should return status code 200
 
 
+  @Functional
   Scenario: Add a new comment to a card
     Given Sets a "POST" request to "/boards/"
       | key  | value               |
@@ -94,7 +97,7 @@ Feature: Card
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
-    When Sets a "POST" request to "/lists/"
+    And Sets a "POST" request to "/lists/"
       | key     | value            |
       | idBoard | (BoardObject.id) |
       | name    | cardList         |
@@ -105,14 +108,14 @@ Feature: Card
       | key    | value           |
       | idList | (ListObject.id) |
     And Sends request
-    Then Should return status code 200
+    And Should return status code 200
     And Saves response as "CardObject"
     And Should return status code 200
-    And Sets a "POST" request to "/cards/CardObject.id/actions/comments"
+    When Sets a "POST" request to "/cards/CardObject.id/actions/comments"
       | key  | value             |
       | text | This is a comment |
     And Sends request
-    And Should return status code 200
+    Then Should return status code 200
     And Validates response body with
       | key       | value             |
       | data.text | This is a comment |
@@ -125,6 +128,7 @@ Feature: Card
     And Should return status code 200
 
 
+  @Functional
   Scenario: Add a new label to a card
     Given Sets a "POST" request to "/boards/"
       | key  | value                 |
@@ -167,6 +171,7 @@ Feature: Card
     And Should return status code 200
 
 
+  @Functional
   Scenario: Add a new comment to a card
     Given Sets a "POST" request to "/boards/"
       | key  | value               |
@@ -205,6 +210,7 @@ Feature: Card
     And Should return status code 200
 
 
+  @Functional
   Scenario: Modify the name of a card
     Given Sets a "POST" request to "/boards/"
       | key  | value               |
@@ -247,6 +253,7 @@ Feature: Card
     And Should return status code 200
 
 
+  @Functional
   Scenario: Creates a new checklist in a card with a top position
     Given Sets a "POST" request to "/boards/"
       | key  | value                    |
@@ -289,6 +296,7 @@ Feature: Card
     And Should return status code 200
 
 
+  @Functional
   Scenario: Gets the checklists on a card
     Given Sets a "POST" request to "/boards/"
       | key  | value          |

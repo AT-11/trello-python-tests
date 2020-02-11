@@ -67,12 +67,12 @@ Feature: Board
     When Sets a "POST" request to "/boards/BoardObject.id/markedAsViewed"
     And Sends request
     Then Should return status code 200
-    And Validates response body with "expected_board_body.json"
     And Validates schema with "board_schema.json"
     # Post condition
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
+
 
   @Acceptance
   Scenario: Add label to existent Board
@@ -101,6 +101,7 @@ Feature: Board
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
+
 
   @Acceptance
   Scenario: Add powerUps to existent Board

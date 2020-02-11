@@ -2,6 +2,7 @@
 Feature: Create a new Board with name and description
   As a regular user, it wants to manage a board, and creates a board with description.
 
+  @Acceptance
   Scenario: Creates a new Board with description
     When Sets a "POST" request to "/boards/"
       | key  | value          |

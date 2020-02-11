@@ -2,6 +2,7 @@
 Feature: Checklist
   As a regular user, it wants to manage a checklist on a card.
 
+  @Functional
   Scenario: Adds checkitem to checklist
     Given Sets a "POST" request to "/boards/"
       | key  | value            |
@@ -31,7 +32,7 @@ Feature: Checklist
     And Sends request
     And Should return status code 200
     And Saves response as "CheckListaObject"
-    When Sets a "POST" request to "/checklists/CheckListaObject.id/checkItems"
+    When Sets a "POST" request to "/checklists/CheckListObject.id/checkItems"
       | key     | value       |
       | name    | CheckItem01 |
       | pos     | top         |
