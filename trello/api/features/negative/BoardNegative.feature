@@ -1,4 +1,4 @@
-Feature: Negative test of Board
+Feature: Board
   As a regular user, It manages the board, and user Gets a board.
 
   Scenario: Board can't be got by invalid Id
@@ -6,6 +6,7 @@ Feature: Negative test of Board
     And Sends request
     Then Should return status code 400
     And Validates response message with message "invalid id"
+
 
   @defect
   Scenario Outline: Board can't be created with spaces or empty as name
@@ -24,6 +25,7 @@ Feature: Negative test of Board
       | (empty)        | This is description | 400         |
       | (blank_spaces) | This is description | 200         |
 
+
   Scenario: Can not Update members with invalid Id
     When Sets a "PUT" request to "/boards/BoardObject.id/members"
       | key   | value   |
@@ -31,5 +33,3 @@ Feature: Negative test of Board
     And Sends request
     Then Should return status code 400
     And Validates response message with message "invalid id"
-
-
