@@ -42,7 +42,7 @@ Feature: List
     Then Should return status code 400
     And Validates response message with message "invalid id"
 
-
+  @defect
   Scenario: Can not set a soft limit for number of cards in the list with invalid value
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
