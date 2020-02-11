@@ -1,5 +1,4 @@
-# Created by Oscar Lopez at 2/10/2020
-Feature: Negative test of Card
+Feature: Card
   As a regular user, It manages the card, and user Gets a Error message Error.
 
   Scenario: A list without name should not be created
@@ -34,19 +33,19 @@ Feature: Negative test of Card
     And Sends request
     And Should return status code 400
 
-  Scenario: Can not gets a card by incorrect idCard
+  Scenario: Can not get a card by incorrect idCard
     When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/actions"
     And Sends request
     Then Should return status code 400
     And Validates response message with message "invalid id"
 
-  Scenario: Can not gets the member of a card that doesn't exist
+  Scenario: Can not get the member of a card that doesn't exist
     When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/members"
     And Sends request
     Then Should return status code 400
     And Validates response message with message "invalid id"
 
-  Scenario: Can not gets stickers of a card that doesn't exist
+  Scenario: Can not get stickers of a card that doesn't exist
     When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/stickers"
     And Sends request
     Then Should return status code 400
