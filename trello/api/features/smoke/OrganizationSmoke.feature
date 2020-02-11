@@ -1,6 +1,7 @@
 Feature: Organization
   As a regular user, It manages a Organization
 
+  @Smoke
   Scenario: Creates new Organization
     When Sets a "POST" request to "/organizations/"
       | key         | value            |

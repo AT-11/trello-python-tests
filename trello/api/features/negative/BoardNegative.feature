@@ -1,6 +1,7 @@
 Feature: Board
   As a regular user, It manages the board, and user Gets a board.
 
+  @Negative
   Scenario: Board can't be got by invalid Id
     When  Sets a "GET" request to "/boards/idBoardNotValid"
     And Sends request
@@ -10,11 +11,11 @@ Feature: Board
 
   @defect
   Scenario Outline: Board can't be created with spaces or empty as name
-    Given Sets a "POST" request to "/boards/"
+    When Sets a "POST" request to "/boards/"
       | key  | value  |
       | name | <name> |
       | desc | <desc> |
-    When Sends request
+    And Sends request
     Then Should return status code <status_code>
     And Saves response as "BoardObject"
     And Sets a "DELETE" request to "/boards/BoardObject.id"
@@ -26,6 +27,7 @@ Feature: Board
       | (blank_spaces) | This is description | 200         |
 
 
+  @Negative
   Scenario: It can not Update members with an invalid Id
     When Sets a "PUT" request to "/boards/BoardObject.id/members"
       | key   | value   |
