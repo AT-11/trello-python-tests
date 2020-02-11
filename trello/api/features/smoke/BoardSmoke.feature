@@ -1,4 +1,3 @@
-# Created by Oscar Lopez at 1/27/2020
 Feature: Board's Test
   As a regular user, It manages the board, and user creates a new board.
 

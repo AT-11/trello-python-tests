@@ -1,4 +1,3 @@
-# Created by Alan Escalera at 1/27/2020
 Feature: Card
   As a regular user, it wants to manage a Card.
 
