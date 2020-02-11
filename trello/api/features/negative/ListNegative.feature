@@ -43,13 +43,6 @@ Feature: List
     And Validates response message with message "invalid id"
 
 
-  Scenario: A card that doesn't exist don't gets a stickers
-    When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/stickers"
-    And Sends request
-    Then Should return status code 400
-    And Validates response message with message "invalid id"
-
-
   Scenario: Can not set a soft limit for number of cards in the list with invalid value
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
