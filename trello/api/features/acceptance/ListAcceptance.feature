@@ -9,6 +9,7 @@ Feature: Board's list
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     When Sets a "POST" request to "/list"
       | key     | value            |
       | name    | newListName      |
@@ -26,8 +27,5 @@ Feature: Board's list
       | name | newListName |
     And Validates schema with "put_list_schema.json"
     And Sets a "GET" request to "/lists/ListObject.id"
-    And Sends request
-    And Should return status code 200
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200

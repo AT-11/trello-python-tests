@@ -9,6 +9,7 @@ Feature: Board
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     When Sets a "PUT" request to "/boards/BoardObject.id"
       | key  | value           |
       | name | UpdateBoardName |
@@ -21,10 +22,6 @@ Feature: Board
     And Sets a "GET" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
-    # Post condition
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
-    And Sends request
-    And Should return status code 200
 
 
   @Acceptance
@@ -35,6 +32,7 @@ Feature: Board
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     When Sets a "PUT" request to "/boards/BoardObject.id/members"
       | key   | value   |
       | email | (email) |
@@ -49,10 +47,6 @@ Feature: Board
     And Sets a "GET" request to "/boards/BoardObject.id/members"
     And Sends request
     And Should return status code 200
-    # Post condition
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
-    And Sends request
-    And Should return status code 200
 
 
   @defect
@@ -63,14 +57,11 @@ Feature: Board
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     When Sets a "POST" request to "/boards/BoardObject.id/markedAsViewed"
     And Sends request
     Then Should return status code 200
     And Validates schema with "board_schema.json"
-    # Post condition
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
-    And Sends request
-    And Should return status code 200
 
 
   @Acceptance
@@ -81,6 +72,7 @@ Feature: Board
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     When Sets a "POST" request to "/boards/BoardObject.id/labels"
       | key   | value       |
       | name  | nameOfLabel |
@@ -96,10 +88,6 @@ Feature: Board
     And Sets a "GET" request to "/labels/LabelObject.id"
     And Sends request
     And Should return status code 200
-    # Post condition
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
-    And Sends request
-    And Should return status code 200
 
 
   @Acceptance
@@ -110,6 +98,7 @@ Feature: Board
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     When Sets a "POST" request to "/boards/BoardObject.id/powerUps"
       | key   | value    |
       | value | calendar |
@@ -119,7 +108,3 @@ Feature: Board
       | key     | value |
       | message | Gone  |
     And Validates schema with "powerups_schema.json"
-    # Post condition
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
-    And Sends request
-    And Should return status code 200

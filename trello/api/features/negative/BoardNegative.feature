@@ -18,6 +18,7 @@ Feature: Board
     And Sends request
     Then Should return status code <status_code>
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code <status_code>

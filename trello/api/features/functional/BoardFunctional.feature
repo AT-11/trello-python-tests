@@ -9,6 +9,7 @@ Feature: Board
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     When Sets a "POST" request to "/labels"
       | key     | value            |
       | name    | newLabel         |
@@ -24,9 +25,6 @@ Feature: Board
     And Sets a "GET" request to "/labels/LabelObject.id"
     And Sends request
     And Should return status code 200
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
-    And Sends request
-    And Should return status code 200
 
 
   @Functional
@@ -38,6 +36,7 @@ Feature: Board
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     When Sets a "POST" request to "/lists"
       | key     | value            |
       | name    | newList          |
@@ -52,6 +51,3 @@ Feature: Board
     And Validates response body with
       | key  | value   |
       | name | newList |
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
-    And Sends request
-    And Should return status code 200

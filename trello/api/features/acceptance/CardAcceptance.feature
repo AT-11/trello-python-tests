@@ -9,6 +9,7 @@ Feature: Card
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     And Sets a "POST" request to "/lists/"
       | key     | value            |
       | idBoard | (BoardObject.id) |
@@ -30,9 +31,6 @@ Feature: Card
     And Sets a "GET" request to "/cards/CardObject.id"
     And Sends request
     And Should return status code 200
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
-    And Sends request
-    And Should return status code 200
 
 
   @Acceptance
@@ -43,6 +41,7 @@ Feature: Card
     And Sends request
     And Should return status code 200
     And Saves response as "BoardObject"
+    And Saves endpoint to delete
     And Sets a "POST" request to "/lists/"
       | key     | value            |
       | idBoard | (BoardObject.id) |
@@ -68,8 +67,5 @@ Feature: Card
       | checkItems | []          |
     And Validates schema with "checklist_schema.json"
     And Sets a "GET" request to "/cards/CardObject.id"
-    And Sends request
-    And Should return status code 200
-    And Sets a "DELETE" request to "/boards/BoardObject.id"
     And Sends request
     And Should return status code 200
