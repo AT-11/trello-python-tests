@@ -1,7 +1,7 @@
-# Created by Juan Martinez at 09/02/2020
 Feature: Checklist
   As a regular user, it wants to manage a checklist on a card.
 
+  @Functional
   Scenario: Adds checkitem to checklist
     Given Sets a "POST" request to "/boards/"
       | key  | value            |
@@ -30,8 +30,8 @@ Feature: Checklist
       | pos    | top                  |
     And Sends request
     And Should return status code 200
-    And Saves response as "CheckListaObject"
-    When Sets a "POST" request to "/checklists/CheckListaObject.id/checkItems"
+    And Saves response as "CheckListAObject"
+    When Sets a "POST" request to "/checklists/CheckListAObject.id/checkItems"
       | key     | value       |
       | name    | CheckItem01 |
       | pos     | top         |
@@ -45,7 +45,7 @@ Feature: Checklist
       | state  | incomplete  |
       | limits | {}          |
     And Validates schema with "check_item_schema.json"
-    And Sets a "GET" request to "/checklists/CheckListaObject.id/checkItems"
+    And Sets a "GET" request to "/checklists/CheckListAObject.id/checkItems"
       | key    | value |
       | filter | all   |
       | fields | all   |
