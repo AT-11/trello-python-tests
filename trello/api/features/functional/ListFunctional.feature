@@ -186,7 +186,8 @@ Feature: List
     And Sends request
     And Should return status code 200
 
-     Scenario: Closes a List
+
+  Scenario: Closes a List
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |
@@ -217,3 +218,4 @@ Feature: List
     And Sets a "DELETE" request to "/board/BoardObject.id"
     And Sends request
     And Should return status code 200
+    
