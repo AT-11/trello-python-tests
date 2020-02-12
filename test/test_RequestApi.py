@@ -1,7 +1,7 @@
 from core.api.request_api.RequestApi import RequestApi
 
 
-def test_get_id_value_sendingValidRow_keyRow_valueAndDictionary_return1231231312aa2212133():
+def test_get_id_value_sending_valid_row_key_row_value_and_dictionary_return1231231312aa2212133():
     row_key = "boardObject"
     row_value = "(boardObject.id)"
     id_dictionary = {"boardObject": "1231231312aa2212133", "listObject": "456464565jjj45645646"}
@@ -11,7 +11,7 @@ def test_get_id_value_sendingValidRow_keyRow_valueAndDictionary_return1231231312
     assert expected == actual
 
 
-def test_get_id_value_sendingInvalidRow_keyAndValidRow_valueDictionary_returnNone():
+def test_get_id_value_sending_invalid_row_key_and_valid_row_value_dictionary_return_none():
     row_key = "boardObject"
     row_value = "(NoneBoardObject.id)"
     id_dictionary = {"boardObject": "1231231312aa2212133", "listObject": "456464565jjj45645646"}
@@ -21,7 +21,7 @@ def test_get_id_value_sendingInvalidRow_keyAndValidRow_valueDictionary_returnNon
     assert expected == actual
 
 
-def test_generate_data_sendsEmptyDataTable_returnKeyAndTokenAsDataDictionary():
+def test_generate_data_sends_empty_data_table_return_key_and_token_as_data_dictionary():
     data_table = None
     id_dictionary = {"boardObject": "1231231312aa2212133", "listObject": "456464565jjj45645646"}
     request_api = RequestApi()
@@ -30,7 +30,7 @@ def test_generate_data_sendsEmptyDataTable_returnKeyAndTokenAsDataDictionary():
     assert expected == len(actual)
 
 
-def test_replace_variable_sendsValidDictionaryAndInputEndpoint_returnUrlConcatenatedWithId():
+def test_replace_variable_sends_valid_dictionary_and_input_endpoint_return_url_concatenated_with_id():
     id_dictionary = {"boardObject": "1231231312aa2212133", "listObject": "456464565jjj45645646"}
     endpoint = "/boards/boardObject.id/labels"
     expected = "/boards/1231231312aa2212133/labels"
@@ -39,7 +39,7 @@ def test_replace_variable_sendsValidDictionaryAndInputEndpoint_returnUrlConcaten
     assert expected == actual
 
 
-def test_replace_variable_sendsIValidDictionaryAndInputEndpoint_returnUrlWithoutChanges():
+def test_replace_variable_sends_i_valid_dictionary_and_input_endpoint_return_url_without_changes():
     id_dictionary = {"invalidBoardObject": "1231231312aa2212133", "listObject": "456464565jjj45645646"}
     endpoint = "/boards/boardObject.id/labels"
     expected = "/boards/boardObject.id/labels"
