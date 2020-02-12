@@ -1,5 +1,144 @@
 Feature: Card
-  As a regular user, it wants manage a card, so it manages cards on list
+  As a regular user, it wants to manage a card, and creates a card.
+
+  @Smoke
+  Scenario: Creates new card
+    Given Sets a "POST" request to "/boards/"
+      | key  | value        |
+      | name | GherkinBoard |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    And Saves endpoint to delete
+    And Sets a "POST" request to "/lists/"
+      | key     | value            |
+      | idBoard | (BoardObject.id) |
+      | name    | GherkinList      |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "ListObject"
+    When Sets a "POST" request to "/cards/"
+      | key    | value           |
+      | idList | (ListObject.id) |
+    And Sends request
+    Then Should return status code 200
+    And Saves response as "CardObject"
+    And Validates response body with
+      | key                                   | value  |
+      | badges.attachmentsByType.trello.board | 0      |
+      | badges.attachmentsByType.trello.card  | 0      |
+      | badges.location                       | False  |
+      | cover.size                            | normal |
+      | cover.brightness                      | light  |
+    And Validates schema with "card_schema.json"
+    And Sets a "GET" request to "/cards/CardObject.id"
+    And Sends request
+    And Should return status code 200
+
+
+  @Smoke
+  Scenario: Delete a Card
+    Given Sets a "POST" request to "/boards/"
+      | key  | value                |
+      | name | board to delete card |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    And Saves endpoint to delete
+    And Sets a "POST" request to "/lists/"
+      | key     | value            |
+      | idBoard | (BoardObject.id) |
+      | name    | list of card     |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "ListObject"
+    And Sets a "POST" request to "/cards/"
+      | key    | value           |
+      | idList | (ListObject.id) |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "CardObject"
+    When Sets a "DELETE" request to "/cards/CardObject.id"
+    And Sends request
+    Then Should return status code 200
+    And Validates response body with
+      | key    | value |
+      | Limits | None  |
+    And Validates schema with "delete_card_label_schema.json"
+    And Sets a "GET" request to "/cards/CardObject.id"
+    And Sends request
+    And Should return status code 404
+
+
+  @Acceptance
+  Scenario: Add a new card with name
+    Given Sets a "POST" request to "/boards/"
+      | key  | value                |
+      | name | boardForCardWithName |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    And Saves endpoint to delete
+    And Sets a "POST" request to "/lists/"
+      | key     | value            |
+      | idBoard | (BoardObject.id) |
+      | name    | cardListName     |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "ListObject"
+    When Sets a "POST" request to "/cards/"
+      | key    | value           |
+      | idList | (ListObject.id) |
+      | name   | newCardName     |
+    And Sends request
+    Then Should return status code 200
+    And Saves response as "CardObject"
+    And Validates response body with
+      | key  | value       |
+      | name | newCardName |
+    And Validates schema with "card_schema.json"
+    And Sets a "GET" request to "/cards/CardObject.id"
+    And Sends request
+    And Should return status code 200
+
+
+  @Acceptance
+  Scenario: Create a new checklist on a card
+    Given Sets a "POST" request to "/boards/"
+      | key  | value    |
+      | name | newBoard |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    And Saves endpoint to delete
+    And Sets a "POST" request to "/lists/"
+      | key     | value            |
+      | idBoard | (BoardObject.id) |
+      | name    | GherkinList      |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "ListObject"
+    And Sets a "POST" request to "/cards/"
+      | key    | value           |
+      | idList | (ListObject.id) |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "CardObject"
+    When Sets a "POST" request to "/cards/CardObject.id/checklists"
+      | key  | value       |
+      | name | myChecklist |
+    And Sends request
+    Then Should return status code 200
+    And Saves response as "CardObjectUpdate"
+    And Validates response body with
+      | key        | value       |
+      | name       | myChecklist |
+      | checkItems | []          |
+    And Validates schema with "checklist_schema.json"
+    And Sets a "GET" request to "/cards/CardObject.id"
+    And Sends request
+    And Should return status code 200
+
 
   @Functional
   Scenario: Creates a new card with parameters
@@ -361,3 +500,46 @@ Feature: Card
       | closed | False    |
       | name   | findCard |
     And Validates schema with "get_card_schema.json"
+
+
+  @Negative
+  Scenario: A list without name should not be created
+    Given Sets a "POST" request to "/boards/"
+      | key  | value              |
+      | name | newBoardPOSTToList |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    And Saves endpoint to delete
+    When Sets a "POST" request to "/list"
+      | key     | value            |
+      | idBoard | (BoardObject.id) |
+    And Sends request
+    Then Should return status code 400
+    And Validates response message with message "invalid value for name"
+
+
+  @defect
+  Scenario: A list can't be created without a correct idBoard
+    When Sets a "POST" request to "/list"
+      | key     | value |
+      | idBoard | None  |
+    And Sends request
+    Then Should return status code 400
+    And Validates response message with message "invalid value for id"
+
+
+  @Negative
+  Scenario: It can not get a card by incorrect idCard
+    When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/actions"
+    And Sends request
+    Then Should return status code 400
+    And Validates response message with message "invalid id"
+
+
+  @Negative
+  Scenario: It can not get the member of a card that doesn't exist
+    When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/members"
+    And Sends request
+    Then Should return status code 400
+    And Validates response message with message "invalid id"
