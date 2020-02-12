@@ -12,7 +12,6 @@ install:
 script:
 - behave trello/api/features --tags=~@wip --tags=~@defect
 - behave -f allure_behave.formatter:AllureFormatter -o ./reports ./trello/api/features/ --tags=~@defect
-- allure serve ./reports
 notifications:
   email: true
 before_install:
