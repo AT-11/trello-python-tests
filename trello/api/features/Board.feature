@@ -1,5 +1,5 @@
 Feature: Board
-  As a regular user, it wants to manage a board, and creates a board with description.
+  As a regular user, it wants to manage a board, and creates a board.
 
    @Smoke
   Scenario: Creates new board with a name

@@ -1,6 +1,5 @@
 Feature: Board's list
-  Manages lists of the board
-
+ As a regular user, it wants to manage a list, and creates a list.
   @Smoke
   Scenario: Create a new list on a board
     Given Sets a "POST" request to "/boards/"
@@ -317,5 +316,3 @@ Feature: Board's list
     And Sends request
     Then Should return status code 400
     And Validates response message with message "invalid value for value"
-
-

@@ -46,6 +46,7 @@ Feature: Organization
     And Sends request
     And Should return status code 200
 
+
     @Functional
   Scenario: Change the name of the Organization
     Given Sets a "POST" request to "/organizations/"

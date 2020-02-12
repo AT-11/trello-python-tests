@@ -128,8 +128,8 @@ Feature: Card
       | key  | value       |
       | name | myChecklist |
     And Sends request
-    And Should return status code 200
-    Then Saves response as "CardObjectUpdate"
+    Then Should return status code 200
+    And Saves response as "CardObjectUpdate"
     And Validates response body with
       | key        | value       |
       | name       | myChecklist |
@@ -140,7 +140,7 @@ Feature: Card
     And Should return status code 200
 
 
-      @Functional
+  @Functional
   Scenario: Creates a new card with parameters
     Given Sets a "POST" request to "/boards/"
       | key  | value               |
@@ -501,7 +501,8 @@ Feature: Card
       | name   | findCard |
     And Validates schema with "get_card_schema.json"
 
-      @Negative
+
+  @Negative
   Scenario: A list without name should not be created
     Given Sets a "POST" request to "/boards/"
       | key  | value              |
