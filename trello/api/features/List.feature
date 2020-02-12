@@ -1,5 +1,6 @@
 Feature: Board's list
  As a regular user, it wants to manage a list, and creates a list.
+
   @Smoke
   Scenario: Create a new list on a board
     Given Sets a "POST" request to "/boards/"
@@ -265,6 +266,7 @@ Feature: Board's list
     And Sets a "GET" request to "/lists/List_Object.id"
     And Sends request
     And Should return status code 200
+
 
   @Negative
   Scenario: A list without name could not be created

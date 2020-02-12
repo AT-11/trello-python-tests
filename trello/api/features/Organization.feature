@@ -1,7 +1,7 @@
 Feature: Organization
   As a regular user, it wants to manage a organization, and creates a organization.
 
-    @Smoke
+  @Smoke
   Scenario: Creates new Organization
     When Sets a "POST" request to "/organizations/"
       | key         | value            |
@@ -47,7 +47,7 @@ Feature: Organization
     And Should return status code 200
 
 
-    @Functional
+  @Functional
   Scenario: Change the name of the Organization
     Given Sets a "POST" request to "/organizations/"
       | key         | value            |
@@ -71,7 +71,7 @@ Feature: Organization
     And Validates schema with "put_organization.json"
 
 
-    @Functional
+  @Functional
   Scenario: Gets organization
     Given Sets a "POST" request to "/organizations/"
       | key         | value                |
