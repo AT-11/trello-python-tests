@@ -1,4 +1,4 @@
-Feature: Board's list
+Feature: List
  As a regular user, it wants to manage a list, and creates a list.
 
   @Smoke
