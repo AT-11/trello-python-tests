@@ -25,7 +25,7 @@ Feature: Organization
     And Validates schema with "put_organization.json"
 
 
-    @Functional
+  @Functional
   Scenario: Gets organization
     Given Sets a "POST" request to "/organizations/"
       | key         | value                |
@@ -47,3 +47,6 @@ Feature: Organization
       | desc        | This is my team AT11 |
       | teamType    | None                 |
     And Validates schema with "get_organization_schema.json"
+    And Sets a "DELETE" request to "/organizations/OrganizationObject.id"
+    And Sends request
+    And Should return status code 200
