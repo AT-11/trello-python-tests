@@ -47,6 +47,3 @@ Feature: Organization
       | desc        | This is my team AT11 |
       | teamType    | None                 |
     And Validates schema with "get_organization_schema.json"
-    And Sets a "DELETE" request to "/organizations/OrganizationObject.id"
-    And Sends request
-    And Should return status code 200
