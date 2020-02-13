@@ -15,14 +15,14 @@ pipeline {
                 bat 'pytest test'
             }
         }
-        stage('TEST') {
+        stage('API TEST') {
             parallel {
                 stage('Trello') {
                     steps {
                             bat 'behave -f allure_behave.formatter:AllureFormatter -o reports trello/api/features/ --tags=~@defect'
                     }
                 }
-                stage('Pivotal') {
+                stage('Pivotal Tracker') {
                     steps {
                             bat 'behave -f allure_behave.formatter:AllureFormatter -o reports pivotal/api/features/ --tags=~@defect'
                     }
