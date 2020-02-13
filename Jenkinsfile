@@ -4,22 +4,32 @@ pipeline {
     pollSCM('* * * * *')
     }
   stages {
-    stage('BUILD') {
-        steps {
-            bat 'pip3 install -r requirements.txt'
-            bat 'pip install allure-behave'
+        stage('BUILD') {
+            steps {
+                bat 'pip3 install -r requirements.txt'
+                bat 'pip install allure-behave'
+            }
         }
-    }
-    stage('TEST') {
-        steps {
-            bat 'pytest test'
-            bat 'behave trello/api/features --tags=~@wip --tags=~@defect'
+        stage('UNIT TEST') {
+            steps {
+                bat 'pytest test'
+            }
         }
-    }
-    stage('REPORTS') {
-        steps {
-            bat 'behave -f allure_behave.formatter:AllureFormatter -o reports trello/api/features/ --tags=~@defect'
+        stage('TEST') {
+            parallel {
+                stage('Trello') {
+                    steps {
+                            bat 'behave -f allure_behave.formatter:AllureFormatter
+                            -o reports trello/api/features/ --tags=~@defect'
+                    }
+                }
+                stage('Pivotal') {
+                    steps {
+                            bat 'behave -f allure_behave.formatter:AllureFormatter
+                                 -o reports pivotal/api/features/ --tags=~@defect'
+                    }
+                }
+            }
         }
-    }
   }
 }
