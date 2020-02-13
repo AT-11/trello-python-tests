@@ -9,12 +9,12 @@ addons:
       secure: "$SONAR_TOKEN"
 install:
 - pip3 install -r requirements.txt
+- pip install allure-behave
 - pip3 install -U pytest
 script:
-- pylint #instalar
 - pytest test
-- behave -f allure_behave.formatter:AllureFormatter -o ./reports ./trello/api/features/ --tags=~@defect
-- behave -f allure_behave.formatter:AllureFormatter -o ./reports ./pivotal/api/features/ --tags=~@defect
+- behave -f allure_behave.formatter:AllureFormatter -o reports ./trello/api/features/ --tags=~@defect
+- behave -f allure_behave.formatter:AllureFormatter -o reports ./pivotal/api/features/ --tags=~@defect
 notifications:
   email: true
 before_install:
