@@ -18,7 +18,7 @@ def after_scenario(context, scenario):
     logger.info("END: %s", scenario)
     status_code_list = context.request_api.delete_object(context.cleaner_list)
     for status_code in status_code_list:
-        assert status_code == 200
+        assert status_code == 200 or status_code == 204
 
 
 def after_feature(context, feature):
