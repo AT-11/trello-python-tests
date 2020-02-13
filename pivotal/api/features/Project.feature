@@ -3,7 +3,7 @@ Feature: Project
 
   @Smoke
   Scenario: Adds a Project
-    Given upload credential like "pivotal"
+    Given upload credential as "pivotal"
     When Sets a "POST" request to "/projects/"
       | key  | value      |
       | name | newProject |

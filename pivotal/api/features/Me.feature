@@ -3,7 +3,7 @@ Feature: Credential
 
   @Smoke
   Scenario: Gets Credential
-    Given upload credential like "pivotal"
+    Given upload credential as "pivotal"
     When Sets a "GET" request to "/me"
     And Sends request
     Then Should return status code 200
