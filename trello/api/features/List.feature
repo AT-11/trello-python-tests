@@ -61,6 +61,7 @@ Feature: List
     And Sets a "GET" request to "/lists/ListObject.id"
     And Sends request
     And Should return status code 200
+    And upload credential as "admin_user"
 
 
   @Acceptance
