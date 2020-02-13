@@ -1,6 +1,5 @@
 from jsonschema import validate
 
-from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
 from core.utils.JsonFileReader import JsonFileReader
 
 
