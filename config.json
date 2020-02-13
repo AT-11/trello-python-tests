@@ -8,7 +8,7 @@
   "pivotal": {
     "base_uri": "https://www.pivotaltracker.com/services/v5",
     "folder_json_path": "pivotal/jsonfiles/",
-    "token": "3ca1c43c20e2b80240a780968258b7d7"
+    "token": "7c3fe952dfe3f6f8cfb58a133e57a710"
   },
   "log_path": "logs/logFile.log"
 }
