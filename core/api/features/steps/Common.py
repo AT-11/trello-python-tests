@@ -1,6 +1,8 @@
 from behave import step
+from dictor import dictor
 
 from core.utils.BodyValidator import BodyValidator
+from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
 from core.utils.SchemaValidator import SchemaValidator
 
 
@@ -29,7 +31,7 @@ def step_impl(context, name_object):
 
 @step('Validates schema with "{schema}"')
 def step_impl(context, schema):
-    result = SchemaValidator.validate(context.json_response.json(), schema)
+    result = SchemaValidator.validate(context.json_response.json(), schema, context.api_config_dict)
     assert None is result
 
 
@@ -48,5 +50,11 @@ def step_impl(context, msg):
 
 @step("Saves endpoint to delete")
 def step_impl(context):
-    value = context.endpoint_value + context.json_response.json()['id']
+    value = '{}{}'.format(context.endpoint_value, context.json_response.json()['id'])
     context.cleaner_list.append(value)
+
+
+@step('upload credential as "{api_name}"')
+def step_impl(context, api_name):
+    context.api_config_dict = dictor(EnvironmentConfiguration().get_config_file(), api_name)
+    context.request_api.upload_credentials_url(context.api_config_dict)
