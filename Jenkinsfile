@@ -31,7 +31,9 @@ pipeline {
         }
          stage('reports') {
             steps {
-                allure includeProperties: false, jdk: '', results: [[path: 'reports']]
+				script {
+                    allure includeProperties: false, jdk: '', results: [[path: 'reports']]
+				}
             }
         }
     }
