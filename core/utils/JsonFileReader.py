@@ -1,4 +1,5 @@
 import json
+from os import path
 
 
 class JsonFileReader(object):
@@ -6,6 +7,7 @@ class JsonFileReader(object):
     @staticmethod
     def read(file_path):
         READ = 'r'
-        with open(file_path, READ) as file:
+        new_file_path = path.relpath(file_path)
+        with open(new_file_path, READ) as file:
             data = file.read()
         return json.loads(data)
