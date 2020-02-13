@@ -303,7 +303,8 @@ Feature: Card
     And Sends request
     And Should return status code 200
 
-    
+
+  @Functional
   Scenario: Modify the name of a card
     Given Sets a "POST" request to "/boards/"
       | key  | value               |
