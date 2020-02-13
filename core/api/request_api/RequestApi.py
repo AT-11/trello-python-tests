@@ -1,6 +1,7 @@
 import json
 import re
 import requests
+from dictor import dictor
 
 from core.utils.EnvironmentConfiguration import EnvironmentConfiguration
 from logs.Logger import logger
@@ -12,9 +13,12 @@ class RequestApi(object):
     def __init__(self):
         self.response = ""
         self.config = EnvironmentConfiguration()
-        self.params_credentials = {"key": self.config.get_config_file()['key'], "token": self.config
-            .get_config_file()['token']}
-        self.url = self.config.get_config_file()['base_uri']
+        self.params_credentials = {}
+        self.url = ""
+        self.value = "NO CAMBIE"
+        # self.params_credentials = {"key": self.config.get_config_file()['key'], "token": self.config
+        #     .get_config_file()['token']}
+        # self.url = self.config.get_config_file()['base_uri']
 
     def get_id_value(self, row_value, id_dictionary):
         result_value = ""
@@ -50,7 +54,7 @@ class RequestApi(object):
         HEADERS = {'content-type': 'application/json'}
 
         logger.debug("HEADERS: %s", HEADERS)
-
+        print(self.value)
         if http_type == 'GET' or http_type == 'DELETE':
             self.response = requests.request(http_type, url_value, params=self.params_credentials)
             verify_logger(self.response)
@@ -74,3 +78,8 @@ class RequestApi(object):
             self.response = requests.request('DELETE', value, params=self.params_credentials)
             status_code_list.append(self.response.status_code)
         return status_code_list
+
+    def upload_credentials_url(self, api_config_dict):
+        self.url = dictor(api_config_dict, 'base_uri')
+        self.params_credentials['key'] = dictor(api_config_dict, 'key')
+        self.params_credentials['token'] = dictor(api_config_dict, 'token')
