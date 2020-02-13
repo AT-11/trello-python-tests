@@ -1,7 +1,7 @@
 {
   "base_uri": "https://api.trello.com/1",
   "folder_json_path": "trello/jsonfiles/",
-  "key": "dbdf36f955ae385a680d31cfff5155b9",
-  "token": "072268c051c53d1ead6954957960f2b6b28ee83938f3b8dbb15fb76907609da8",
+  "key": "5f772a4de56208aaa52af058ce1702ce",
+  "token": "39c03b9ff67695390affed158296a589fef7ea07eab79ee76398aadd38ce2be1",
   "log_path": "logs/logFile.log"
 }
