@@ -39,7 +39,7 @@ def test_replace_variable_sends_valid_dictionary_and_input_endpoint_return_url_c
     assert expected == actual
 
 
-def test_replace_variable_sends_i_valid_dictionary_and_input_endpoint_return_url_without_changes():
+def test_replace_variable_sends_invalid_dictionary_and_input_endpoint_return_url_without_changes():
     id_dictionary = {"invalidBoardObject": "1231231312aa2212133", "listObject": "456464565jjj45645646"}
     endpoint = "/boards/boardObject.id/labels"
     expected = "/boards/boardObject.id/labels"
