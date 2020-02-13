@@ -19,14 +19,12 @@ pipeline {
             parallel {
                 stage('Trello') {
                     steps {
-                            bat '''behave -f allure_behave.formatter:AllureFormatter
-                            -o reports trello/api/features/ --tags=~@defect'''
+                            bat 'behave -f allure_behave.formatter:AllureFormatter -o reports trello/api/features/ --tags=~@defect'
                     }
                 }
                 stage('Pivotal') {
                     steps {
-                            bat '''behave -f allure_behave.formatter:AllureFormatter
-                                 -o reports pivotal/api/features/ --tags=~@defect'''
+                            bat 'behave -f allure_behave.formatter:AllureFormatter -o reports pivotal/api/features/ --tags=~@defect'
                     }
                 }
             }
