@@ -309,44 +309,6 @@ Feature: Card
 
 
   @Functional
-  Scenario: Add a new comment to a card
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
-      | key  | value               |
-      | name | boardForCardComment |
-    And Sends request
-    And Should return status code 200
-    And Saves response as "BoardObject"
-    And Saves endpoint to delete
-    And Sets a "POST" request to "/lists/"
-      | key     | value            |
-      | idBoard | (BoardObject.id) |
-      | name    | cardList         |
-    And Sends request
-    And Should return status code 200
-    And Saves response as "ListObject"
-    And Sets a "POST" request to "/cards/"
-      | key    | value           |
-      | idList | (ListObject.id) |
-    And Sends request
-    And Should return status code 200
-    And Saves response as "CardObject"
-    And Should return status code 200
-    When Sets a "POST" request to "/cards/CardObject.id/actions/comments"
-      | key  | value             |
-      | text | This is a comment |
-    And Sends request
-    Then Should return status code 200
-    And Validates response body with
-      | key       | value             |
-      | data.text | This is a comment |
-    And Validates schema with "card_add_comment_schema.json"
-    And Sets a "GET" request to "/cards/CardObject.id"
-    And Sends request
-    And Should return status code 200
-
-
-  @Functional
   Scenario: Modify the name of a card
     Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
