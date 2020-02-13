@@ -1,7 +1,7 @@
 pipeline {
   agent any
     triggers {
-    pollSCM('* * * * *')
+		pollSCM('* * * * *')
     }
   stages {
         stage('BUILD') {
@@ -33,17 +33,17 @@ pipeline {
         }
         stage('reports') {
             steps {
-            script {
-                    allure([
-                            includeProperties: false,
-                            jdk: '',
-                            properties: [],
-                            reportBuildPolicy: 'ALWAYS',
-                            results: [[path: 'target/allure-results']]
-                    ])
-            }
+				script {
+						allure([
+								includeProperties: false,
+								jdk: '',
+								properties: [],
+								reportBuildPolicy: 'ALWAYS',
+								results: [[path: 'target/allure-results']]
+						])
+				}
             }
         }
 
-  }
+    }
 }
