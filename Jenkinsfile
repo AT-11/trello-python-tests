@@ -1,22 +1,48 @@
 pipeline {
   agent any
-  triggers {
+    triggers {
     pollSCM('* * * * *')
-  }
+    }
   stages {
-    stage('build') {
+    stage('BUILD') {
       steps {
-        bat 'python --version'
+        bat 'pip3 install -r requirements.txt'
+        bat 'pip install allure-behave'
       }
     }
-    stage('Install Requirements') {
-      steps {
-          bat 'pip3 install -r requirements.txt'
-      }
+    stage('TEST') {
+        parallel {
+            stage('Board'){
+                steps {
+                        bat 'behave trello/api/features/Board.feature --tags=~@wip --tags=~@defect'
+                }
+            }
+            stage('Card'){
+                steps {
+                        bat 'behave trello/api/features/Card.feature --tags=~@wip --tags=~@defect'
+                }
+            }
+            stage('Checklist'){
+                steps {
+                        bat 'behave trello/api/features/Checklist.feature --tags=~@wip --tags=~@defect'
+                }
+            }
+            stage('List'){
+                steps {
+                        bat 'behave trello/api/features/List.feature --tags=~@wip --tags=~@defect'
+                }
+            }
+             stage('Organization'){
+                steps {
+                        bat 'behave trello/api/features/Organization.feature --tags=~@wip --tags=~@defect'
+                }
+            }
+        }
     }
-    stage('API') {
+    stage('REPORTS') {
       steps {
-        bat 'behave trello/api/features --tags=~@wip --tags=~@defect'
+        bat 'behave -f allure_behave.formatter:AllureFormatter -o reports trello/api/features/ --tags=~@defect'
+        bat 'allure serve reports'
       }
     }
   }
