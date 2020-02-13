@@ -1,7 +1,14 @@
 {
-  "base_uri": "https://api.trello.com/1",
-  "folder_json_path": "trello/jsonfiles/",
-  "key": "5f772a4de56208aaa52af058ce1702ce",
-  "token": "39c03b9ff67695390affed158296a589fef7ea07eab79ee76398aadd38ce2be1",
+  "trello": {
+    "base_uri": "https://api.trello.com/1",
+    "folder_json_path": "trello/jsonfiles/",
+    "key": "5f772a4de56208aaa52af058ce1702ce",
+    "token": "39c03b9ff67695390affed158296a589fef7ea07eab79ee76398aadd38ce2be1"
+  },
+  "pivotal": {
+    "base_uri": "https://www.pivotaltracker.com/services/v5",
+    "folder_json_path": "pivotal/jsonfiles/",
+    "token": "3ca1c43c20e2b80240a780968258b7d7"
+  },
   "log_path": "logs/logFile.log"
 }
