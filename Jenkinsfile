@@ -25,8 +25,8 @@ pipeline {
                 }
                 stage('Pivotal') {
                     steps {
-                            bat 'behave -f allure_behave.formatter:AllureFormatter
-                                 -o reports pivotal/api/features/ --tags=~@defect'
+                            bat '''behave -f allure_behave.formatter:AllureFormatter
+                                 -o reports pivotal/api/features/ --tags=~@defect'''
                     }
                 }
             }
