@@ -7,6 +7,8 @@ pipeline {
     stage('BUILD') {
         steps {
             bat 'pip3 install -r requirements.txt'
+            bat 'iwr -useb get.scoop.sh | iex'
+            bat 'scoop install allure'
             bat 'pip install allure-behave'
         }
     }
