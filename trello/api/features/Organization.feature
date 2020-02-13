@@ -3,6 +3,7 @@ Feature: Organization
 
   @Smoke
   Scenario: Creates new Organization
+    Given upload credential like "trello"
     When Sets a "POST" request to "/organizations/"
       | key         | value            |
       | displayName | new Organization |
@@ -23,7 +24,8 @@ Feature: Organization
 
   @Smoke
   Scenario: Delete a Organization by id
-    Given Sets a "POST" request to "/organizations/"
+    Given upload credential like "trello"
+    And Sets a "POST" request to "/organizations/"
       | key         | value            |
       | displayName | new Organization |
     And Sends request
@@ -39,7 +41,8 @@ Feature: Organization
 
   @defect
   Scenario: Add a member to an Organization
-    Given Sets a "POST" request to "/organizations/"
+    Given upload credential like "trello"
+    And Sets a "POST" request to "/organizations/"
       | key         | value            |
       | displayName | new Organization |
     And Sends request
@@ -65,7 +68,8 @@ Feature: Organization
 
   @Functional
   Scenario: Change the name of the Organization
-    Given Sets a "POST" request to "/organizations/"
+    Given upload credential like "trello"
+    And Sets a "POST" request to "/organizations/"
       | key         | value            |
       | displayName | new Organization |
     And Sends request
@@ -89,7 +93,8 @@ Feature: Organization
 
   @Functional
   Scenario: Gets organization
-    Given Sets a "POST" request to "/organizations/"
+    Given upload credential like "trello"
+    And Sets a "POST" request to "/organizations/"
       | key         | value                |
       | displayName | TeamToOrganization   |
       | desc        | This is my team AT11 |

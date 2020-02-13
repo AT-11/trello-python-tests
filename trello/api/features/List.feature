@@ -1,9 +1,10 @@
 Feature: List
- As a regular user, it wants to manage a list, and creates a list.
+  As a regular user, it wants to manage a list, and creates a list.
 
   @Smoke
   Scenario: Create a new list on a board
-    Given Sets a "POST" request to "/boards/"
+    Given upload credential like "trello"
+    And Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardPOSTToList |
     And Sends request
@@ -30,7 +31,8 @@ Feature: List
 
   @Acceptance
   Scenario: Update the name of a list using id
-    Given Sets a "POST" request to "/boards/"
+    Given upload credential like "trello"
+    And Sets a "POST" request to "/boards/"
       | key  | value    |
       | name | newBoard |
     And Sends request
@@ -60,7 +62,8 @@ Feature: List
 
   @Functional
   Scenario: Creates a list with name and position
-    Given Sets a "POST" request to "/boards/"
+    Given upload credential like "trello"
+    And Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |
     And Sends request
@@ -88,7 +91,8 @@ Feature: List
 
   @Functional
   Scenario: Moves a list from a board to another one
-    Given Sets a "POST" request to "/boards/"
+    Given upload credential like "trello"
+    And Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |
     And Sends request
@@ -121,7 +125,8 @@ Feature: List
 
   @Functional
   Scenario: Creates a list from another list
-    Given Sets a "POST" request to "/boards/"
+    Given upload credential like "trello"
+    And Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |
     And Sends request
@@ -157,7 +162,8 @@ Feature: List
 
   @Functional
   Scenario: Modifies the list position to bottom
-    Given Sets a "POST" request to "/boards/"
+    Given upload credential like "trello"
+    And Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |
     And Sends request
@@ -189,7 +195,8 @@ Feature: List
 
   @Functional
   Scenario: Moves all cards from list to another list
-    Given Sets a "POST" request to "/boards/"
+    Given upload credential like "trello"
+    And Sets a "POST" request to "/boards/"
       | key  | value        |
       | name | newBoardList |
     And Sends request
@@ -238,7 +245,8 @@ Feature: List
 
   @Functional
   Scenario: Closes a List
-    Given Sets a "POST" request to "/boards/"
+    Given upload credential like "trello"
+    And Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |
     And Sends request
@@ -270,7 +278,8 @@ Feature: List
 
   @Negative
   Scenario: A list without name could not be created
-    Given Sets a "POST" request to "/boards/"
+    Given upload credential like "trello"
+    And Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardPOSTToList |
     And Sends request
@@ -287,6 +296,7 @@ Feature: List
 
   @defect
   Scenario: A list can't be created without a correct idBoard
+    Given upload credential like "trello"
     When Sets a "POST" request to "/list"
       | key     | value |
       | idBoard | None  |
@@ -297,7 +307,8 @@ Feature: List
 
   @defect
   Scenario: List does not allow to set softlimit over the limit 5000
-    Given Sets a "POST" request to "/boards/"
+    Given upload credential like "trello"
+    And Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardPOSTToList |
     And Sends request

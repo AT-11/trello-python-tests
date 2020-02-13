@@ -50,7 +50,7 @@ def step_impl(context, msg):
 
 @step("Saves endpoint to delete")
 def step_impl(context):
-    value = context.endpoint_value + context.json_response.json()['id']
+    value = '{}{}'.format(context.endpoint_value, context.json_response.json()['id'])
     context.cleaner_list.append(value)
 
 

@@ -15,7 +15,6 @@ class RequestApi(object):
         self.config = EnvironmentConfiguration()
         self.params_credentials = {}
         self.url = ""
-        self.value = "NO CAMBIE"
 
     def get_id_value(self, row_value, id_dictionary):
         result_value = ""
@@ -64,7 +63,7 @@ class RequestApi(object):
         NOT_FOUND = -1
         for key in id_dictionary:
             if input_endpoint.find(key) > NOT_FOUND:
-                input_endpoint = input_endpoint.replace(key, id_dictionary[key]).replace(".id", "")
+                input_endpoint = input_endpoint.replace(key, str(id_dictionary[key])).replace(".id", "")
         return input_endpoint
 
     def delete_object(self, cleaner_list):
