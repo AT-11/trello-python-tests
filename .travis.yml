@@ -11,9 +11,10 @@ install:
 - pip3 install -r requirements.txt
 - pip3 install -U pytest
 script:
+- pylint #instalar
 - pytest test
-- behave trello/api/features --tags=~@wip --tags=~@defect
 - behave -f allure_behave.formatter:AllureFormatter -o ./reports ./trello/api/features/ --tags=~@defect
+- behave -f allure_behave.formatter:AllureFormatter -o ./reports ./pivotal/api/features/ --tags=~@defect
 notifications:
   email: true
 before_install:

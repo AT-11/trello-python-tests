@@ -4,3 +4,4 @@ jsonschema
 Pytest
 dictor
 allure-behave
+pylint
