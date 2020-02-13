@@ -3,6 +3,7 @@ from typing import Final
 
 ENDPOINT: Final = "/boards/boardObject.id/labels"
 
+
 def test_get_id_value_sending_valid_row_key_row_value_and_dictionary_return1231231312aa2212133():
     row_value = "(boardObject.id)"
     id_dictionary = {"boardObject": "1231231312aa2212133", "listObject": "456464565jjj45645646"}
