@@ -1,7 +1,7 @@
 Feature: Board
   As a regular user, it wants to manage a board, and creates a board.
 
-   @Smoke
+  @Smoke
   Scenario: Creates new board with a name
     When Sets a "POST" request to "/boards/"
       | key  | value    |
