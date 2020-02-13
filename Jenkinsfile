@@ -32,7 +32,7 @@ pipeline {
          stage('reports') {
             steps {
 				script {
-                    allure includeProperties: false, jdk: '', results: [[path: 'reports']]
+                    allure includeProperties: false, jdk: 'JDK9', results: [[path: 'reports']]
 				}
             }
         }
