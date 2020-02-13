@@ -54,7 +54,7 @@ def step_impl(context):
     context.cleaner_list.append(value)
 
 
-@step('upload credential like "{api_name}"')
+@step('upload credential as "{api_name}"')
 def step_impl(context, api_name):
     context.api_config_dict = dictor(EnvironmentConfiguration().get_config_file(), api_name)
     context.request_api.upload_credentials_url(context.api_config_dict)

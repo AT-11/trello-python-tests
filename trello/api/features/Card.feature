@@ -3,7 +3,7 @@ Feature: Card
 
   @Smoke
   Scenario: Creates new card
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
       | key  | value        |
       | name | GherkinBoard |
@@ -39,7 +39,7 @@ Feature: Card
 
   @Smoke
   Scenario: Delete a Card
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
       | key  | value                |
       | name | board to delete card |
@@ -74,7 +74,7 @@ Feature: Card
 
   @Acceptance
   Scenario: Add a new card with name
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
       | key  | value                |
       | name | boardForCardWithName |
@@ -107,7 +107,7 @@ Feature: Card
 
   @Acceptance
   Scenario: Create a new checklist on a card
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
       | key  | value    |
       | name | newBoard |
@@ -146,7 +146,7 @@ Feature: Card
 
   @Functional
   Scenario: Creates a new card with parameters
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
       | key  | value               |
       | name | boardFunctionalCard |
@@ -186,7 +186,7 @@ Feature: Card
 
   @Functional
   Scenario: Adds a sticker to a card
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
       | key  | value                      |
       | name | boardFunctionalCardSticker |
@@ -230,7 +230,7 @@ Feature: Card
 
   @Functional
   Scenario: Add a new comment to a card
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
       | key  | value               |
       | name | boardForCardComment |
@@ -268,7 +268,7 @@ Feature: Card
 
   @Functional
   Scenario: Add a new label to a card
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
       | key  | value                 |
       | name | boardForCardWithLabel |
@@ -310,7 +310,7 @@ Feature: Card
 
   @Functional
   Scenario: Add a new comment to a card
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
       | key  | value               |
       | name | boardForCardComment |
@@ -348,7 +348,7 @@ Feature: Card
 
   @Functional
   Scenario: Modify the name of a card
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
       | key  | value               |
       | name | boardFunctionalCard |
@@ -389,7 +389,7 @@ Feature: Card
 
   @Functional
   Scenario: Creates a new checklist in a card with a top position
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
       | key  | value                    |
       | name | board to check list card |
@@ -430,7 +430,7 @@ Feature: Card
 
   @Functional
   Scenario: Gets the checklists on a card
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
       | key  | value          |
       | name | newBoardToCard |
@@ -481,7 +481,7 @@ Feature: Card
 
   @Functional
   Scenario: Find a card by id
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
       | key  | value            |
       | name | boardForFindCard |
@@ -517,7 +517,7 @@ Feature: Card
 
   @Negative
   Scenario: A list without name should not be created
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardPOSTToList |
@@ -535,7 +535,7 @@ Feature: Card
 
   @defect
   Scenario: A list can't be created without a correct idBoard
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     When Sets a "POST" request to "/list"
       | key     | value |
       | idBoard | None  |
@@ -546,7 +546,7 @@ Feature: Card
 
   @Negative
   Scenario: It can not get a card by incorrect idCard
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/actions"
     And Sends request
     Then Should return status code 400
@@ -555,7 +555,7 @@ Feature: Card
 
   @Negative
   Scenario: It can not get the member of a card that doesn't exist
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     When Sets a "GET" request to "/cards/5e3d75852b8afb5c7c60dc45invalidId/members"
     And Sends request
     Then Should return status code 400

@@ -3,7 +3,7 @@ Feature: Checklist
 
   @Functional
   Scenario: Adds checkitem to checklist
-    Given upload credential like "trello"
+    Given upload credential as "trello"
     And Sets a "POST" request to "/boards/"
       | key  | value            |
       | name | BoardToCheckItem |
