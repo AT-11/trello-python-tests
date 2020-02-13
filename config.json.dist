@@ -1,7 +1,22 @@
 {
-  "base_uri": "https://api.trello.com/1",
-  "folder_json_path": "trello/jsonfiles/",
-  "key": "",
-  "token": "",
+  "trello": {
+    "base_uri": "https://api.trello.com/1",
+    "folder_json_path": "trello/jsonfiles/",
+    "admin_user": {
+      "key": "",
+      "token": ""
+    },
+    "current_user": {
+      "key": "",
+      "token": ""
+    }
+  },
+  "pivotal": {
+    "base_uri": "https://www.pivotaltracker.com/services/v5",
+    "folder_json_path": "pivotal/jsonfiles/",
+    "admin_user": {
+      "token": ""
+    }
+  },
   "log_path": "logs/logFile.log"
 }
