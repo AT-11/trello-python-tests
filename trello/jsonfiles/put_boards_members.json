@@ -82,7 +82,7 @@
               "type": "string"
             },
             "idMemberReferrer": {
-              "type": "string"
+              "type": "null"
             },
             "initials": {
               "type": "string"
