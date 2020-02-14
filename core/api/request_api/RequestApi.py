@@ -44,7 +44,9 @@ class RequestApi(object):
             status_code_list.append(self.response.status_code)
         return status_code_list
 
-    def upload_credentials_url(self, api_config_dict):
+    def upload_credentials_url(self, api_config_dict, user_type):
+        user_key = '{}{}'.format(user_type, '.key')
+        user_token = '{}{}'.format(user_type, '.token')
         self.url = dictor(api_config_dict, 'base_uri')
-        self.params_credentials['key'] = dictor(api_config_dict, 'key')
-        self.params_credentials['token'] = dictor(api_config_dict, 'token')
+        self.params_credentials['key'] = dictor(api_config_dict, user_key)
+        self.params_credentials['token'] = dictor(api_config_dict, user_token)

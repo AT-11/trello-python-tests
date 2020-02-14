@@ -1,10 +1,13 @@
 Feature: List
   As a regular user, it wants to manage a list, and creates a list.
 
+  Background:
+    Given defines api as "trello"
+    And upload credential as "admin_user"
+
   @Smoke
   Scenario: Create a new list on a board
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardPOSTToList |
     And Sends request
@@ -28,11 +31,42 @@ Feature: List
     And Sends request
     And Should return status code 200
 
+  Scenario: Create a list as a current user in a board of an admin user
+    Given Sets a "POST" request to "/boards/"
+      | key  | value              |
+      | name | newBoardPOSTToList |
+    And Sends request
+    And Should return status code 200
+    And Saves response as "BoardObject"
+    And Saves endpoint to delete
+    When Sets a "PUT" request to "/boards/BoardObject.id/members"
+      | key   | value   |
+      | email | (email) |
+    And Sends request
+    Then Should return status code 200
+    And upload credential as "current_user"
+    When Sets a "POST" request to "/list"
+      | key     | value            |
+      | name    | newListName      |
+      | idBoard | (BoardObject.id) |
+    And Sends request
+    Then Should return status code 200
+    And Saves response as "ListObject"
+    And Validates response body with
+      | key    | value       |
+      | name   | newListName |
+      | closed | False       |
+      | limits | {}          |
+    And Validates schema with "list_schema.json"
+    And Sets a "GET" request to "/lists/ListObject.id"
+    And Sends request
+    And Should return status code 200
+    And upload credential as "admin_user"
+
 
   @Acceptance
   Scenario: Update the name of a list using id
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value    |
       | name | newBoard |
     And Sends request
@@ -62,8 +96,7 @@ Feature: List
 
   @Functional
   Scenario: Creates a list with name and position
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |
     And Sends request
@@ -91,8 +124,7 @@ Feature: List
 
   @Functional
   Scenario: Moves a list from a board to another one
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |
     And Sends request
@@ -125,8 +157,7 @@ Feature: List
 
   @Functional
   Scenario: Creates a list from another list
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |
     And Sends request
@@ -162,8 +193,7 @@ Feature: List
 
   @Functional
   Scenario: Modifies the list position to bottom
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |
     And Sends request
@@ -195,8 +225,7 @@ Feature: List
 
   @Functional
   Scenario: Moves all cards from list to another list
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value        |
       | name | newBoardList |
     And Sends request
@@ -245,8 +274,7 @@ Feature: List
 
   @Functional
   Scenario: Closes a List
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardFunctional |
     And Sends request
@@ -278,8 +306,7 @@ Feature: List
 
   @Negative
   Scenario: A list without name could not be created
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardPOSTToList |
     And Sends request
@@ -296,7 +323,6 @@ Feature: List
 
   @defect
   Scenario: A list can't be created without a correct idBoard
-    Given upload credential as "trello"
     When Sets a "POST" request to "/list"
       | key     | value |
       | idBoard | None  |
@@ -307,8 +333,7 @@ Feature: List
 
   @defect
   Scenario: List does not allow to set softlimit over the limit 5000
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value              |
       | name | newBoardPOSTToList |
     And Sends request

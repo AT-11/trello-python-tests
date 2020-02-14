@@ -1,10 +1,13 @@
 Feature: Checklist
   As a regular user, it wants to manage a checklist on a card.
 
+  Background:
+    Given defines api as "trello"
+    And upload credential as "admin_user"
+
   @Functional
   Scenario: Adds checkitem to checklist
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value            |
       | name | BoardToCheckItem |
     And Sends request
