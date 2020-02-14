@@ -48,9 +48,9 @@ def test_replace_variable_sends_invalid_dictionary_and_input_endpoint_return_url
     assert expected == actual
 
 
-def test_read_file_path_and_return_new_file_path():
+def test_read_file_path_and_return_json_dictionary():
     file_path = "trello/jsonfiles/file.json"
     new_file_path = path.realpath(file_path)
-    expected = {"name": "limbert"}
+    expected = {"name": "newName"}
     actual = JsonFileReader.read(file_path)
     assert expected == actual
