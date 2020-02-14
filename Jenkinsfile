@@ -19,7 +19,7 @@ pipeline {
             parallel {
                 stage('Trello') {
                     steps {
-                           echo 'trello'
+                           bat 'behave -f allure_behave.formatter:AllureFormatter -o reportsTrello trello/api/features/ --tags=~@defect'
                     }
                 }
                 stage('Pivotal Tracker') {
@@ -29,17 +29,34 @@ pipeline {
                 }
             }
         }
-        stage('reports') {
-            steps {
-				script {
-						allure([
-								includeProperties: true,
-								jdk: 'java11',
-								properties: [],
-								reportBuildPolicy: 'ALWAYS',
-								results: [[path: 'reportsPivotal']]
-						])
-				}
+        stage('API TEST') {
+            parallel {
+                stage('Reports Trello') {
+                    steps {
+                        script {
+                            allure([
+                                    includeProperties: true,
+                                    jdk: 'java11',
+                                    properties: [],
+                                    reportBuildPolicy: 'ALWAYS',
+                                    results: [[path: 'reportsTrello']]
+                            ])
+                        }
+                    }
+                }
+                stage('Reports Trello') {
+                    steps {
+                        script {
+                            allure([
+                                    includeProperties: true,
+                                    jdk: 'java11',
+                                    properties: [],
+                                    reportBuildPolicy: 'ALWAYS',
+                                    results: [[path: 'reportsPivotal']]
+                            ])
+                        }
+                    }
+                }
             }
         }
     }
