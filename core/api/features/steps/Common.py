@@ -62,4 +62,6 @@ def step_impl(context, user_type):
 
 @step('defines api as "{api_name}"')
 def step_impl(context, api_name):
+
     context.api_name = api_name
+
