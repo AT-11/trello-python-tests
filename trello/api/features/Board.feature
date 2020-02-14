@@ -1,9 +1,12 @@
 Feature: Board
   As a regular user, it wants to manage a board, and creates a board.
 
+  Background:
+    Given defines api as "trello"
+    And upload credential as "admin_user"
+
   @Smoke
   Scenario: Creates new board with a name
-    Given upload credential as "trello"
     When Sets a "POST" request to "/boards/"
       | key  | value    |
       | name | newBoard |
@@ -25,8 +28,7 @@ Feature: Board
 
   @Smoke
   Scenario: Deletes a board by Id
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value    |
       | name | newBoard |
     And Sends request
@@ -46,8 +48,7 @@ Feature: Board
 
   @Acceptance
   Scenario: Changes the name of the board
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value        |
       | name | GherkinBoard |
     And Sends request
@@ -70,8 +71,7 @@ Feature: Board
 
   @Acceptance
   Scenario: Updates members in a Board
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value     |
       | name | boardTest |
     And Sends request
@@ -96,8 +96,7 @@ Feature: Board
 
   @defect
   Scenario: Board marked as a viewed
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value        |
       | name | GherkinBoard |
     And Sends request
@@ -112,8 +111,7 @@ Feature: Board
 
   @Acceptance
   Scenario: Add label to existent Board
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value      |
       | name | BoardLabel |
     And Sends request
@@ -139,8 +137,7 @@ Feature: Board
 
   @Acceptance
   Scenario: Add powerUps to existent Board
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value             |
       | name | postBoardPowerUps |
     And Sends request
@@ -160,8 +157,7 @@ Feature: Board
 
   @Functional
   Scenario: Creates a label in board
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value    |
       | name | newBoard |
     And Sends request
@@ -188,8 +184,7 @@ Feature: Board
   @Functional
   Scenario: Creates a list in board
   This scenario allows to create a list on an existing board
-    Given upload credential as "trello"
-    And Sets a "POST" request to "/boards/"
+    Given Sets a "POST" request to "/boards/"
       | key  | value    |
       | name | newBoard |
     And Sends request
@@ -214,7 +209,6 @@ Feature: Board
 
   @Acceptance
   Scenario: Creates a new Board with description
-    Given upload credential as "trello"
     When Sets a "POST" request to "/boards/"
       | key  | value          |
       | name | newBoard       |
@@ -237,7 +231,6 @@ Feature: Board
 
   @Negative
   Scenario: Board can't be got by invalid Id
-    Given upload credential as "trello"
     When  Sets a "GET" request to "/boards/idBoardNotValid"
     And Sends request
     Then Should return status code 400
@@ -246,7 +239,6 @@ Feature: Board
 
   @defect
   Scenario Outline: Board can't be created with spaces or empty as name
-    Given upload credential as "trello"
     When Sets a "POST" request to "/boards/"
       | key  | value  |
       | name | <name> |
@@ -266,7 +258,6 @@ Feature: Board
 
   @Negative
   Scenario: It can not Update members with an invalid Id
-    Given upload credential as "trello"
     When Sets a "PUT" request to "/boards/BoardObject.id/members"
       | key   | value   |
       | email | (email) |
