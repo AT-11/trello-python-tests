@@ -19,12 +19,42 @@ pipeline {
             parallel {
                 stage('Trello') {
                     steps {
-                            bat 'behave -f allure_behave.formatter:AllureFormatter -o reports trello/api/features/ --tags=~@defect'
+                           bat 'behave -f allure_behave.formatter:AllureFormatter -o reportsTrello trello/api/features/ --tags=~@defect'
                     }
                 }
                 stage('Pivotal Tracker') {
                     steps {
-                            bat 'behave -f allure_behave.formatter:AllureFormatter -o reports pivotal/api/features/ --tags=~@defect'
+                           bat 'behave -f allure_behave.formatter:AllureFormatter -o reportsPivotal pivotal/api/features/ --tags=~@defect'
+                    }
+                }
+            }
+        }
+        stage('REPORTS') {
+            parallel {
+                stage('Reports Trello') {
+                    steps {
+                        script {
+                            allure([
+                                    includeProperties: true,
+                                    jdk: 'java11',
+                                    properties: [],
+                                    reportBuildPolicy: 'ALWAYS',
+                                    results: [[path: 'reportsTrello']]
+                            ])
+                        }
+                    }
+                }
+                stage('Reports Pivotal Tracker') {
+                    steps {
+                        script {
+                            allure([
+                                    includeProperties: true,
+                                    jdk: 'java11',
+                                    properties: [],
+                                    reportBuildPolicy: 'ALWAYS',
+                                    results: [[path: 'reportsPivotal']]
+                            ])
+                        }
                     }
                 }
             }
