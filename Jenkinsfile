@@ -29,7 +29,7 @@ pipeline {
                 }
             }
         }
-        stage('API TEST') {
+        stage('REPORTS') {
             parallel {
                 stage('Reports Trello') {
                     steps {
