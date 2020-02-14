@@ -44,7 +44,7 @@ pipeline {
                         }
                     }
                 }
-                stage('Reports Trello') {
+                stage('Reports Pivotal Tracker') {
                     steps {
                         script {
                             allure([
