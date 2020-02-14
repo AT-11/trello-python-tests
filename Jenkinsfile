@@ -29,11 +29,16 @@ pipeline {
                 }
             }
         }
-         stage('reports') {
+        stage('reports') {
             steps {
 				script {
-
-                    allure includeProperties: false, jdk: 'java11', results: [[path: 'reportsPivotal']]
+						allure([
+								includeProperties: true,
+								jdk: 'java11',
+								properties: [],
+								reportBuildPolicy: 'ALWAYS',
+								results: [[path: 'reportsPivotal']]
+						])
 				}
             }
         }
