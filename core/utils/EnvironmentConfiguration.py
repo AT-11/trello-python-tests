@@ -1,14 +1,12 @@
 from core.utils.JsonFileReader import JsonFileReader
 
 
-class EnvironmentConfiguration(object):
+class EnvironmentConfiguration:
 
-    def __init__(self):
-        self.config = JsonFileReader.read('config.json')
-        self.variables = JsonFileReader.read('input_variables.json')
+    @staticmethod
+    def get_config_file():
+        return JsonFileReader.read('config.json')
 
-    def get_config_file(self):
-        return self.config
-
-    def get_variables_file(self):
-        return self.variables
+    @staticmethod
+    def get_variables_file():
+        return JsonFileReader.read('input_variables.json')
