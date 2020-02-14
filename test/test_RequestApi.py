@@ -1,3 +1,6 @@
+from core.api.request_api.RequestApi import RequestApi
+from os import path
+from core.utils.JsonFileReader import JsonFileReader
 from core.utils.RequestApiUtils import RequestApiUtils
 
 
@@ -38,4 +41,12 @@ def test_replace_variable_sends_invalid_dictionary_and_input_endpoint_return_url
     endpoint = "/boards/boardObject.id/labels"
     expected = "/boards/boardObject.id/labels"
     actual = RequestApiUtils.replace_variables(endpoint, id_dictionary)
+    assert expected == actual
+
+
+def test_read_file_path_and_return_json_dictionary():
+    file_path = "trello/jsonfiles/file.json"
+    new_file_path = path.realpath(file_path)
+    expected = {"name": "newName"}
+    actual = JsonFileReader.read(file_path)
     assert expected == actual
