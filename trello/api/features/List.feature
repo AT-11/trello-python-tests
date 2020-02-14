@@ -31,7 +31,7 @@ Feature: List
     And Sends request
     And Should return status code 200
 
-    
+
   @acceptance
   Scenario: Create a list as a current user in a board of an admin user
     Given Sets a "POST" request to "/boards/"
