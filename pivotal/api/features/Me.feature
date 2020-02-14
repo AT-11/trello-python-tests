@@ -1,9 +1,12 @@
 Feature: Credential
   As a regular user, it wants to manage an account.
 
+  Background:
+    Given defines api as "pivotal"
+    And upload credential as "admin_user"
+
   @Smoke
   Scenario: Gets Credential
-    Given upload credential as "pivotal"
     When Sets a "GET" request to "/me"
     And Sends request
     Then Should return status code 200

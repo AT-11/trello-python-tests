@@ -26,9 +26,6 @@
             "fullName": {
               "type": "string"
             },
-            "idMemberReferrer": {
-              "type": "null"
-            },
             "initials": {
               "type": "string"
             },
