@@ -1,9 +1,12 @@
 Feature: Project
   As a regular user, it wants to manage an project.
 
+  Background:
+    Given defines api as "pivotal"
+    And upload credential as "admin_user"
+
   @Smoke
   Scenario: Adds a Project
-    Given upload credential as "pivotal"
     When Sets a "POST" request to "/projects/"
       | key  | value      |
       | name | newProject |
