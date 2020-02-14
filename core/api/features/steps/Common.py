@@ -64,6 +64,4 @@ def step_impl(context, user_type):
 def step_impl(context, api_name):
 
     context.api_name = api_name
-    context.api_config_dict = dictor(EnvironmentConfiguration.get_config_file(), api_name)
-    context.request_api.upload_credentials_url(context.api_config_dict)
 

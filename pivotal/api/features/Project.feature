@@ -38,8 +38,7 @@ Feature: Project
 
   @smoke
   Scenario: Membership operations.
-    Given upload credential as "pivotal"
-    And Sets a "POST" request to "/projects/"
+    When Sets a "POST" request to "/projects/"
       | key  | value         |
       | name | TestProject11 |
     And Sends request
