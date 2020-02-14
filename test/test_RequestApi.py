@@ -52,6 +52,5 @@ def test_read_file_path_and_return_new_file_path():
     file_path = "trello/jsonfiles/file.json"
     new_file_path = path.realpath(file_path)
     expected = {"name": "limbert"}
-    json_reader = JsonFileReader()
-    actual = json_reader.read(file_path)
+    actual = JsonFileReader.read(file_path)
     assert expected == actual
