@@ -34,13 +34,16 @@ Go File -> Settings -> Tools -> Python Integrated Tools and in Testing field in 
 ## Configuration Jenkins
 This project is working with Jenkins in Windows. To configure Jenkins we will install a plugin called ShiningPanda.
 1. Go to "Manage Jenkins"
-2. In tab Available, search ShiningPanda and install click to Download now and install after restart
+2. In tab Available, search ShiningPanda plugin, Allure plugin and blue Ocean plugin and install click on Download now and install after restart
 3. After restart go to global tool configuration
 4. Click in add python button
 5. In the name field: write python
 6. In the Home or executable field: insert the path python. Take care that the path doesn't content spaces. (Eg. C:\Users\alans\AppData\Local\Programs\Python\Python38-32) 
-7. click on Save and afte apply button
-8. Create Jenkinsfile with the next commands
+7. Click on  Add Allure comman line Button
+8. In the Name field write Allure
+9. Click on Install automatically Checklist and select the version 2.13.1
+10. click on Save and afte apply button
+11. Create Jenkinsfile with the next commands
 
   * In stage build: bat 'pip3 install -r requirements.txt'
                     bat 'pip install allure-behave'
@@ -68,6 +71,7 @@ This project is working with Jenkins in Windows. To configure Jenkins we will in
                                     results: [[path: 'reportsPivotal']]
                             ])
                         }
+ 12. On main menu click on Open Blue Ocean and configure with github reposirtory the new pipeline
 
 ## About the Project
 On the 'core' folder we intend to put generic steps and functions that can be used on any API testing. 
