@@ -19,6 +19,9 @@ file.
 * requests
 * jsonschema
 * Pytest to write unit tests.
+* dictor
+* allure-behave
+* pylint
 
 This means all required libraries can be installed from the project path using:
 ```bash 
@@ -27,6 +30,44 @@ pip install -r requirements.txt
 To finish this configuration we need add Pytest in Python Integrated Tool follow the next steps:
 
 Go File -> Settings -> Tools -> Python Integrated Tools and in Testing field in Default test runner select pytest option.  
+
+## Configuration Jenkins
+This project is working with Jenkins in Windows. To configure Jenkins we will install a plugin called ShiningPanda.
+1. Go to "Manage Jenkins"
+2. In tab Available, search ShiningPanda and install click to Download now and install after restart
+3. After restart go to global tool configuration
+4. Click in add python button
+5. In the name field: write python
+6. In the Home or executable field: insert the path python. Take care that the path doesn't content spaces. (Eg. C:\Users\alans\AppData\Local\Programs\Python\Python38-32) 
+7. click on Save and afte apply button
+8. Create Jenkinsfile with the next commands
+
+  * In stage build: bat 'pip3 install -r requirements.txt'
+                    bat 'pip install allure-behave'
+  * In stage unit test: bat 'pytest test'
+  * In stage Trello:  bat 'behave -f allure_behave.formatter:AllureFormatter -o reportsTrello trello/api/features/ --tags=~@defect'
+  * In stage Pivotal: bat 'behave -f allure_behave.formatter:AllureFormatter -o reportsPivotal pivotal/api/features/ --tags=~@defect'
+  * In stage Reports:  
+     In Parallel: reports Trello
+                        script {
+                            allure([
+                                    includeProperties: true,
+                                    jdk: 'java11',
+                                    properties: [],
+                                    reportBuildPolicy: 'ALWAYS',
+                                    results: [[path: 'reportsTrello']]
+                            ])
+                        }
+     In Parallel: Reports Pivotal
+                         script {
+                            allure([
+                                    includeProperties: true,
+                                    jdk: 'java11',
+                                    properties: [],
+                                    reportBuildPolicy: 'ALWAYS',
+                                    results: [[path: 'reportsPivotal']]
+                            ])
+                        }
 
 ## About the Project
 On the 'core' folder we intend to put generic steps and functions that can be used on any API testing. 
